@@ -421,7 +421,7 @@ class SOMPZInformer(CatInformer):
     name = "SOMPZInformer"
     config_options = CatInformer.config_options.copy()
     config_options.update(redshift_col=SHARED_PARAMS,
-                          hdf5_groupname=SHARED_PARAMS,
+                          #hdf5_groupname=None,
                           nproc=Param(int, 1, msg="number of processors to use"),
                           # groupname=Param(str, "photometry", msg="hdf5_groupname for ata"),
                           inputs=Param(list, default_input_names, msg="list of the names of columns to be used as inputs for data"),
@@ -443,13 +443,9 @@ class SOMPZInformer(CatInformer):
                ]
 
     def run(self):
-
+        
         # note: hdf5_groupname is a SHARED_PARAM defined in the parent class!
-        if self.config.hdf5_groupname:  # pragma: no cover
-            data = self.get_data('input_data')[self.config.hdf5_groupname]
-        else:  # pragma: no cover
-            # DEAL with hdf5_groupname stuff later, just assume it's in the top level for now!
-            data = self.get_data('input_data')
+        data = self.get_data('input_data').to_pandas()                 
         num_inputs = len(self.config.inputs)
         ngal = len(data[self.config.inputs[0]])
         print(f"{ngal} galaxies in sample")
@@ -515,9 +511,9 @@ class SOMPZEstimator(CatEstimator):  # pragma: no cover
                           zbins_max=Param(float, 6.0, msg="maximum redshift for output grid"),
                           zbins_dz=Param(float, 0.01, msg="delta z for defining output grid"),
                           # data_path=Param(str, "directory", msg="directory for output files"),
-                          spec_groupname=Param(str, "photometry", msg="hdf5_groupname for spec_data"),
-                          balrog_groupname=Param(str, "photometry", msg="hdf5_groupname for balrog_data"),
-                          wide_groupname=Param(str, "photometry", msg="hdf5_groupname for wide_data"),
+                          spec_groupname=Param(str, "", msg="hdf5_groupname for spec_data"),
+                          balrog_groupname=Param(str, "", msg="hdf5_groupname for balrog_data"),
+                          wide_groupname=Param(str, "", msg="hdf5_groupname for wide_data"),
                           specz_name=Param(str, "redshift", msg="column name for true redshift in specz sample"),
                           inputs_deep=Param(list, default_input_names, msg="list of the names of columns to be used as inputs for deep data"),
                           input_errs_deep=Param(list, default_err_names, msg="list of the names of columns containing errors on inputs for deep data"),
@@ -858,17 +854,17 @@ class SOMPZEstimator(CatEstimator):  # pragma: no cover
         if self.config.spec_groupname:
             spec_data = self.get_data('spec_data')[self.config.spec_groupname]
         else:  # pragma: no cover
-            spec_data = self.get_data('spec_data')
+            spec_data = self.get_data('spec_data').to_pandas()
 
         if self.config.balrog_groupname:
             balrog_data = self.get_data('balrog_data')[self.config.balrog_groupname]
         else:  # pragma: no cover
-            balrog_data = self.get_data('balrog_data')
+            balrog_data = self.get_data('balrog_data').to_pandas()
 
         if self.config.wide_groupname:
             wide_data = self.get_data('wide_data')[self.config.wide_groupname]
         else:  # pragma: no cover
-            wide_data = self.get_data('wide_data')
+            wide_data = self.get_data('wide_data').to_pandas()
 
         # iterator = self.input_iterator("wide_data")
         # first = True
@@ -1042,10 +1038,7 @@ class SOMPZPzc(CatEstimator):
         # check on bands, errs, and prior band
 
     def run(self):
-        if self.config.deep_groupname:  # pragma: no cover
-            spec_data = self.get_data('spec_data')[self.config.deep_groupname]
-        else:  # pragma: no cover
-            spec_data = self.get_data('spec_data')
+        spec_data = self.get_data('spec_data')
         cell_deep_spec_data = self.get_data('cell_deep_spec_data')
         self.deep_som_size = int(cell_deep_spec_data['som_size'][0])
         key = self.config.redshift_col
@@ -1313,8 +1306,8 @@ class SOMPZEstimatorBase(CatEstimator):
     config_options = CatEstimator.config_options.copy()
     config_options.update(chunk_size=SHARED_PARAMS,
                           redshift_col=SHARED_PARAMS, #Param(str, "redshift", msg="name of redshift column"),
-                          hdf5_groupname=SHARED_PARAMS, #Param(str, "photometry", msg="hdf5_groupname for data"),
-                          groupname=Param(str, "photometry", msg="hdf5_groupname for data"),
+                          hdf5_groupname=None,  #Param(str, "photometry", msg="hdf5_groupname for data"),
+                          #groupname=SHARED_PARAMS, #Param(str, "", msg="hdf5_groupname for data"),
                           inputs=Param(list, default_input_names, msg="list of the names of columns to be used as inputs for deep data"),
                           input_errs=Param(list, default_err_names, msg="list of the names of columns containing errors on inputs for deep data"),
                           zero_points=Param(list, default_zero_points, msg="zero points for converting mags to fluxes for deep data, if needed"),
@@ -1423,10 +1416,7 @@ class SOMPZEstimatorBase(CatEstimator):
         self.model = None
         self.model = self.open_model(**self.config)  # None
         first = True
-        if self.config.hdf5_groupname:  # pragma: no cover
-            iter1 = self.input_iterator('data')[self.config.hdf5_groupname]
-        else:
-            iter1 = self.input_iterator('data')
+        iter1 = self.input_iterator('data')
         # iter1 = self.input_iterator('data', groupname=self.config.hdf5_groupname)
         # iter1 = self.input_iterator('data')
         self._output_handle = None

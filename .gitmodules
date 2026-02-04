@@ -1,0 +1,9 @@
+[submodule "src/rail_base"]
+	path = src/rail_base
+	url = https://github.com/chto/rail_base.git
+[submodule "tables_io"]
+	path = tables_io
+	url = https://github.com/chto/tables_io.git
+[submodule "src/tables_io"]
+	path = src/tables_io
+	url = https://github.com/chto/tables_io.git
