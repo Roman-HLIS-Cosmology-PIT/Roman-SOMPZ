@@ -1,0 +1,116 @@
+output_dir: ./
+log_dir: out
+resume: True # If all the outputs for a stage already exist then do not re-run that stage
+config: ../yaml/config.yaml
+modules: rail
+inputs:
+  input_deep_data: ./data/hlwas_cosmos_260120_UM_2026_01_22.parquet
+  input_spec_data: ./data/hlwas_cosmos_260120_UM_2026_01_22.parquet
+  input_wide_data: ./data/hlwas_cosmos_260120_UM_2026_01_22.parquet
+stages:
+
+- name: som_wide_informer_big
+  classname: SOMPZInformer
+  nprocess: 1
+  module_name: rail.estimation.algos.sompz
+  aliases:
+    model: model_som_wide_informer
+    input_data: input_wide_data
+
+- name: som_deep_informer_big
+  classname: SOMPZInformer
+  nprocess: 1
+  module_name: rail.estimation.algos.sompz
+  aliases:
+    model: model_som_deep_informer
+    input_data: input_deep_data
+- name: som_deepdeep_estimator
+  classname: SOMPZEstimatorDeep
+  nprocess: &id001 128
+  module_name: rail.estimation.algos.sompz
+  aliases:
+    deep_model: model_som_deep_informer
+    data: input_deep_data
+    assignment: assignment_som_deepdeep_estimator
+- name: som_deepwide_estimator
+  classname: SOMPZEstimatorWide
+  nprocess:  *id001
+  module_name: rail.estimation.algos.sompz
+  aliases:
+    data: input_deep_data
+    assignment: assignment_som_deepwide_estimator
+    wide_model: model_som_wide_informer 
+- name: som_deepspec_estimator
+  classname: SOMPZEstimatorDeep
+  nprocess: *id001
+  module_name: rail.estimation.algos.sompz
+  aliases:
+    assignment: assignment_som_deepspec_estimator
+    deep_model: model_som_deep_informer
+    data: input_spec_data
+- name: som_widewide_estimator
+  classname: SOMPZEstimatorWide
+  nprocess: *id001
+  module_name: rail.estimation.algos.sompz
+  aliases:
+    assignment: assignment_som_widewide_estimator
+    wide_model: model_som_wide_informer 
+    data: input_wide_data
+- name: som_widespec_estimator
+  classname: SOMPZEstimatorWide
+  nprocess: *id001
+  module_name: rail.estimation.algos.sompz
+  aliases:
+    assignment: assignment_som_widespec_estimator
+    wide_model: model_som_wide_informer 
+    data: input_spec_data
+- name: som_pzc_stage
+  classname: SOMPZPzc
+  nprocess: 1
+  module_name: rail.estimation.algos.sompz
+  aliases:
+    cell_deep_spec_data: assignment_som_deepspec_estimator
+    spec_data: input_spec_data
+    pz_c: pz_c_som_pzc_stage
+- name: pcchat_stage
+  classname: SOMPZPc_chat
+  nprocess: 1
+  module_name: rail.estimation.algos.sompz
+  aliases:
+    cell_deep_balrog_data: assignment_som_deepdeep_estimator
+    cell_wide_balrog_data: assignment_som_deepwide_estimator
+    pc_chat: pc_chat_pcchat_stage
+- name: sompz_pzchat
+  classname: SOMPZPzchat
+  nprocess: 1
+  module_name: rail.estimation.algos.sompz
+  aliases:
+    spec_data: input_spec_data
+    cell_deep_spec_data: assignment_som_deepspec_estimator
+    cell_wide_wide_data: assignment_som_widewide_estimator
+    pz_c: pz_c_som_pzc_stage
+    pc_chat: pc_chat_pcchat_stage
+    pz_chat: pz_chat_sompz_pzchat
+- name: sompz_tomobin
+  classname: SOMPZTomobin
+  nprocess: 1
+  module_name: rail.estimation.algos.sompz
+  aliases:
+    spec_data: input_spec_data
+    cell_deep_spec_data: assignment_som_deepspec_estimator
+    cell_wide_spec_data: assignment_som_widespec_estimator
+    tomo_bins_wide: tomo_bins_wide_sompz_tomobin
+- name: sompz_nz
+  classname: SOMPZnz
+  nprocess: 1
+  module_name: rail.estimation.algos.sompz
+  aliases:
+    spec_data: input_spec_data
+    cell_deep_spec_data: assignment_som_deepspec_estimator
+    cell_wide_wide_data: assignment_som_widewide_estimator
+    tomo_bins_wide: tomo_bins_wide_sompz_tomobin
+    pc_chat: pc_chat_pcchat_stage
+    nz: nz_sompz_nz
+site:
+  max_threads: 128
+  name: local
