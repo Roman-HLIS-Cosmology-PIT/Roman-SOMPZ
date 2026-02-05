@@ -249,7 +249,7 @@ som_pzc_stage:
   - 0.85
   - 2.0
   zbins_min: 0.0
-  zbins_max: 3.2
+  zbins_max: *id011
   zbins_dz: 0.02
   name: som_pzc_stage
   pz_c: out/pz_c.hdf5
@@ -287,7 +287,7 @@ sompz_pzchat:
   - 0.85
   - 2.0
   zbins_min: 0.0
-  zbins_max: 3.0
+  zbins_max: *id011
   zbins_dz: 0.025
   name: sompz_pzchat
   config: None
@@ -309,8 +309,8 @@ sompz_tomobin:
   - 0.85
   - 2.0
   zbins_min: 0.0
-  zbins_max: 3.0
-  zbins_dz: 0.025
+  zbins_max: *id011
+  zbins_dz: &id020 0.025
   name: sompz_tomobin
   wide_som_size: 1024
   deep_som_size: 4096
@@ -335,7 +335,7 @@ sompz_nz:
   - 2.0
   zbins_min: 0.0
   zbins_max: *id011
-  zbins_dz: 0.025
+  zbins_dz: *id020
   name: sompz_nz
   wide_som_size: 625
   deep_som_size: 1024
@@ -367,4 +367,18 @@ PhotozDeepZeroPointPipe:
   assignment: out/deepdata_zeropoint_assignment.hdf5
   thresh_val_err: 1.0e-05
   config: None
+PreparePZRealizationsPipe:
+  photometric_zeropoint_deep: True
+  redshift_sample_uncertainty: False
+  photometric_zeropoint_wide: False
+  photometric_skybackground_wide: False
+  deepfield_zeropoint_data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001] 
+  num_lhc_points: 3
+  LHC_samples: ./out/LHC_samples_small.fit
+Samplevariance: 
+    area:  20.0
+    zmin: 0.0
+    zmax: *id011
+    zbins_dz: *id020 
+    Sample_variance: ./out/Sample_variance.fit
 

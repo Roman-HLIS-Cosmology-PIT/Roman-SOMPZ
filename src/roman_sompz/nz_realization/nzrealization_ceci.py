@@ -1,3 +1,76 @@
+from scm_pipeline import PipelineStage
+from rail.core.data import TableHandle, ModelHandle, QPHandle, Hdf5Handle
+from rail.estimation.estimator import CatEstimator, CatInformer
+from ceci.config import StageParameter as Param
+import rail.estimation.algos.som as somfuncs
+from rail.core.common_params import SHARED_PARAMS
+import numpy as np
+import gc
+from roman_sompz.nz_realization.generate_LHC_sample_ceci import generate_LHC_points
+import astropy.table as apTable
+import tables_io
+from ceci.config import StageParameter
+import numpy as np
+import os
+from roman_sompz.nz_realization.samplevariance import *
+#from ceci_example.types import NpyFile, HDFFile
+# We need to define NpyFile etc we want to use inside ceci_example.types, Or not??? get_input don't use this function and we open in run ourselves
+def_bands = ["u", "g", "r", "i", "z", "y"]
+default_bin_edges = [0.0, 0.405, 0.665, 0.96, 2.0]
+default_input_names = []
+default_err_names = []
+default_zero_points = []
+
+
+#from ceci_example.types import NpyFile, HDFFile
+# We need to define NpyFile etc we want to use inside ceci_example.types, Or not??? get_input don't use this function and we open in run ourselves
+class PreparePZRealizationsPipe(PipelineStage):
+    """
+    Generates LHC sampling points for the uncertainty beside sample variance and shot noise.
+    Saves to a NPZfile with LHCsampling points.
+    """
+
+    name = "PreparePZRealizationsPipe"
+    inputs = []
+    outputs = [("LHC_samples",TableHandle)]
+    parallel = False
+    
+    config_options = {
+        "photometric_zeropoint_deep": StageParameter(bool, False,
+            msg="If you want to add photometric zero point uncertainty due to the deep field zero point offsets " ),
+        "redshift_sample_uncertainty": StageParameter(bool, False,
+            msg="The bias and uncertainty due to the use of photometric redshfit calibration sample" ), #If we use spec-only, don't need this
+        "photometric_zeropoint_wide": StageParameter(bool, False,
+            msg="If you want to add photometric zero point uncertainty due to the wide field zero point offsets " ),  #not implemented
+        "photometric_skybackground_wide": StageParameter(bool, False,
+            msg="If you want to add skybackground uncertainty on the wide field photometry " ), #not implemented       
+        "deepfield_zeropoint_data": StageParameter(list, [], msg="zero point uncertainty" ), #not implemented
+        "num_lhc_points":StageParameter(int, 100,msg="number of lhc points we want to sample")
+    }
+
+
+    def run(self):
+            photometric_zeropoint_deep = self.config["photometric_zeropoint_deep"]
+            redshift_sample_uncertainty = self.config["redshift_sample_uncertainty"]
+            photometric_zeropoint_wide = self.config["photometric_zeropoint_wide"]
+            photometric_skybackground_wide = self.config["photometric_skybackground_wide"]
+            deepfield_zeropoint_data=  self.config["deepfield_zeropoint_data"]
+            
+            num_lhc_points = self.config["num_lhc_points"]
+            
+            samples = generate_LHC_points(np.array(deepfield_zeropoint_data), photometric_zeropoint_deep, redshift_sample_uncertainty, photometric_zeropoint_wide, photometric_skybackground_wide, num_lhc_points)
+            filename = self.get_output(self.outputs[0][0])
+            t= np.zeros(len(samples), dtype=[("samples", '>f8', samples.shape[-1])])
+            t['samples'] = samples
+            table = apTable.Table(t)
+            table = tables_io.convert(table, tables_io.types.NUMPY_FITS)
+            filename, file_extension = os.path.splitext(filename)
+            tables_io.write(table,filename, file_extension[1:])
+
+            
+         
+# assign_som_deep_ZPU_mpi4py_ceci.py
+class PhotozDeepZeroPointPipe(CatEstimator):
     """CatEstimator subclass to compute redshift PDFs for SOMPZ
     """
     name = "PhotozDeepZeroPointPipe"
@@ -221,6 +294,73 @@
         """
         tmpdict = dict(som_size=self.som_size)
         self._output_handle.finalize_write(**tmpdict)
+
+
+class Samplevariance(PipelineStage):
+
+    name = "Samplevariance"
+    inputs = []
+    outputs = [("Sample_variance", TableHandle)] 
+    parallel = False
+
+    config_options = {
+        "cosmoparameters": StageParameter(list, [70.0, 0.02242, 0.11933, 0.0, 0.0561, 0.0, 2.15E-9, 0.9665, 0.0],
+            msg="" ),
+         "zbins_min": StageParameter(float, 0.0, msg="minimum redshift for output grid"),
+         "zbins_max": StageParameter(float, 5.0, msg="max redshift for output grid"),
+         "zbins_dz": StageParameter(float, 0.01, msg="redshift difference for output grid"),
+         "area": StageParameter(float, 20.0, msg="size of deep field in deg^2"),
+         "num_points_z":StageParameter(int, 50, msg="number of point z"),
+    
+    }
+    def run(self):
+        camb_pars = camb.CAMBparams()
+        cosmoparameters = self.config.cosmoparameters
+        camb_pars.set_cosmology(H0=cosmoparameters[0],
+                               ombh2=cosmoparameters[1],
+                               omch2=cosmoparameters[2],
+                               mnu=cosmoparameters[3],
+                               tau=cosmoparameters[4],
+                               omk=cosmoparameters[5])
+        camb_pars.InitPower.set_params(As=cosmoparameters[6], 
+                                       ns=cosmoparameters[7], 
+                                       r=cosmoparameters[8])
+        camb_pars.set_for_lmax(3500, lens_potential_accuracy=0)
+        zbins = np.arange(self.config.zbins_min - self.config.zbins_dz / 2., self.config.zbins_max + self.config.zbins_dz, self.config.zbins_dz)
+        zbins[zbins<0]=0.0
+        camb_pars.set_matter_power(redshifts=np.sort(zbins)[::-1], kmax=100.0)
+        camb_pars.NonLinear = model.NonLinear_both
+        camb_pars.NonLinearModel.set_params(halofit_version='takahashi')
+        
+        # Set CAMB source terms (only density for simplicity)
+        camb_pars.SourceTerms.counts_density = True
+        camb_pars.SourceTerms.counts_evolve = False
+        camb_pars.SourceTerms.counts_redshift = False
+        camb_pars.SourceTerms.counts_velocity = False
+        camb_pars.SourceTerms.counts_lensing = False
+        camb_pars.SourceTerms.counts_radial = False
+        camb_pars.SourceTerms.counts_timedelay = False
+        camb_pars.SourceTerms.counts_ISW = False
+        camb_pars.SourceTerms.counts_potential = False
+        area_deg2 = self.config.area
+        area_rad2 = area_deg2 / (180./np.pi)**2
+        theta = np.arccos(1. - 0.5*area_rad2/np.pi)
+        thetas = np.array([theta])
+        z_binsc, sample_var, sample_var_var = sample_variance(
+                camb_pars, 
+                thetas, 
+                zbins,
+                nz_function=simple_galaxy_counts,
+                bias_function=simple_bias, area_deg2=area_deg2, num_points_z = self.config.num_points_z 
+        )
+        filename = self.get_output(self.outputs[0][0])
+        t= np.zeros(len(sample_var[0]), dtype=[("sample_var", '>f8', sample_var.shape[-1])])
+        t['sample_var'] = sample_var
+        table = apTable.Table(t)
+        table = tables_io.convert(table, tables_io.types.NUMPY_FITS)
+        filename, file_extension = os.path.splitext(filename)
+        tables_io.write(table,filename, file_extension[1:])
+
 
 
 

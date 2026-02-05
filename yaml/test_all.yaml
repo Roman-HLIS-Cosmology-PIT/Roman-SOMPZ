@@ -7,7 +7,6 @@ inputs:
   input_deep_data: ./data/hlwas_cosmos_260120_UM_2026_01_22.parquet
   input_spec_data: ./data/hlwas_cosmos_260120_UM_2026_01_22.parquet
   input_wide_data: ./data/hlwas_cosmos_260120_UM_2026_01_22.parquet
-  inputtemp: /home/chto/code/Roman/code/Roman-SOMPZ/data/LHC_samples_small.fit
 stages:
 - name: som_wide_informer_big
   classname: SOMPZInformer
@@ -114,12 +113,22 @@ stages:
 - name: PhotozDeepZeroPointPipe 
   classname:  PhotozDeepZeroPointPipe
   nprocess: *id001
-  module_name: roman_sompz.nz_realization.nzrealization_ceci_2
+  module_name: roman_sompz.nz_realization.nzrealization_ceci
   aliases:
     deep_model: model_som_deep_informer
     balrogdata: input_deep_data
-    lhc_samples: inputtemp  
+    lhc_samples: LHC_samples 
     assignment: assignment_som_deepdeep_estimator_perturb
+- name: PreparePZRealizationsPipe 
+  classname:  PreparePZRealizationsPipe
+  nprocess: 1
+  module_name: roman_sompz.nz_realization.nzrealization_ceci
+
+- name: Samplevariance 
+  classname:  Samplevariance
+  nprocess: 1
+  module_name: roman_sompz.nz_realization.nzrealization_ceci
+
 
 site:
   max_threads: 128
