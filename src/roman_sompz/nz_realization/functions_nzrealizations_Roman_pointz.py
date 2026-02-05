@@ -6,15 +6,8 @@ import pickle
 ###################################################
 ### Functions for generating nz realizations
 ###################################################
-min_z   = 0.01
-max_z   = 2.32
-delta_z = 0.05
-zbins   = np.arange(min_z,max_z,delta_z)
-zbinsc  = zbins[:-1]+(zbins[1]-zbins[0])/2.
-zpdfcols = ["Z{:.3f}".format(s).replace(".","_") for s in zbinsc]
-num_bins = 9
 
-def return_Nzc(df):
+def return_Nzc(df, redshiftcol, zbinsc,zbins, ndeep):
     """
     - This function returns the counts Nzc=N(z,c) in each bin z and cell c.
     - The input is a pandas Dataframe containing a redshift sample. 
@@ -23,21 +16,21 @@ def return_Nzc(df):
     to weight the counts of each galaxy in N(z,c).
     """
     
-    num_galaxy = np.shape(np.array(df['z']))[0]
+    num_galaxy = np.shape(np.array(df[redshiftcol]))[0]
     w = np.ones(num_galaxy) 
     
-    Ncz = np.zeros((64**2,len(zbinsc)))
-    for ti in range(64**2):
+    Ncz = np.zeros((ndeep**2,len(zbinsc)))
+    for ti in range(ndeep**2):
         index = df['cell_deep'].values==ti
         sub = df[index]
-        Ncz[ti], _ = np.histogram(sub['z'], bins=zbins, weights=w[index])
+        Ncz[ti], _ = np.histogram(sub[redshiftcol], bins=zbins, weights=w[index])
     
     Nzc = Ncz.T
     
     return Nzc
 
 
-def return_Nc(df):
+def return_Nc(df, ndeep):
     """
     - This function returns the counts Nc=N(c) in each cell c.
     - The input is a pandas Dataframe containing a deep sample. 
@@ -46,33 +39,33 @@ def return_Nc(df):
     to weight the counts of each galaxy in N(c).
     """
 
-    Nc = np.zeros((64*64))
-    for ti in range(64**2):
+    Nc = np.zeros((ndeep*ndeep))
+    for ti in range(ndeep**2):
         index = df['cell_deep'].values==ti
         Nc[ti] = np.sum(index)
 
     return Nc
 
-def return_Rzc(df):
+def return_Rzc(df, zbinsc, ndeep):
     """
     - This function returns the average lensingXshear weight in each bin z and cell c, Rzc= <ResponseXshear>(z,c)
     - The average is weighted by the balrog probability of each galaxy, defined as #detections/#injections.
     """
     # No response-weight for sim Roman
-    Rzc = np.ones((len(zbinsc), 64**2))
+    Rzc = np.ones((len(zbinsc), ndeep**2))
     return Rzc
 
-def return_Rc(df):
+def return_Rc(df, ndeep):
     """
     - This function returns the average lensingXshear weight in each cell c, Rc= <ResponseXshear>(c)
     - The average is weighted by the balrog probability of each galaxy, defined as #detections/#injections.
     """
     # No response-weight for sim Roman
-    Rc = np.ones(64**2)
+    Rc = np.ones(ndeep**2)
 
     return Rc
 
-def return_bincondition_fraction_Nzt_redshiftsample(redshift_sample_Nzt):
+def return_bincondition_fraction_Nzt_redshiftsample(redshift_sample_Nzt, num_bins):
     """This function returns the fraction of counts in Nzt with over 
     without bin condition, for each tomographic bin.
     """
@@ -97,7 +90,7 @@ def return_bincondition_fraction_Nzt_redshiftsample(redshift_sample_Nzt):
 
 
 
-def return_bincondition_fraction_Nt_deepsample(deep_sample_Nt):
+def return_bincondition_fraction_Nt_deepsample(deep_sample_Nt, num_bins):
     """This function returns the fraction of counts in Nt with over 
     without bin condition, for each tomographic bin. Deep sample.
     """    
@@ -115,7 +108,7 @@ def return_bincondition_fraction_Nt_deepsample(deep_sample_Nt):
 
 
 
-def return_bincondition_weight_Rzt_combined(redshift_sample_Rzt, redshift_sample_Rt, deep_sample_Rt):
+def return_bincondition_weight_Rzt_combined(redshift_sample_Rzt, redshift_sample_Rt, deep_sample_Rt, num_bins):
     """This function returns the final average responseXshear weight in each deep cell and redshift bin: Rzc.
     Response weight = Response to shear of the balrog injection of a deep galaxy.
     Shear weight = Weight to optimize of signal to noise of some shear observable. 
@@ -140,7 +133,7 @@ def return_bincondition_weight_Rzt_combined(redshift_sample_Rzt, redshift_sample
     return np.array(Rzt_finals)
 
 
-def make_nzT(nzti, njoin, plot=False):
+def make_nzT(nzti, njoin,zbinsc,  plot=False):
     zmeanti = np.zeros(nzti.shape[1])
     for i in range(nzti.shape[1]):
         try: zmeanti[i] = np.average(np.arange(len(zbinsc)),weights=nzti.T[i])
@@ -159,7 +152,7 @@ def make_nzT(nzti, njoin, plot=False):
 
     return nzTi
 
-def make_nT(nzti, nti, njoin):
+def make_nT(nzti, nti, njoin, zbinsc):
     zmeanti = np.zeros(nzti.shape[1])
     for i in range(nzti.shape[1]):
         try: zmeanti[i] = np.average(np.arange(len(zbinsc)),weights=nzti.T[i])
@@ -171,7 +164,7 @@ def make_nT(nzti, nti, njoin):
         nTi[i] = np.sum(nti[((zmeanti>=njoin*i)&(zmeanti<njoin*i+njoin))])
     return nTi
 
-def corr_metric(pzT):
+def corr_metric(pzT, zbinsc):
     pzT = pzT/pzT.sum()
     overlap = np.zeros((pzT.shape[1],pzT.shape[1]))
     for i in range(pzT.shape[1]):
@@ -182,7 +175,7 @@ def corr_metric(pzT):
     return metric
 
 
-def rebin_Ncz(Ncz_original):
+def rebin_Ncz(Ncz_original, zbinsc):
     
     #Add two more bins 4.00 and 4.01 with all value 0 inside. This is to ensure interpolation 4.005 will success.
     zeros_column = np.zeros((Ncz_original.shape[0], 2))
@@ -206,70 +199,6 @@ def rebin_Ncz(Ncz_original):
     return Ncz_integrated
 
 
-
-def rebin_cosmos(cosmos_original):
-    
-    #Original redshift and its bins
-    redshift_original = cosmos_original[zpdfcols].values  #(Ngal * 400)
-    #Add two more bins 4.00 and 4.01 with all value 0 inside. This is to ensure interpolation 4.05 will success.
-    zeros_column = np.zeros((redshift_original.shape[0], 2))
-    redshift_original = np.hstack((redshift_original, zeros_column)) #(Ngal * 402)
-    zbinsc_laigle = np.arange(0,4.02,0.01)
-    
-    #Define interpolation bins
-    Nint = 5
-    zbinsc_integrate = np.arange(min_z+delta_z/Nint/2.,max_z+delta_z/Nint,delta_z/Nint)
-    #interpolate for all galaxies
-    interp_func = interp1d(zbinsc_laigle, redshift_original, kind='linear', axis=1, bounds_error=False, fill_value=0)
-    values = interp_func(zbinsc_integrate)
-    #sum 0.01 to 0.05
-    num_galaxies = redshift_original.shape[0]
-    values = values.reshape((num_galaxies, len(zbinsc), Nint))
-    redshift_integrated = np.sum(values, axis=2)     #(Ngal * 80)
-    
-    #remake zpdf columns
-    cosmos_drop = cosmos_original.drop(columns=zpdfcols)
-    new_zpdfcols = ["Z{:.3f}".format(s).replace(".","_") for s in zbinsc]
-    zpdf_df = pd.DataFrame(redshift_integrated, columns=new_zpdfcols)
-    cosmos_new = pd.concat([cosmos_drop, zpdf_df], axis=1)
-    
-    return cosmos_new
-
-
-#####################################################################
-### Functions for assign deep SOM with Perturbed ZPU deep fluxes
-#####################################################################
-
-# Get flux and flux errors for all deep bands that is detected at least once in Balorg, and separate based on deep field == COSMOS.
-def get_fluxes(balrog_file, deep_file):     
-    
-    bands = ['U','G','R','I','Z','J','H','K']
-    
-    # get deep field galaxies that is selected in balrog
-
-    balrog_data = pickle.load(open(balrog_file, 'rb'), encoding='latin1')
-    ids_b = balrog_data['ID'].values
-
-    deep_data = pickle.load(open(deep_file, 'rb'), encoding='latin1')
-    ids_d = deep_data['ID'].values
-
-    match_d_b = np.isin(ids_d,ids_b)  #size of deep field with True if in Balrog and False otherwise
-    print(ids_d[match_d_b].shape)
-
-    fluxes_d = np.zeros((int(match_d_b.sum()),len(bands)))
-    fluxerrs_d = np.zeros((int(match_d_b.sum()),len(bands)))
-    
-    for i,band in enumerate(bands):
-        print(i,band)
-        fluxes_d[:,i] = deep_data['BDF_FLUX_DERED_CALIB_%s'%band][match_d_b]
-        fluxerrs_d[:,i] = deep_data['BDF_FLUX_ERR_DERED_CALIB_%s'%band][match_d_b]
-
-    #get fields  - each deep field has different zp uncertainty
-    fields = deep_data['FIELD'].values[match_d_b]
-    deep_id = deep_data['ID'].values[match_d_b]
-    
-    assert len(fluxes_d)==len(fields)
-    return fluxes_d, fluxerrs_d, fields, deep_id
 
 
 
