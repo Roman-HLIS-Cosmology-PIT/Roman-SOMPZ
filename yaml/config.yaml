@@ -172,6 +172,7 @@ som_deepspec_estimator:
   model: out/model_deep.pkl
   thresh_val_err: 1.0e-05
   config: None
+  assignment: out/deepspecdata_deep_assignment.hdf5
 som_widewide_estimator:
   output_mode: default
   chunk_size: 2000
@@ -339,5 +340,31 @@ sompz_nz:
   wide_som_size: 625
   deep_som_size: 1024
   nz: FINAL_NZ.hdf5
+  config: None
+PhotozDeepZeroPointPipe:
+  output_mode: default
+  chunk_size: 2000
+  hdf5_groupname: None
+  zmin: 0.0
+  zmax: *id011
+  nzbins: *id012
+  calculated_point_estimates: *id001
+  recompute_point_estimates: false
+  redshift_col: *id013
+  inputs: *id006
+  input_errs: *id007
+  zero_points: *id008
+  som_shape: *id005
+  som_minerror: 0.005
+  som_wrap: *id016
+  som_take_log: *id015
+  convert_to_flux: *id014
+  set_threshold: true
+  thresh_val: 1.0e-05
+  debug: false
+  name: PhotozDeepZeroPointPipe
+  deep_model: out/model_deep.pkl
+  assignment: out/deepdata_zeropoint_assignment.hdf5
+  thresh_val_err: 1.0e-05
   config: None
 

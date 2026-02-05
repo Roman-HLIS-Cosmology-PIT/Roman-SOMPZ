@@ -1,58 +1,18 @@
 from scm_pipeline import PipelineStage
 from rail.core.data import TableHandle, ModelHandle, QPHandle, Hdf5Handle
 from rail.estimation.estimator import CatEstimator, CatInformer
+from ceci.config import StageParameter as Param
+import rail.estimation.algos.som as somfuncs
+from rail.core.common_params import SHARED_PARAMS
+import numpy as np
+import gc
 #from ceci_example.types import NpyFile, HDFFile
 # We need to define NpyFile etc we want to use inside ceci_example.types, Or not??? get_input don't use this function and we open in run ourselves
-
-class PreparePZRealizationsPipe(PipelineStage):
-    """
-    Generates LHC sampling points for the uncertainty beside sample variance and shot noise.
-    Saves to a NPZfile with LHCsampling points.
-    """
-
-    name = "PreparePZRealizationsPipe"
-    inputs = [("deepfield_zeropoint", NpyFile)]
-    outputs = [("LHC_samples", NpyFile)]
-    parallel = False
-    
-    config_options = {
-        "shot_noise": StageParameter(bool, False,
-            msg="If you want to add shot noise from the limited number of galaxies in redshift and deep sample "),
-        "sample_variance": StageParameter(bool, False,
-            msg="If you want to add sample variance from the limited area of redshift and deep field. Must add shot nose if you add sample variance" ),
-        "photometric_zeropoint_deep": StageParameter(bool, False,
-            msg="If you want to add photometric zero point uncertainty due to the deep field zero point offsets " ),
-        "redshift_sample_uncertainty": StageParameter(bool, False,
-            msg="The bias and uncertainty due to the use of photometric redshfit calibration sample" ), #If we use spec-only, don't need this
-        "photometric_zeropoint_wide": StageParameter(bool, False,
-            msg="If you want to add photometric zero point uncertainty due to the wide field zero point offsets " ),  #not implemented
-        "photometric_skybackground_wide": StageParameter(bool, False,
-            msg="If you want to add skybackground uncertainty on the wide field photometry " ), #not implemented       
-        "num_lhc_points":StageParameter(int, 100,msg="number of lhc points we want to sample"),
-        "num_3sdir":StageParameter(int, 100,msg="number of 3sdir sampling we want to do"),
-    }
-
-
-    def run(self):
-        for inp, _ in self.inputs:
-            deepfield_zeropoint_filename = self.get_input("deepfield_zeropoint")
-            deepfield_zeropoint_data = np.load(deepfield_zeropoint_filename)
-            
-            shot_noise = self.config["shot_noise"]
-            sample_variance = self.config["sample_variance"]
-            photometric_zeropoint_deep = self.config["photometric_zeropoint_deep"]
-            redshift_sample_uncertainty = self.config["redshift_sample_uncertainty"]
-            photometric_zeropoint_wide = self.config["photometric_zeropoint_wide"]
-            photometric_skybackground_wide = self.config["photometric_skybackground_wide"]
-            
-            num_lhc_points = self.config["num_lhc_points"]
-            num_3sdir = self.config["num_3sdir"]
-            
-            generate_LHC_points(deepfield_zeropoint_data, shot_noise, sample_variance, photometric_zeropoint_deep, redshift_sample_uncertainty, photometric_zeropoint_wide, photometric_skybackground_wide, num_lhc_points )
-            
-            #
-            save_LHC_points here
-            num_3sdir 
+def_bands = ["u", "g", "r", "i", "z", "y"]
+default_bin_edges = [0.0, 0.405, 0.665, 0.96, 2.0]
+default_input_names = []
+default_err_names = []
+default_zero_points = []
 
 # assign_som_deep_ZPU_mpi4py_ceci.py
 class PhotozDeepZeroPointPipe(CatEstimator):
@@ -77,7 +37,7 @@ class PhotozDeepZeroPointPipe(CatEstimator):
                           thresh_val=Param(float, 1.e-5, msg="threshold value for set_threshold for deep data"),
                           debug=Param(bool, False, msg="boolean reducing dataset size for quick debuggin"))
 
-    inputs = [('model', ModelHandle), ('lhc_samples', TableHandle),
+    inputs = [('deep_model', ModelHandle), ('lhc_samples', TableHandle),
               ('balrogdata', TableHandle)]
     outputs = [
         ('assignment', Hdf5Handle),
@@ -92,6 +52,36 @@ class PhotozDeepZeroPointPipe(CatEstimator):
             raise ValueError("Number of inputs_deep specified in inputs_deep must be equal to number of mag errors specified in input_errs_deep!")
         if len(self.config.som_shape) != 2:  # pragma: no cover
             raise ValueError(f"som_shape must be a list with two integers specifying the SOM shape, not len {len(self.config.som_shape)}")
+
+    def open_model(self, **kwargs):
+        """Load the model and/or attach it to this Creator.
+
+        Keywords
+        --------
+        model : object, str or ModelHandle
+            Either an object with a trained model, a path pointing to a file
+            that can be read to obtain the trained model, or a ``ModelHandle``
+            providing access to the trained model
+
+        Returns
+        -------
+        self.model : object
+            The object encapsulating the trained model
+        """
+        model = kwargs.get("model", kwargs.get('deep_model', None))
+        if model is None or model == "None":  # pragma: no cover
+            self.model = None
+        else:
+            if isinstance(model, str):
+                self.model = self.set_data("deep_model", data=None, path=model)
+                self.config["model"] = model
+            else:  # pragma: no cover
+                if isinstance(model, ModelHandle):  # pragma: no cover
+                    if model.has_path:
+                        self.config["model"] = model.path
+                self.model = self.set_data("deep_model", model)
+
+        return self.model
 
     def _assign_som(self, flux, flux_err):
         # som_dim = self.config.som_shape[0]
@@ -115,7 +105,7 @@ class PhotozDeepZeroPointPipe(CatEstimator):
 
         return cells_test, dist_test
 
-    def _process_chunk(self, start, end, data, first):
+    def _process_chunk(self, start, end, data, first, total_LHCsamples):
         """
         Run SOMPZ on a chunk of data
         """
@@ -145,7 +135,15 @@ class PhotozDeepZeroPointPipe(CatEstimator):
         flux_err_wide = data_err_wide_ndarray.view()
 
         cells_wide, dist_wide = self._assign_som(flux_wide, flux_err_wide)
-        output_chunk = dict(cells=cells_wide, dist=dist_wide)
+        if first:
+            output_chunk = {}
+            output_chunk['cells'] = cells_wide
+            output_chunk['dist'] = dist_wide
+            for ind in range(total_LHCsamples):
+                output_chunk['cells_LHC_id_{0}'.format(ind)] = cells_wide
+                output_chunk['dist_LHC_id_{0}'.format(ind)] = dist_wide
+        else:
+            output_chunk = dict(cells=cells_wide, dist=dist_wide)
         self._do_chunk_output(output_chunk, start, end, first)
 
     def _process_chunk_perturb(self, start, end, data, first, LHC_id, LHC_sample):
@@ -181,10 +179,12 @@ class PhotozDeepZeroPointPipe(CatEstimator):
         flux_err_wide = data_err_wide_ndarray.view()
 
         cells_wide, dist_wide = self._assign_som(flux_wide, flux_err_wide)
-        output_chunk = dict(cells=cells_wide, dist=dist_wide)
-        self._do_chunk_output(output_chunk, start, end, first, ispurturb=True)
+        output_chunk = {}
+        output_chunk['cells_LHC_id_{0}'.format(LHC_id)] = cells_wide
+        output_chunk['dist_LHC_id_{0}'.format(LHC_id)] = dist_wide
+        self._do_chunk_output(output_chunk, start, end, first)
 
-    def _do_chunk_output(self, output_chunk, start, end, first, ispurturb=False):
+    def _do_chunk_output(self, output_chunk, start, end, first, purturbnum=-1):
         """
 
         Parameters
@@ -199,7 +199,8 @@ class PhotozDeepZeroPointPipe(CatEstimator):
 
         """
         if first:
-            self._output_handle = self.add_handle('assignment', data=output_chunk)
+            name = "assignment"
+            self._output_handle = self.add_handle(name, data=output_chunk)
             self._output_handle.initialize_write(self._input_length, communicator=self.comm)
         self._output_handle.set_data(output_chunk, partial=True)
         self._output_handle.write_chunk(start, end)
@@ -209,13 +210,15 @@ class PhotozDeepZeroPointPipe(CatEstimator):
         self.model = self.open_model(**self.config)  # None
         first = True
         iter1 = self.input_iterator('balrogdata') # here we assume no deep galaxy duplicates  (Will deal with this later)
+        LHC_samples = self.get_data('lhc_samples').view(np.ndarray)['samples']
+        print(LHC_samples.shape)
         self._output_handle = None
         for s, e, test_data in iter1:
             print(f"Process {self.rank} running creator on chunk {s} - {e}", flush=True)
-            self._process_chunk(s, e, test_data, first)
+            self._process_chunk(s, e, test_data, first, len(LHC_samples))
+            first = False
             for LHC_id, LHC_sample in enumerate(LHC_samples):
                 self._process_chunk_perturb(s, e, test_data, first, LHC_id, LHC_sample)
-            first = False
             gc.collect()
         if self.comm:  # pragma: no cover
             self.comm.Barrier()
@@ -237,30 +240,5 @@ class PhotozDeepZeroPointPipe(CatEstimator):
         tmpdict = dict(som_size=self.som_size)
         self._output_handle.finalize_write(**tmpdict)
 
-#selection_nz_final_rushift_zpshift.py call functions_nzrealizations_Roman_pointz.py
-class RunPZRealizationsPipe(PipelineStage):
-    """
-    Generates redshift realizations, where each is a possible redshift distribution given the uncertainty.
-    Use SOM products and modeled uncertainty and saves to a HDFFile.
-    """
-
-    name = "RunPZRealizationsPipe"
-    inputs = [("deep_balrog_file", ParquetFile), ("redshift_deep_balrog_file", ParquetFile), ("deep_som", PklFile), ("wide_som", PklFile), ("pchat", HDFFile), ("pcchat", HDFFile), ("tomo_bin_assignment", HDFFile), ("deep_cells_assignment_balrog_file", HDFFile)]
-    outputs = [("photoz_realizations", ParquetFile)]
-    parallel = False
-    
-    config_options = {   
-    }
-
-
-    def run(self):
-        for inp, _ in self.inputs:
-            filename = self.get_input(inp)
-            print(f"    PZRealizationPipe reading from {filename}")
-            open(filename)
-
-            #open all the input files
-
-            nz_realizations = get_realizations(input_files)
 
 
