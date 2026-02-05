@@ -12,39 +12,45 @@ from scipy.interpolate import interp1d
 import multiprocessing as mp
 import os 
 import yaml
-from functions_nzrealizations_Roman_pointz import*
+from roman_sompz.nz_realization.functions_nzrealizations_Roman_pointz import*
 import sys
-sys.path.append('/global/cfs/cdirs/des/boyan/sompz_y6/sompz/')
-from functions_sompz import *
-from functions_WL import *
 from datetime import datetime
 today = datetime.today()
 today = today.strftime('%B%d')
 import gc
     
-def get_realizations(sv_redshift_data, sv_deep_data, shot_noise, sample_variance, photometric_zeropoint_deep, redshift_sample_uncertainty, photometric_zeropoint_wide, photometric_skybackground_wide, num_lhc_points, num_3sdir, deep_balrog_data, redshift_deep_balrog_data, deep_som, wide_som, pchat, pcchat, tomo_bin_assignment, deep_cells_assignment_balrog_file_withzp, deep_cells_assignment_balrog_file, wide_cells_assignment_balrog_file):
-
+def get_realizations(sv_redshift_data, sv_deep_data, shot_noise, sample_variance, photometric_zeropoint_deep, redshift_sample_uncertainty, photometric_zeropoint_wide, photometric_skybackground_wide, num_lhc_points, num_3sdir, deep_balrog_data, redshift_deep_balrog_data, deep_som_size, wide_som_size, pchat, pcchat, tomo_bins_wide_in, deep_cells_assignment_balrog_files_withzp, deep_cells_assignment_balrog_file, wide_cells_assignment_balrog_file, bands, redshiftcol, zbins):
+    ndeep = int(np.sqrt(deep_som_size))
+    tomo_bins_wide = {}
+    for i in np.unique(tomo_bins_wide_in['tomo_bins_wide'][:, 0]):
+        if i < 0:
+            continue
+        inarr1 = np.where(tomo_bins_wide_in['tomo_bins_wide'][:, 0] == i)[0]
+        inarr2 = tomo_bins_wide_in['tomo_bins_wide'][inarr1, 1]
+        tomo_bins_wide[i] = np.array(inarr1)
+    zbinsc = 0.5*(zbins[1:]+zbins[:-1])
+    num_bins = len(tomo_bins_wide.keys())
     Nsamples = num_3sdir
-    bands = ['LSST_u','LSST_g','LSST_r','LSST_i','LSST_z','LSST_y', 'Y', 'J', 'H']
-    
-    
-    balrog_data_noshift = build_balrog_df(deep_balrog_file, 
-                      deep_cells_assignment_balrog_file, 
-                      wide_cells_assignment_balrog_file)
+    deep_balrog_data['cell_deep']=deep_cells_assignment_balrog_file['cells']
+    deep_balrog_data['cell_wide_unsheared']=wide_cells_assignment_balrog_file['cells']
+    balrog_data_noshift = deep_balrog_data
+
 
 
     #Now just assume they are the same. The reason for below is if you want to do redshift sample uncertainty, you want to perturb only the redhsift sample to save time and memory
-    deep_cells_assignment_spec_file = deep_cells_assignment_balrog_file
-    wide_cells_assignment_spec_file = wide_cells_assignment_balrog_file
-    spec_data_noshift = redshift_deep_balrog_data[['ra','dec','z']]
+    deep_cells_assignment_spec_file = deep_cells_assignment_balrog_file['cells']
+    wide_cells_assignment_spec_file = wide_cells_assignment_balrog_file['cells']
+    spec_data_noshift = redshift_deep_balrog_data[[redshiftcol, 'ID']]
     spec_data_noshift['cell_deep'] = deep_cells_assignment_spec_file
     spec_data_noshift['cell_wide_unsheared'] = wide_cells_assignment_spec_file
-
+    deep_data_ID= deep_balrog_data['ID']
+    returnned = []
     
     for LHC_id in range(num_lhc_points):
+        T0 = time.time()
         if photometric_zeropoint_deep:
             # Load deep cell assignment with zpu
-            cells_deep = deep_cells_assignment_balrog_files_withzp[LHC_id]
+            cells_deep = deep_cells_assignment_balrog_files_withzp['cells_LHC_id_{0}'.format(LHC_id)]
 
             cells_deep_df = pd.DataFrame({'ID': deep_data_ID, 'cell_deep': cells_deep})
 
@@ -62,12 +68,6 @@ def get_realizations(sv_redshift_data, sv_deep_data, shot_noise, sample_variance
 
         # Define the redshift binning. This is currently set by the sample variance.
         # This binning (dz = 0.05) ensures minimal correlation between bins, which is crucial since the Dir sampling is assuming each redshfit bin to be independent
-        min_z   = 0.01
-        max_z   = 4
-        delta_z = 0.05
-        zbins   = np.arange(min_z,max_z+delta_z,delta_z)
-        zbinsc  = zbins[:-1]+(zbins[1]-zbins[0])/2.
-    
     
     
         Nzc_bins = []
@@ -79,19 +79,19 @@ def get_realizations(sv_redshift_data, sv_deep_data, shot_noise, sample_variance
         # Loop over the tomographic bins
         for i in range(num_bins):
             # Compute Nzc for spec_data
-            Nzc_bins.append(return_Nzc(spec_data[spec_data.cell_wide_unsheared.isin(tomo_bins_wide[i])]))
+            Nzc_bins.append(return_Nzc(spec_data[spec_data.cell_wide_unsheared.isin(tomo_bins_wide[i])], redshiftcol, zbinsc, zbins, ndeep))
             # Compute Nc for balrog_data
-            Nc_bins.append(return_Nc(balrog_data[balrog_data.cell_wide_unsheared.isin(tomo_bins_wide[i])]))
+            Nc_bins.append(return_Nc(balrog_data[balrog_data.cell_wide_unsheared.isin(tomo_bins_wide[i])], ndeep))
             # Compute Rzc for spec_data. This is the response weighted Nzc.
-            Rzc_bins.append(return_Rzc(spec_data[spec_data.cell_wide_unsheared.isin(tomo_bins_wide[i])]))
+            Rzc_bins.append(return_Rzc(spec_data[spec_data.cell_wide_unsheared.isin(tomo_bins_wide[i])],zbinsc, ndeep))
             # Compute Rc_redshift for spec_data. 
-            Rc_redshift_bins.append(return_Rc(spec_data[spec_data.cell_wide_unsheared.isin(tomo_bins_wide[i])]))
+            Rc_redshift_bins.append(return_Rc(spec_data[spec_data.cell_wide_unsheared.isin(tomo_bins_wide[i])], ndeep))
             # Compute Rc_deep for balrog_data
-            Rc_deep_bins.append(return_Rc(balrog_data[balrog_data.cell_wide_unsheared.isin(tomo_bins_wide[i])]))
+            Rc_deep_bins.append(return_Rc(balrog_data[balrog_data.cell_wide_unsheared.isin(tomo_bins_wide[i])], ndeep))
 
         # Stack Nzc and Nc for each bin. The first is no tomo-binning 
-        Nzc_bins = np.array([return_Nzc(spec_data)] + Nzc_bins)
-        Nc_bins = np.array([return_Nc(balrog_data)] + Nc_bins)
+        Nzc_bins = np.array([return_Nzc(spec_data, redshiftcol, zbinsc, zbins, ndeep)] + Nzc_bins)
+        Nc_bins = np.array([return_Nc(balrog_data, ndeep)] + Nc_bins)
 
         # Handle the case where no redshift counts in a deep cell after the bin condition
         for i in range(num_bins):
@@ -99,19 +99,19 @@ def get_realizations(sv_redshift_data, sv_deep_data, shot_noise, sample_variance
             Nzc_bins[i + 1][:, sel] = Nzc_bins[0][:, sel].copy()
 
         # Compute the responseXlensing weighted averages for redshift and deep samples
-        Rzc_bins = np.array([return_Rzc(spec_data)] + Rzc_bins)
-        Rc_redshift_bins = np.array([return_Rc(spec_data)] + Rc_redshift_bins)
-        Rc_deep_bins = np.array([return_Rc(balrog_data)] + Rc_deep_bins)
+        Rzc_bins = np.array([return_Rzc(spec_data, zbinsc, ndeep)] + Rzc_bins)
+        Rc_redshift_bins = np.array([return_Rc(spec_data, ndeep)] + Rc_redshift_bins)
+        Rc_deep_bins = np.array([return_Rc(balrog_data, ndeep)] + Rc_deep_bins)
 
         # Perform the bin condition fractions for redshift and deep samples
-        fraction_Nzt = return_bincondition_fraction_Nzt_redshiftsample(Nzc_bins)
-        fraction_Nt_D = return_bincondition_fraction_Nt_deepsample(Nc_bins)
+        fraction_Nzt = return_bincondition_fraction_Nzt_redshiftsample(Nzc_bins, num_bins)
+        fraction_Nt_D = return_bincondition_fraction_Nt_deepsample(Nc_bins, num_bins)
 
         # Compute bin condition weights gzc(R,Bin)/gc(R,Bin) * gc(D,Bin)
         bincond_combined = fraction_Nzt * fraction_Nt_D[:, None, :]
 
         # Compute the response weights final Rzt = <Rzt>r * <Rt>D / <Rt>r
-        Rt_combined = return_bincondition_weight_Rzt_combined(Rzc_bins, Rc_redshift_bins, Rc_deep_bins)
+        Rt_combined = return_bincondition_weight_Rzt_combined(Rzc_bins, Rc_redshift_bins, Rc_deep_bins, num_bins)
 
         
         
@@ -187,18 +187,19 @@ def get_realizations(sv_redshift_data, sv_deep_data, shot_noise, sample_variance
         nzTi = np.zeros((len(zbinsc),nT))
         nTi = np.zeros((nT))
         for i in range(nT):
-            nzTi[:,i] = np.sum(make_nzT(nzt,1,False)[:,bins[str(i)]],axis=1)
-            nTi[i] = np.sum(make_nT(nzt,nts,1)[bins[str(i)]])
+            nzTi[:,i] = np.sum(make_nzT(nzt,1,zbinsc, False)[:,bins[str(i)]],axis=1)
+            nTi[i] = np.sum(make_nT(nzt,nts,1, zbinsc)[bins[str(i)]])
 
         # Calculate correlation metirc to see the overlap of nz between superphenotypes
         # Should be ~1 because we made assumption that T are independent, so det(corr metric) ->1
-        print ('Correlation metric = %.3f'%corr_metric(nzTi))
+        print ('Correlation metric = %.3f'%corr_metric(nzTi, zbinsc))
 
 
         #############################################################
         ### Load Sample Variance from theory. 
         #############################################################
         # var = 1 + N* sv_th
+        print(sv_redshift_data.shape[0], len(zbinsc))
         assert sv_redshift_data.shape[0]==len(zbinsc)
         assert sv_deep_data.shape[0]==len(zbinsc)
         
@@ -374,20 +375,13 @@ def get_realizations(sv_redshift_data, sv_deep_data, shot_noise, sample_variance
 
 
         def aux_fun(i):
-            np.random.seed()
+                np.random.seed(i)
             #want to generate Nsamples nz realization
-            nz_samples_newmethod = np.zeros((Nsamples,num_bins, len(zbinsc)))
-
-            for i_sample in range(Nsamples):
                 # f_zt = fzc(redshift)/fc(Redshfit) * fc(Deep)
                 # fc(Redshfit) = sum_z (fzc(redshift))
                 f_zt = draw_3sdir_newmethod()
                 # generate nz: multiply by bincond fraction, weight, and Balrog + Wide portions
-                nz_samples_newmethod[i_sample] = return_nzsamples_fromfzt(f_zt, i_sample)
-                if i_sample%(1e3) == 0 :
-                    print(i_sample)
-
-            return nz_samples_newmethod  
+                return np.array([return_nzsamples_fromfzt(f_zt, i)])
 
         def return_nzsamples_fromfzt(fzt_dummy, i):
             fzt = np.zeros((4096, len(zbinsc))).T  # (80, 4096)
@@ -413,9 +407,8 @@ def get_realizations(sv_redshift_data, sv_deep_data, shot_noise, sample_variance
         ########################################################################################
         # for Nsamples = 10000, using pool uses ~ same time as direct run
  
-        p = mp.Pool(100)
-        nz_samples_newmethod = np.concatenate(p.map(aux_fun, range(100)), axis=0)
-        p.terminate()
+        #p = mp.Pool(100)
+        nz_samples_newmethod = np.concatenate(list(map(aux_fun, range(num_3sdir))), axis=0)
 
 
 
@@ -429,19 +422,14 @@ def get_realizations(sv_redshift_data, sv_deep_data, shot_noise, sample_variance
         #nz_samples_newmethod = aux_fun()
 
         # save the nz realiztions to h5 file
-        print("Saving " + filename)
-        with h5py.File(outpath + filename, 'w') as h5:
-            h5.create_dataset("zbins", data=zbins)
-            h5.create_dataset("zbinsc", data=zbinsc)
-
-            for i in range(num_bins):
-                h5.create_dataset(f"bin{i}", data=nz_samples_newmethod[:, i])
-
-
 
         T1 = time.time()
         print("Total time for %d: %.2f"%(LHC_id, T1-T0))
+        returnned.append(nz_samples_newmethod)
 
         # only SV + SN 
-        if ((ZPU==False)):
+        if ((photometric_zeropoint_deep==False)):
             break
+    return returnned
+
+  
