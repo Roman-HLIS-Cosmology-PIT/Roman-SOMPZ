@@ -1,0 +1,8 @@
+# Changes here will be overwritten by Copier
+_commit: v0.3.1
+_src_path: gh:LSSTDESC/RAIL-project-template
+author_email: echarles@slac.stanford.edu
+author_name: Eric Charles
+create_example_module: false
+package_name: tables_io
+project_name: tables-io

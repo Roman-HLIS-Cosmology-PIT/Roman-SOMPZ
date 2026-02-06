@@ -1,0 +1,107 @@
+[project]
+name = "pz-rail-base"
+requires-python = ">=3.10"
+license = {file = "LICENSE"}
+readme = "README.md"
+authors = [
+    { name = "LSST Dark Energy Science Collaboration (DESC)", email = "later@later.com" }
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "License :: OSI Approved :: MIT License",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+]
+dynamic = ["version"]
+dependencies = [
+    "deprecated",
+    "pyyaml",
+    "numpy",
+    "click",
+    "ceci>=2.1",
+    "qp-prob>=1.0.0",
+    "scipy>=1.9.0",
+    "setuptools>=62", # Used to manage connections between RAIL packages
+]
+
+
+# On a mac, install optional dependencies with `pip install '.[dev]'` (include the single quotes)
+[project.optional-dependencies]
+dev = [
+    "qp-prob[full]", 
+    "pytest",
+    "pytest-cov", # Used to report total code coverage
+    "pre-commit", # Used to run checks before finalizing a git commit
+    "pylint", # Used for static linting of files
+    "jupyter", # Used to render simple test notebook
+]
+
+[project.scripts]
+rail = "rail.cli.rail.commands:cli"
+
+[build-system]
+requires = [
+    "setuptools>=62", # Used to build and package the Python project
+    "setuptools_scm>=6.2", # Gets release version from git. Makes it available programmatically
+]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+write_to = "src/rail/core/_version.py"
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests",
+]
+addopts = [
+    "--cov=rail",
+    "--cov-report=html"
+]
+
+[tool.pylint]
+disable = [
+    "abstract-method",
+    "invalid-name",
+    "too-many-statements",
+    "too-many-arguments",
+    "missing-module-docstring",
+    "missing-class-docstring",
+    "missing-function-docstring",
+    "too-few-public-methods",
+    "duplicate-code",
+    "use-dict-literal",
+    "broad-exception-caught",
+]
+max-line-length = 110
+max-locals = 50
+max-branches = 25
+max-public-methods = 50
+
+[tool.mypy]
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+ignore_missing_imports = true
+local_partial_types = true
+no_implicit_reexport = true
+show_error_codes = true
+strict_equality = true
+warn_redundant_casts = true
+warn_unreachable = true
+warn_unused_ignores = true
+
+
+[tool.coverage.run]
+omit = [
+     "*/_version.py",
+     ]
+
+[tool.coverage.report]
+exclude_also = [
+    "raise NotImplementedError",
+    "__repr__",
+    "TYPE_CHECKING",
+    "if cls._instance is None:",
+    "except KeyError as missing_key:",    
+]

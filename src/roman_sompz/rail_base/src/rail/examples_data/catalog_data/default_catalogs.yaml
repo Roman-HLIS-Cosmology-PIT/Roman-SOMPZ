@@ -1,0 +1,557 @@
+# Information about a filter bands
+# For each band this is just a name and a reddening
+# parameter: a_env.   
+
+# The name is used for lookup and should be unique.
+# It should match the name of the associated filter file.
+#
+# These are typically found in:
+# rail_base/src/rail/examples_data/estimation_data/data/FILTER
+#
+# The a_env parameter can be computed from filter 
+# curves using code in `rail_astro_tools`:
+#
+# https://github.com/LSSTDESC/rail_astro_tools/blob/main/src/rail/tools/filter_tools.py
+Bands:
+  - Band:
+      name: comcam_u
+      a_env: 4.81
+  - Band:
+      name: comcam_g
+      a_env: 3.64
+  - Band:
+      name: comcam_r
+      a_env: 2.70
+  - Band:
+      name: comcam_i
+      a_env: 2.06
+  - Band:
+      name: comcam_z
+      a_env: 1.58
+  - Band:
+      name: comcam_y
+      a_env: 1.31
+  - Band:
+      name: DC2LSST_u
+      a_env: 4.81
+  - Band:
+      name: DC2LSST_g
+      a_env: 3.64
+  - Band:
+      name: DC2LSST_r
+      a_env: 2.70
+  - Band:
+      name: DC2LSST_i
+      a_env: 2.06
+  - Band:
+      name: DC2LSST_z
+      a_env: 1.58
+  - Band:
+      name: DC2LSST_y
+      a_env: 1.31
+  - Band:
+      name: euclid_H
+      a_env: 0.47
+  - Band:
+      name: euclid_J
+      a_env: 0.76
+  - Band:
+      name: euclid_Y
+      a_env: 1.10
+  - Band:
+      name: euclid_vis
+      a_env: 2.24
+  - Band:
+      name: hsc_g
+      a_env: 3.64
+  - Band:
+      name: hsc_r
+      a_env: 2.70
+  - Band:
+      name: hsc_i
+      a_env: 2.06
+  - Band:
+      name: hsc_z
+      a_env: 1.58
+  - Band:
+      name: hsc_y
+      a_env: 1.31
+  - Band:
+      name: roman_K213
+      a_env: 0.37
+  - Band:
+      name: roman_F184
+      a_env: 0.47
+  - Band:
+      name: roman_H158
+      a_env: 0.60
+  - Band:
+      name: roman_W146
+      a_env: 0.68
+  - Band:
+      name: roman_J129
+      a_env: 0.83
+  - Band:
+      name: roman_Y106
+      a_env: 1.14
+  - Band:
+      name: roman_Z087
+      a_env: 1.57
+# These are just copied from the comcam values and should be updated
+  - Band:
+      name: DECam_g
+      a_env: 3.64
+  - Band:
+      name: DECam_r
+      a_env: 2.70
+  - Band:
+      name: DECam_i
+      a_env: 2.06
+  - Band:
+      name: DECam_z
+      a_env: 1.58
+  - Band:
+      name: DECam_y
+      a_env: 1.31
+      
+#
+# Particulars about specific catalogs.
+# 
+# These keep track of things like the mapping between band names and columns,
+# names of special columns like the objectId and the 'true' redshift, guard
+# values used to specify non-detections or non-observations.
+#
+# The mapping between bands and magnitude, magnitude error columns
+# is constructed by looping over the band_list add resolving
+# mag_column_template and mag_err_column_template.
+#
+# Similarly, the mapping between bands and filters is constructed
+# by looping over the band_list add resolving filter_template.
+#
+# The `bands` field is used to provide band-specific overrides.
+# At a minimum this must include 5-sigma limiting magnitdues.
+#
+# But it may also include specfic overrides for the names of the
+# mag_column, mag_err_columns and filter template file, for example when a
+# subset of band_list entries do not follow the patterns in the templates.
+#
+CatalogTags:
+  - CatalogTag:
+      name: "com_cam"
+      mag_column_template: "{band}_cModelMag"
+      mag_err_column_template: "{band}_cModelMagErr"
+      filter_template: "comcam_{band}"
+      band_list: ['u', 'g', 'r', 'i', 'z', 'y']
+      bands:
+        u:
+          mag_limit: 26.4
+        g:
+          mag_limit: 27.8
+        r:
+          mag_limit: 27.1
+        i:
+          mag_limit: 26.7
+        z:
+          mag_limit: 25.8
+        y:
+          mag_limit: 24.6
+  - CatalogTag:
+      name: "com_cam_euclid"
+      mag_column_template: "{band}_gaap1p0Mag"
+      mag_err_column_template: "{band}_gaap1p0MagErr"
+      filter_template: "comcam_{band}"
+      band_list: ['u', 'g', 'r', 'i', 'z', 'y', 'vis', 'Y', 'J', 'H']
+      bands:
+        u:
+          mag_limit: 26.4
+        g:
+          mag_limit: 27.8
+        r:
+          mag_limit: 27.1
+        i:
+          mag_limit: 26.7
+        z:
+          mag_limit: 25.8
+        y:
+          mag_limit: 24.6
+        vis:
+          filter: euclid_vis
+          mag_column_name: "euclid_vis_psfMag"
+          mag_err_column_name: "euclid_vis_psfMagErr"
+          mag_limit: 26.0
+        Y:
+          filter: euclid_Y
+          mag_column_name: "euclid_y_unifMag"
+          mag_err_column_name: "euclid_y_unifMagErr"
+          mag_limit: 26.0
+        J:
+          filter: euclid_J
+          mag_column_name: "euclid_j_unifMag"
+          mag_err_column_name: "euclid_j_unifMagErr"
+          mag_limit: 26.0
+        H:
+          filter: euclid_H
+          mag_column_name: "euclid_h_unifMag"
+          mag_err_column_name: "euclid_h_unifMagErr"
+          mag_limit: 26.0
+  - CatalogTag:
+      name: "hsc"
+      redshift_col: "specz_redshift"
+      object_id_col: "object_id"
+      mag_column_template: "HSC{band}_cmodel_dered"
+      mag_err_column_template: "{band}_cmodel_magerr"
+      filter_template: "hsc_{band}"
+      band_list: ['g', 'r', 'i', 'z', 'y']
+      bands:
+        g:
+          mag_limit: 27.66
+        r:
+          mag_limit: 27.25
+        i:
+          mag_limit: 26.6
+        z:
+          mag_limit: 26.24
+        y:
+          mag_limit: 23.35
+  - CatalogTag:
+      name: "dc2"
+      mag_column_template: "mag_{band}_cModel_obj_dered"
+      mag_err_column_template: "magerr_{band}_cModel_obj"
+      redshift_col: "redshift_true"
+      object_id_col: "objectId_obj"
+      filter_template: "DC2LSST_{band}"
+      band_list: ['u', 'g', 'r', 'i', 'z', 'y']
+      bands:
+        u:
+          mag_limit: 24.0
+        g:
+          mag_limit: 27.66
+        r:
+          mag_limit: 27.25
+        i:
+          mag_limit: 26.6
+        z:
+          mag_limit: 26.24
+        y:
+          mag_limit: 23.35
+  - CatalogTag:
+      name: "rubin"
+      mag_column_template: "LSST_obs_{band}"
+      mag_err_column_template: "LSST_obs_{band}_err"
+      redshift_col: "true_redshift"
+      filter_template: "DC2LSST_{band}"
+      band_list: ['u', 'g', 'r', 'i', 'z', 'y']
+      bands:
+        u:
+          mag_limit: 24.0
+        g:
+          mag_limit: 27.66
+        r:
+          mag_limit: 27.25
+        i:
+          mag_limit: 26.6
+        z:
+          mag_limit: 26.24
+        y:
+          mag_limit: 23.35
+  - CatalogTag:
+      name: "roman_3band"
+      mag_column_template: "ROMAN_obs_{band}"
+      mag_err_column_template: "ROMAN_obs_{band}_err"
+      ref_band: "Y106"
+      filter_template: "roman_{band}"
+      band_list: ['Y106', 'J129', 'H158']
+      bands:
+        Y106:
+          mag_limit: 26.4
+        J129:
+          mag_limit: 26.4
+        H158:
+          mag_limit: 26.4
+  - CatalogTag:
+      name: "roman_7band"
+      mag_column_template: "ROMAN_obs_{band}"
+      mag_err_column_template: "ROMAN_obs_{band}_err"
+      ref_band: "Y106"
+      filter_template: "roman_{band}"
+      band_list: ['Z087', 'Y106', 'J129', 'W146', 'H158', 'F184', 'K213']
+      bands:
+        Z087:
+          mag_limit: 27.4
+        Y106:
+          mag_limit: 27.4
+        J129:
+          mag_limit: 27.4
+        W146:
+          mag_limit: 27.4
+        H158:
+          mag_limit: 27.4
+        F184:
+          mag_limit: 27.4
+        K213:
+          mag_limit: 27.4
+  - CatalogTag:
+      name: "roman_rubin"
+      mag_column_template: "LSST_obs_{band}"
+      mag_err_column_template: "LSST_obs_{band}_err"
+      filter_template: "DC2LSST_{band}"
+      band_list: ['u', 'g', 'r', 'i', 'z', 'y']
+      bands:
+        u:
+          mag_limit: 24.0
+        g:
+          mag_limit: 27.66
+        r:
+          mag_limit: 27.25
+        i:
+          mag_limit: 26.6
+        z:
+          mag_limit: 26.24
+        y:
+          mag_limit: 25.35
+  - CatalogTag:
+      name: "rubin_fl"
+      mag_column_template: "{band}_cModelMag"
+      mag_err_column_template: "{band}_cModelMagErr"
+      filter_template: "DC2LSST_{band}"
+      band_list: ['u', 'g', 'r', 'i']
+      bands:
+        u:
+          mag_limit: 26.4
+        g:
+          mag_limit: 27.8
+        r:
+          mag_limit: 27.1
+        i:
+          mag_limit: 26.7
+  - CatalogTag:
+      name: "com_cam_gaap"
+      mag_column_template: "{band}_gaap1p0Mag"
+      mag_err_column_template: "{band}_gaap1p0MagErr"
+      filter_template: "comcam_{band}"
+      band_list: ['u', 'g', 'r', 'i', 'z', 'y']
+      bands:
+        u:
+          mag_limit: 26.5
+        g:
+          mag_limit: 27.8
+        r:
+          mag_limit: 27.1
+        i:
+          mag_limit: 26.7
+        z:
+          mag_limit: 25.8
+        y:
+          mag_limit: 24.6
+  - CatalogTag:
+      name: "com_cam_gaap_4band"
+      mag_column_template: "{band}_gaap1p0Mag"
+      mag_err_column_template: "{band}_gaap1p0MagErr"
+      filter_template: "comcam_{band}"
+      band_list: ['g', 'r', 'i', 'z']
+      bands:
+        g:
+          mag_limit: 27.8
+        r:
+          mag_limit: 27.1
+        i:
+          mag_limit: 26.7
+        z:
+          mag_limit: 25.8
+  - CatalogTag:
+      name: "com_cam_kron"
+      mag_column_template: "{band}_kronMag"
+      mag_err_column_template: "{band}_kronMagErr"
+      filter_template: "comcam_{band}"
+      band_list: ['u', 'g', 'r', 'i', 'z', 'y']
+      bands:
+        u:
+          mag_limit: 26.5
+        g:
+          mag_limit: 27.8
+        r:
+          mag_limit: 27.1
+        i:
+          mag_limit: 26.7
+        z:
+          mag_limit: 25.8
+        y:
+          mag_limit: 24.6
+  - CatalogTag:
+      name: "com_cam_euclid_nir"
+      mag_column_template: "{band}_gaap1p0Mag"
+      mag_err_column_template: "{band}_gaap1p0MagErr"
+      filter_template: "comcam_{band}"
+      band_list: ['u', 'g', 'r', 'i', 'z', 'y', 'Y', 'J', 'H']
+      bands:
+        u:
+          mag_limit: 26.4
+        g:
+          mag_limit: 27.8
+        r:
+          mag_limit: 27.1
+        i:
+          mag_limit: 26.7
+        z:
+          mag_limit: 25.8
+        y:
+          mag_limit: 24.6
+        Y:
+          filter: euclid_Y
+          mag_column_name: "euclid_y_unifMag"
+          mag_err_column_name: "euclid_y_unifMagErr"
+          mag_limit: 26.0
+        J:
+          filter: euclid_J
+          mag_column_name: "euclid_j_unifMag"
+          mag_err_column_name: "euclid_j_unifMagErr"
+          mag_limit: 26.0
+        H:
+          filter: euclid_H
+          mag_column_name: "euclid_h_unifMag"
+          mag_err_column_name: "euclid_h_unifMagErr"
+          mag_limit: 26.0
+  - CatalogTag:
+      name: "roman_plus_rubin"
+      mag_column_template: "LSST_obs_{band}"
+      mag_err_column_template: "LSST_obs_{band}_err"
+      filter_template: "DC2LSST_{band}"
+      band_list: ['u', 'g', 'r', 'i', 'z', 'y', 'Y', 'J', 'H', 'F']
+      bands:
+        u:
+          mag_limit: 24.0
+        g:
+          mag_limit: 27.66
+        r:
+          mag_limit: 27.25
+        i:
+          mag_limit: 26.6
+        z:
+          mag_limit: 26.24
+        y:
+          mag_limit: 25.35
+        Y:
+          filter: roman_Y106
+          mag_column_name: "ROMAN_obs_Y106"
+          mag_err_column_name: "ROMAN_obs_Y106_err"
+          mag_limit: 26.5
+        J:
+          filter: roman_J129
+          mag_column_name: "ROMAN_obs_J129"
+          mag_err_column_name: "ROMAN_obs_J129_err"
+          mag_limit: 26.5
+        H:
+          filter: roman_H158
+          mag_column_name: "ROMAN_obs_H158"
+          mag_err_column_name: "ROMAN_obs_H158_err"
+          mag_limit: 26.5
+        F:
+          filter: roman_F184
+          mag_column_name: "ROMAN_obs_F184"
+          mag_err_column_name: "ROMAN_obs_F184_err"
+          mag_limit: 26.5
+  - CatalogTag:
+      name: "roman_3band_rubin"
+      mag_column_template: "LSST_obs_{band}"
+      mag_err_column_template: "LSST_obs_{band}_err"
+      filter_template: "DC2LSST_{band}"
+      band_list: ['u', 'g', 'r', 'i', 'z', 'y', 'Y', 'J', 'H']
+      bands:
+        u:
+          mag_limit: 24.0
+        g:
+          mag_limit: 27.66
+        r:
+          mag_limit: 27.25
+        i:
+          mag_limit: 26.6
+        z:
+          mag_limit: 26.24
+        y:
+          mag_limit: 25.35
+        Y:
+          filter: roman_Y106
+          mag_column_name: "ROMAN_obs_Y106"
+          mag_err_column_name: "ROMAN_obs_Y106_err"
+          mag_limit: 26.5
+        J:
+          filter: roman_J129
+          mag_column_name: "ROMAN_obs_J129"
+          mag_err_column_name: "ROMAN_obs_J129_err"
+          mag_limit: 26.5
+        H:
+          filter: roman_H158
+          mag_column_name: "ROMAN_obs_H158"
+          mag_err_column_name: "ROMAN_obs_H158_err"
+          mag_limit: 26.5
+  - CatalogTag:
+      name: "roman_7band_rubin"
+      mag_column_template: "LSST_obs_{band}"
+      mag_err_column_template: "LSST_obs_{band}_err"
+      filter_template: "DC2LSST_{band}"
+      band_list: ['u', 'g', 'r', 'i', 'z', 'y', 'Z', 'Y', 'J', 'W', 'H', 'F', 'K']
+      bands:
+        u:
+          mag_limit: 24.0
+        g:
+          mag_limit: 27.66
+        r:
+          mag_limit: 27.25
+        i:
+          mag_limit: 26.6
+        z:
+          mag_limit: 26.24
+        y:
+          mag_limit: 25.35
+        Z:
+          filter: roman_Z087
+          mag_column_name: "ROMAN_obs_Z087"
+          mag_err_column_name: "ROMAN_obs_Z087_err"
+          mag_limit: 27.7
+        Y:
+          filter: roman_Y106
+          mag_column_name: "ROMAN_obs_Y106"
+          mag_err_column_name: "ROMAN_obs_Y106_err"
+          mag_limit: 27.7
+        J:
+          filter: roman_J129
+          mag_column_name: "ROMAN_obs_J129"
+          mag_err_column_name: "ROMAN_obs_J129_err"
+          mag_limit: 27.6
+        W:
+          filter: roman_W146
+          mag_column_name: "ROMAN_obs_W146"
+          mag_err_column_name: "ROMAN_obs_W146_err"
+          mag_limit: 28.3
+        H:
+          filter: roman_H158
+          mag_column_name: "ROMAN_obs_H158"
+          mag_err_column_name: "ROMAN_obs_H158_err"
+          mag_limit: 27.5
+        F:
+          filter: roman_F184
+          mag_column_name: "ROMAN_obs_F184"
+          mag_err_column_name: "ROMAN_obs_F184_err"
+          mag_limit: 27.0
+        K:
+          filter: roman_K213
+          mag_column_name: "ROMAN_obs_K213"
+          mag_err_column_name: "ROMAN_obs_K213_err"
+          mag_limit: 25.9
+  - CatalogTag:
+      name: "des"
+      mag_column_template: "DES_{band}_mag"
+      mag_err_column_template: "DES_{band}_mag_err"
+      filter_template: "DECam_{band}"
+      band_list: ['g', 'r', 'i', 'z']
+      redshift_col: "ZTRUE"
+      object_id_col: "OBJID"      
+      bands:
+        g:
+          mag_limit: 24.4
+        r:
+          mag_limit: 23.8
+        i:
+          mag_limit: 23.1
+        z:
+          mag_limit: 21.7

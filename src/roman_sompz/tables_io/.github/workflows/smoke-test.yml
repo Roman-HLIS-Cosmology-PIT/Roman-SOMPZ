@@ -1,0 +1,44 @@
+# This workflow will run daily at 06:45.
+# It will install Python dependencies and run tests with a variety of Python versions.
+
+name: Unit test smoke test
+
+on:
+  schedule:
+    - cron: 45 6 * * *
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -l {0}
+    strategy:
+      matrix:
+        python-version: ['3.9', '3.10', '3.11']
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: conda-incubator/setup-miniconda@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+        channels: conda-forge,defaults
+        channel-priority: strict
+        show-channel-urls: true
+        miniforge-version: latest
+        use-mamba: true
+        environment-file: environment.yml
+        activate-environment: tables_io
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        python -m pip install --upgrade pip
+        pip install --no-deps .
+        pip install pytest pytest-cov
+    - name: Run unit tests with pytest
+      run: |
+        python -m pytest tests

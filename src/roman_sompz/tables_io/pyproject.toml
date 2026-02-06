@@ -1,0 +1,96 @@
+[project]
+name = "tables-io"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+readme = "README.md"
+description = "Input/output and conversion functions for tabular data"
+authors = [
+    { name = "Eric Charles", email = "echarles@slac.stanford.edu" },
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "License :: OSI Approved :: MIT License",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+]
+dynamic = ["version"]
+dependencies = ["numpy>=1.21.0", "click", "deprecated>=1.2.0", "tables>=3.0", "h5py>=2.9", "pandas>=2.0"]
+
+# On a mac, install optional dependencies with `pip install '.[dev]'` (include the single quotes)
+[project.optional-dependencies]
+full = ["astropy", "pyarrow"] # enables all of the tables_io file format options
+dev = [
+    "astropy",
+    "h5py>=2.9",
+    "pandas>=2.0",
+    "pyarrow",
+    "mpi4py",
+    "coverage",
+    "pylint",
+    "pytest",
+    "pytest-cov",
+    "flake8",
+    "jax>=0.4",
+    "jaxlib",
+    "pre-commit",        # Used to run checks before finalizing a git commit
+    "sphinx>6.3.1",            # Used to automatically generate documentation
+    "sphinx_rtd_theme",  # Used to render documentation
+    "sphinx-autoapi",    # Used to automatically generate api documentation
+    "sphinx_design",
+    "myst-nb",           # used to render notebooks in markdown and write documentation in markdown
+    "sphinx-copybutton",
+]
+
+[project.scripts]
+tables-io = "tables_io.cli:cli"
+
+[build-system]
+requires = [
+    "setuptools>=62",      # Used to build and package the Python project
+    "setuptools_scm>=6.2", # Gets release version from git. Makes it available programmatically
+]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+write_to = "src/tables_io/_version.py"
+
+[tool.pylint]
+disable = [
+    "abstract-method",
+    "invalid-name",
+    "too-many-statements",
+    "missing-module-docstring",
+    "missing-class-docstring",
+    "missing-function-docstring",
+    "too-few-public-methods",
+    "duplicate-code",
+    "use-dict-literal",
+    "broad-exception-caught",
+]
+max-line-length = 110
+max-locals = 50
+max-branches = 25
+max-public-methods = 50
+max-module-lines = 1500
+
+[tool.isort]
+profile = "black"
+line_length = 110
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = ["--cov=tables_io", "--cov-report=html"]
+#flake8-ignore = "E203"
+
+[tool.mypy]
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+ignore_missing_imports = true
+namespace_packages = true
+show_error_codes = true
+strict_equality = true
+warn_redundant_casts = true
+warn_unreachable = true
+warn_unused_ignores = true

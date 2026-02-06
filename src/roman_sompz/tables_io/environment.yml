@@ -1,0 +1,25 @@
+name: tables_io
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - numpy>=1.21.0
+  - astropy
+  - h5py>=2.9=*mpi_openmpi*
+  - pandas
+  - pyarrow
+  - pytables
+  - mpi4py
+  - hdf5=*=*mpi_openmpi*
+  - pylint
+  - pytest
+  - pytest-cov
+  - deprecated>=1.2.0
+  - jupyter
+  - pip
+  - setuptools
+  - coverage
+  - flake8
+  - click
+  - jax>=0.4
+  - jaxlib
