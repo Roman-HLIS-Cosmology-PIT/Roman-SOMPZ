@@ -16,7 +16,8 @@ classifiers = [
 dynamic = ["version", "dependencies", "optional-dependencies"]
 
 [tool.setuptools.dynamic]
-dependencies = { file = "requirements.txt" }
+dependencies = {file = ["requirements.txt"]}
+
 
 [project.urls]
 "Source Code" = "https://github.com/Roman-HLIS-Cosmology-PIT/Roman-SOMPZ/tree/main"
