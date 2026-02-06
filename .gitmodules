@@ -1,0 +1,6 @@
+[submodule "src/roman_sompz/tables_io"]
+	path = src/roman_sompz/tables_io
+	url = https://github.com/chto/tables_io.git
+[submodule "src/roman_sompz/rail_base"]
+	path = src/roman_sompz/rail_base
+	url = https://github.com/chto/rail_base.git
