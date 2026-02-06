@@ -45,9 +45,10 @@ git submodule update --init --recursive
 ```
 
 ## Quick Start
+```
 cd job
 ceci ../yaml/test_all.yaml
-
+```
 
 ## Usage Examples
 
