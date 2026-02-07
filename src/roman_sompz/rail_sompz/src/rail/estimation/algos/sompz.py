@@ -370,7 +370,7 @@ def bin_assignment_spec(spec_data, deep_som_size, wide_som_size, bin_edges,
     nbins = len(bin_edges) - 1
     for ii in range(nbins):
         xlabels.append(ii)
-
+    spec_data['tomo_bin'] = pd.cut(spec_data[key_z], bin_edges, labels=xlabels)
     ncells_with_spec_data = len(np.unique(spec_data[key_cells_wide].values))
     cell_bin_assignment = np.ones(wide_som_size, dtype=int) * -1
     cells_with_spec_data = np.unique(spec_data[key_cells_wide].values)
