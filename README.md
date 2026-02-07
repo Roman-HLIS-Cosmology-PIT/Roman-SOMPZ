@@ -21,11 +21,11 @@ Roman SOMPZ uses self-organizing maps to estimate photometric redshifts from mul
 - pip
 
 ### Install from source
-
-1. Clone the repository with submodules:
+1. Fork the repository
+2. Clone the repository with submodules:
 ```bash
-git clone --recurse-submodules https://github.com/yourusername/romansompz.git
-cd romansompz
+git clone --recurse-submodules https://github.com/yourusername/Roman-SOMPZ.git
+cd Roman-SOMPZ
 ```
 3. Install the package:
 ```bash
