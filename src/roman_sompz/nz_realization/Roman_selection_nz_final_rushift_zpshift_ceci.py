@@ -75,7 +75,6 @@ def get_realizations(sv_redshift_data, sv_deep_data, shot_noise, sample_variance
         Rzc_bins = []
         Rc_redshift_bins = []
         Rc_deep_bins = []
-        print(tomo_bins_wide)
         # Loop over the tomographic bins
         for i in range(num_bins):
             # Compute Nzc for spec_data
@@ -269,9 +268,8 @@ def get_realizations(sv_redshift_data, sv_deep_data, shot_noise, sample_variance
             fcchat_i = np.divide(fcchat_i, normfactor_i, np.zeros(np.shape(fcchat_i)), where=normfactor_i != 0)
             fcchat_i[~np.isfinite(fcchat_i)] = 0
             fcchat_bins.append(fcchat_i)
-
             fchat_i = pchat[tomo_bins_wide[i]]
-            fchat_bins.append(fchat_i)
+            fchat_bins.append(np.squeeze(fchat_i))
 
         Fcchat_bins = [fcchat_bins[i] * fchat_bins[i][:, None] for i in range(num_bins)]
 

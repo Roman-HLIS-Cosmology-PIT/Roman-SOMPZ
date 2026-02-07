@@ -462,9 +462,9 @@ class RunPZRealizationsPipe(CatEstimator):
             tomo_bin_assignment = self.get_data('tomo_bin_assignment')
             deep_cells_assignment_balrog = self.get_data("deep_cells_assignment_balrog_files")
             wide_cells_assignment_balrog = self.get_data("wide_cells_assignment_balrog_files")
-            pchat = np.squeeze(self.get_data('pchat')['pz_chat'])
+            pchat = np.squeeze(self.get_data('pchat')['pchat'])
             pcchat = self.get_data('pcchat')['pc_chat']
-            print(pchat.shape, pcchat.shape)
+            assert(pcchat.shape[1]==len(pchat))
             bands = self.config.bands 
             deep_som_size = int(deep_cells_assignment_balrog['som_size'][0])
             wide_som_size = int(wide_cells_assignment_balrog['som_size'][0])

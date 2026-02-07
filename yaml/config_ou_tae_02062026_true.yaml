@@ -125,7 +125,7 @@ som_deepdeep_estimator:
   hdf5_groupname: None
   zmin: 0.0
   zmax: &id011 5.0
-  nzbins: &id012 201
+  nzbins: &id012 101
   calculated_point_estimates: &id001 []
   recompute_point_estimates: false
   redshift_col: *id013
@@ -263,9 +263,9 @@ som_pzc_stage:
   deep_groupname: None
   bin_edges:  &id023
   - 0.0
-  - 0.35
   - 0.65
-  - 0.85
+  - 1.0
+  - 1.3
   - 2.0
   - 3.0
   zbins_min: 0.0
@@ -304,7 +304,7 @@ sompz_pzchat:
   bin_edges: *id023
   zbins_min: 0.0
   zbins_max: *id011
-  zbins_dz: *id012
+  zbins_dz: &id020 0.05
   name: sompz_pzchat
   config: None
   pz_chat: out_true/pz_chat.hdf5
@@ -322,7 +322,7 @@ sompz_tomobin:
   bin_edges: *id023
   zbins_min: 0.0
   zbins_max: *id011
-  zbins_dz: &id020 0.05
+  zbins_dz: *id020
   name: sompz_tomobin
   wide_som_size: 1024
   deep_som_size: 4096
@@ -374,6 +374,16 @@ PhotozDeepZeroPointPipe:
   assignment: out_true/deepdata_zeropoint_assignment.hdf5
   thresh_val_err: 1.0e-05
   config: None
+sompz_pchat:
+  output_mode: default
+  chunk_size: 2000
+  hdf5_groupname: None
+  inputs: *id010
+  name: sompz_pchat
+  config: None
+  pz_chat: out/pchat.hdf5
+
+
 PreparePZRealizationsPipe:
   photometric_zeropoint_deep: True
   redshift_sample_uncertainty: False

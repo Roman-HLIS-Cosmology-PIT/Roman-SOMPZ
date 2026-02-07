@@ -115,6 +115,15 @@ stages:
     pz_c: pz_c_som_pzc_stage
     pc_chat: pc_chat_pcchat_stage
     pz_chat: pz_chat_sompz_pzchat
+
+- name: sompz_pchat
+  classname: SOMPZPchat
+  nprocess: 1
+  module_name: roman_sompz.rail_sompz.src.rail.estimation.algos.sompz
+  aliases:
+      cell_wide_wide_data: assignment_som_widewide_estimator
+      pchat: pchat_stage
+
 - name: sompz_tomobin
   classname: SOMPZTomobin
   nprocess: 1
@@ -164,7 +173,7 @@ stages:
   aliases:
       deep_balrog_file: input_deep_data
       redshift_deep_balrog_file: input_spec_data
-      pchat: pz_chat_sompz_pzchat 
+      pchat: pchat_stage
       pcchat: pc_chat_pcchat_stage
       tomo_bin_assignment: tomo_bins_wide_sompz_tomobin 
       deep_cells_assignment_balrog_files_withzp: assignment_som_deepdeep_estimator_perturb

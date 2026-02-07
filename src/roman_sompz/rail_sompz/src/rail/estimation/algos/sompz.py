@@ -1163,6 +1163,42 @@ class SOMPZPc_chat(CatEstimator):
         self.run()
         self.finalize()
 
+class SOMPZPchat(CatEstimator):
+    """Calcaulate p(chat)
+    """
+    name = "SOMPZPchat"
+    config_options = CatEstimator.config_options.copy()
+    config_options.update(inputs=Param(list, default_input_names, msg="list of the names of columns to be used as inputs for deep data"),
+                          )
+    inputs = [
+              ('cell_wide_wide_data', TableHandle),
+              ]
+    outputs = [('pchat', Hdf5Handle)]
+
+    def __init__(self, args, **kwargs):
+        """Constructor, build the CatEstimator, then do SOMPZ specific setup
+        """
+        super().__init__(args, **kwargs)
+        # check on bands, errs, and prior band
+
+    def run(self):
+        cell_wide_wide_data = self.get_data('cell_wide_wide_data')
+        weights = np.ones(len(cell_wide_wide_data['cells']))
+        wide_data_for_pz = pd.DataFrame({'cell_wide': cell_wide_wide_data['cells'], 
+                                        'overlap_weight': weights})    
+
+        cells, cell_weights = get_cell_weights_wide(wide_data_for_pz,  overlap_weighted_pchat=True, force_assignment=False, cell_key='cell_wide')
+        pchat = dict(pchat=cell_weights)
+        self.add_data('pchat',pchat)
+
+    def estimate(self, cell_deep_balrog_data, cell_wide_balrog_data):
+        self.set_data('cell_deep_balrog_data', cell_deep_balrog_data)
+        self.set_data('cell_wide_balrog_data', cell_wide_balrog_data)
+        self.run()
+        self.finalize()
+
+
+
 
 class SOMPZTomobin(CatEstimator):
     """Calcaulate tomobin

@@ -129,7 +129,7 @@ som_deepdeep_estimator:
   hdf5_groupname: None
   zmin: 0.0
   zmax: &id011 5.0
-  nzbins: &id012 201
+  nzbins: &id012 101
   calculated_point_estimates: &id001 []
   recompute_point_estimates: false
   redshift_col: *id013
@@ -267,9 +267,9 @@ som_pzc_stage:
   deep_groupname: None
   bin_edges: &id023
   - 0.0
-  - 0.35
   - 0.65
-  - 0.85
+  - 1.0
+  - 1.3
   - 2.0
   - 3.0
   zbins_min: 0.0
@@ -312,6 +312,15 @@ sompz_pzchat:
   name: sompz_pzchat
   config: None
   pz_chat: out/pz_chat.hdf5
+sompz_pchat:
+  output_mode: default
+  chunk_size: 2000
+  hdf5_groupname: None
+  inputs: *id010
+  name: sompz_pchat
+  config: None
+  pz_chat: out/pchat.hdf5
+
 sompz_tomobin:
   output_mode: default
   chunk_size: 2000

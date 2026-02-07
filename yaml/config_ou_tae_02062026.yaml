@@ -42,7 +42,7 @@ som_deep_informer_big:
   thresh_val: 1.0e-05
   thresh_val_err: 1.0e-05
   name: som_deep_informer_big
-  model: out/model_deep.pkl
+  model: out_ou/model_deep.pkl
   som_takelog: false
   config: None
 som_wide_informer_big:
@@ -90,12 +90,12 @@ som_wide_informer_big:
   thresh_val: 1.0e-05
   thresh_val_err: 1.0e-05
   name: som_wide_informer_big
-  model: out/model_wide.pkl
+  model: out_ou/model_wide.pkl
   som_takelog: false
   config: None
 checkinputdeep:
   output_mode: default
-  checked: out/checked_deep.txt 
+  checked: out/checked_deep.txt
   config: None
   nproc: 1
   name: checkinputdeep
@@ -103,7 +103,7 @@ checkinputdeep:
   input_errs: *id003
 checkinputspec:
   output_mode: default
-  checked: out/checked_spec.txt 
+  checked: out/checked_spec.txt
   config: None
   nproc: 1
   name: checkinputspec
@@ -112,14 +112,12 @@ checkinputspec:
 
 checkinputwide:
   output_mode: default
-  checked: out/checked_wide.txt 
+  checked: out/checked_wide.txt
   config: None
   nproc: 1
   name: checkinputwide
   inputs: *id006
   input_errs: *id007
-
-
 
 som_deepdeep_estimator:
   output_mode: default
@@ -127,7 +125,7 @@ som_deepdeep_estimator:
   hdf5_groupname: None
   zmin: 0.0
   zmax: &id011 5.0
-  nzbins: &id012 201
+  nzbins: &id012 101
   calculated_point_estimates: &id001 []
   recompute_point_estimates: false
   redshift_col: *id013
@@ -143,8 +141,8 @@ som_deepdeep_estimator:
   thresh_val: 1.0e-05
   debug: false
   name: som_deepdeep_estimator
-  model: out/model_deep.pkl
-  assignment: out/deepdata_deep_assignment.hdf5
+  model: out_ou/model_deep.pkl
+  assignment: out_ou/deepdata_deep_assignment.hdf5
   thresh_val_err: 1.0e-05
   config: None
 som_deepwide_estimator:
@@ -169,8 +167,8 @@ som_deepwide_estimator:
   thresh_val: 1.0e-05
   debug: false
   name: som_deepwide_estimator
-  model: out/model_wide.pkl
-  assignment: out/deepdata_wide_assignment.hdf5
+  model: out_ou/model_wide.pkl
+  assignment: out_ou/deepdata_wide_assignment.hdf5
   thresh_val_err: 1.0e-05
   config: None
 som_deepspec_estimator:
@@ -195,10 +193,10 @@ som_deepspec_estimator:
   thresh_val: 1.0e-05
   debug: false
   name: som_deepspec_estimator
-  model: out/model_deep.pkl
+  model: out_ou/model_deep.pkl
   thresh_val_err: 1.0e-05
   config: None
-  assignment: out/deepspecdata_deep_assignment.hdf5
+  assignment: out_ou/deepspecdata_deep_assignment.hdf5
 som_widewide_estimator:
   output_mode: default
   chunk_size: 2000
@@ -221,8 +219,8 @@ som_widewide_estimator:
   thresh_val: 1.0e-05
   debug: false
   name: som_widewide_estimator
-  model: out/model_wide.pkl
-  assignment: out/widedata_wide_assignment.hdf5
+  model: out_ou/model_wide.pkl
+  assignment: out_ou/widedata_wide_assignment.hdf5
   thresh_val_err: 1.0e-05
   config: None
 som_widespec_estimator:
@@ -247,8 +245,8 @@ som_widespec_estimator:
   thresh_val: 1.0e-05
   debug: false
   name: som_widespec_estimator
-  model: out/model_wide.pkl
-  assignment: out/specdata_wide_assignment.hdf5
+  model: out_ou/model_wide.pkl
+  assignment: out_ou/specdata_wide_assignment.hdf5
   thresh_val_err: 1.0e-05
   config: None
 som_pzc_stage:
@@ -265,16 +263,16 @@ som_pzc_stage:
   deep_groupname: None
   bin_edges:  &id023
   - 0.0
-  - 0.35
   - 0.65
-  - 0.85
+  - 1.0
+  - 1.3
   - 2.0
   - 3.0
   zbins_min: 0.0
   zbins_max: *id011
   zbins_dz: *id012
   name: som_pzc_stage
-  pz_c: out/pz_c.hdf5
+  pz_c: out_ou/pz_c.hdf5
   config: None
 pcchat_stage:
   output_mode: default
@@ -291,7 +289,7 @@ pcchat_stage:
   wide_som_size: 1024
   redshift_col: *id013
   config: None
-  pc_chat: ./out/pc_chat_pcchat_stage.hdf5
+  pc_chat: ./out_ou/pc_chat_pcchat_stage.hdf5
 sompz_pzchat:
   output_mode: default
   chunk_size: 2000
@@ -306,10 +304,10 @@ sompz_pzchat:
   bin_edges: *id023
   zbins_min: 0.0
   zbins_max: *id011
-  zbins_dz: *id012
+  zbins_dz: &id020 0.05
   name: sompz_pzchat
   config: None
-  pz_chat: out/pz_chat.hdf5
+  pz_chat: out_ou/pz_chat.hdf5
 sompz_tomobin:
   output_mode: default
   chunk_size: 2000
@@ -324,11 +322,11 @@ sompz_tomobin:
   bin_edges: *id023
   zbins_min: 0.0
   zbins_max: *id011
-  zbins_dz: &id020 0.05
+  zbins_dz: *id020
   name: sompz_tomobin
   wide_som_size: 1024
   deep_som_size: 4096
-  tomo_bins_wide: ./out/tomo_bins_wide.hdf5
+  tomo_bins_wide: ./out_ou/tomo_bins_wide.hdf5
   config: None
 sompz_nz:
   output_mode: default
@@ -348,7 +346,7 @@ sompz_nz:
   name: sompz_nz
   wide_som_size: 1024
   deep_som_size: 4096
-  nz: ./out/FINAL_NZ.hdf5
+  nz: ./out_ou/FINAL_NZ.hdf5
   config: None
 PhotozDeepZeroPointPipe:
   output_mode: default
@@ -372,10 +370,20 @@ PhotozDeepZeroPointPipe:
   thresh_val: 1.0e-05
   debug: false
   name: PhotozDeepZeroPointPipe
-  deep_model: out/model_deep.pkl
-  assignment: out/deepdata_zeropoint_assignment.hdf5
+  deep_model: out_ou/model_deep.pkl
+  assignment: out_ou/deepdata_zeropoint_assignment.hdf5
   thresh_val_err: 1.0e-05
   config: None
+sompz_pchat:
+  output_mode: default
+  chunk_size: 2000
+  hdf5_groupname: None
+  inputs: *id010
+  name: sompz_pchat
+  config: None
+  pz_chat: out/pchat.hdf5
+
+
 PreparePZRealizationsPipe:
   photometric_zeropoint_deep: True
   redshift_sample_uncertainty: False
@@ -383,13 +391,13 @@ PreparePZRealizationsPipe:
   photometric_skybackground_wide: False
   deepfield_zeropoint_data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001] 
   num_lhc_points: &id021 5
-  LHC_samples: ./out/LHC_samples_small.fit
+  LHC_samples: ./out_ou/LHC_samples_small.fit
 Samplevariance: 
     area:  20.0
     zmin: 0.0
     zmax: *id011
     zbins_dz: *id020 
-    Sample_variance: ./out/Sample_variance.fit
+    Sample_variance: ./out_ou/Sample_variance.fit
 RunPZRealizationsPipe:
     redshift_col: *id013
     shot_noise: True
@@ -404,7 +412,7 @@ RunPZRealizationsPipe:
     inputs: *id006
     input_errs: *id007
     som_shape: *id005
-    photoz_realizations: ./out/photoz_realizations.hdf5
+    photoz_realizations: ./out_ou/photoz_realizations.hdf5
     name: RunPZRealizationsPipe
     zbins_min: 0.0
     zbins_max: *id011
