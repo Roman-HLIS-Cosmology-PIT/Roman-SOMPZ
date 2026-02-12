@@ -2,7 +2,7 @@ from scm_pipeline import PipelineStage
 from rail.core.data import TableHandle, ModelHandle, QPHandle, Hdf5Handle
 from rail.estimation.estimator import CatEstimator, CatInformer
 from ceci.config import StageParameter as Param
-import rail.estimation.algos.som as somfuncs
+import roman_sompz.rail_sompz.src.rail.estimation.algos.som as somfuncs
 from rail.core.common_params import SHARED_PARAMS
 import numpy as np
 import gc
