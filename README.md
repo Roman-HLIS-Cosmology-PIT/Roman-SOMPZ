@@ -55,6 +55,12 @@ cd scm-pipeline
 pip install .
 cd ../Roman-SOMPZ
 ```
+## For NERSC users to run mpirun
+```
+module swap PrgEnv-${PE_ENV,,} PrgEnv-gnu 
+MPICC="cc -shared" pip install --force-reinstall --no-cache-dir --no-binary=mpi4py mpi4py\
+module load openmpi
+```
 ## Quick Start
 ```
 cd job
