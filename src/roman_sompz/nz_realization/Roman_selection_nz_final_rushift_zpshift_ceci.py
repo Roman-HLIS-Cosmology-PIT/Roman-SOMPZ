@@ -18,8 +18,9 @@ from datetime import datetime
 today = datetime.today()
 today = today.strftime('%B%d')
 import gc
-    
-def get_realizations(sv_redshift_data, sv_deep_data, shot_noise, sample_variance, photometric_zeropoint_deep, redshift_sample_uncertainty, photometric_zeropoint_wide, photometric_skybackground_wide, num_lhc_points, num_3sdir, deep_balrog_data, redshift_deep_balrog_data, deep_som_size, wide_som_size, pchat, pcchat, tomo_bins_wide_in, deep_cells_assignment_balrog_files_withzp, deep_cells_assignment_balrog_file, wide_cells_assignment_balrog_file, bands, redshiftcol, zbins):
+
+#added wide_cells_assignment_wide_files_withzp
+def get_realizations(sv_redshift_data, sv_deep_data, shot_noise, sample_variance, redshift_sample_uncertainty,  photometric_zeropoint_deep, photometric_zeropoint_wide, photometric_skybackground_deep, photometric_skybackground_wide, num_lhc_points, num_3sdir, deep_balrog_data, redshift_deep_balrog_data, deep_som_size, wide_som_size, pchat, pcchat, tomo_bins_wide_in, deep_cells_assignment_balrog_files_withzp, wide_cells_assignment_balrog_files_withzp, wide_cells_assignment_wide_files_withzp, deep_cells_assignment_balrog_file, wide_cells_assignment_balrog_file, bands, redshiftcol, zbins):
     ndeep = int(np.sqrt(deep_som_size))
     tomo_bins_wide = {}
     for i in np.unique(tomo_bins_wide_in['tomo_bins_wide'][:, 0]):
@@ -31,10 +32,10 @@ def get_realizations(sv_redshift_data, sv_deep_data, shot_noise, sample_variance
     zbinsc = 0.5*(zbins[1:]+zbins[:-1])
     num_bins = len(tomo_bins_wide.keys())
     Nsamples = num_3sdir
+    
     deep_balrog_data['cell_deep']=deep_cells_assignment_balrog_file['cells']
     deep_balrog_data['cell_wide_unsheared']=wide_cells_assignment_balrog_file['cells']
     balrog_data_noshift = deep_balrog_data
-
 
 
     #Now just assume they are the same. The reason for below is if you want to do redshift sample uncertainty, you want to perturb only the redhsift sample to save time and memory
@@ -44,11 +45,13 @@ def get_realizations(sv_redshift_data, sv_deep_data, shot_noise, sample_variance
     spec_data_noshift['cell_deep'] = deep_cells_assignment_spec_file
     spec_data_noshift['cell_wide_unsheared'] = wide_cells_assignment_spec_file
     deep_data_ID= deep_balrog_data['ID']
+
+
     returnned = []
     
     for LHC_id in range(num_lhc_points):
         T0 = time.time()
-        if photometric_zeropoint_deep:
+        if photometric_zeropoint_deep or photometric_skybackground_deep:
             # Load deep cell assignment with zpu
             cells_deep = deep_cells_assignment_balrog_files_withzp['cells_LHC_id_{0}'.format(LHC_id)]
 
@@ -60,8 +63,22 @@ def get_realizations(sv_redshift_data, sv_deep_data, shot_noise, sample_variance
             
             spec_data = spec_data_noshift.copy().drop('cell_deep', axis=1)
             spec_data = spec_data.merge(cells_deep_df, on='ID', how='left')
+            
+        if photometric_zeropoint_wide or photometric_skybackground_wide:
+            cell_wide_balrog = wide_cells_assignment_balrog_files_withzp['cells_LHC_id_{0}'.format(LHC_id)]
+            cell_wide = wide_cells_assignment_wide_files_withzp['cells_LHC_id_{0}'.format(LHC_id)]
 
+            #recompute pchat
+            pchat = np.zeros(wide_som_size)
+            np.add.at(pchat, cell_wide, 1)
+            pchat /= np.sum(pchat)
 
+        if photometric_zeropoint_deep or photometric_skybackground_deep or photometric_zeropoint_wide or photometric_skybackground_wide:
+            #recompute pcchat
+            pcchat = np.zeros((deep_som_size, wide_som_size))
+            np.add.at(pcchat, (cells_deep,cell_wide_balrog), 1)
+            pcchat /= np.sum(pcchat)
+            
         ###########################################################################################
         ### Define new redshift bins
         ###########################################################################################

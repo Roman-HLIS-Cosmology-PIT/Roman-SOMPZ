@@ -128,8 +128,8 @@ som_deepdeep_estimator:
   chunk_size: 2000
   hdf5_groupname: None
   zmin: 0.0
-  zmax: &id011 5.0
-  nzbins: &id012 101
+  zmax: &id011 3.05
+  nzbins: &id012 62
   calculated_point_estimates: &id001 []
   recompute_point_estimates: false
   redshift_col: *id013
@@ -361,7 +361,51 @@ sompz_nz:
   deep_som_size: 1024
   nz: ./out/FINAL_NZ.hdf5
   config: None
-PhotozDeepZeroPointPipe:
+PreparePZRealizationsPipe:
+  output_mode: default
+  redshift_sample_uncertainty: &id024 False
+  photometric_zeropoint_deep: &id017 True 
+  photometric_zeropoint_wide: &id018 True
+  photometric_skybackground_deep: &id019 True
+  photometric_skybackground_wide: &id022 True
+  deepfield_zeropoint_data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001] 
+  widefield_zeropoint_data: [0.0002, 0.0002, 0.0002, 0.0002, 0.0002, 0.0002, 0.0002, 0.0002, 0.0002] 
+  num_lhc_points: &id021 5
+  LHC_samples_deep_zp: ./out/LHC_samples_deep_zp.fit
+  LHC_samples_wide_zp: ./out/LHC_samples_wide_zp.fit
+  LHC_samples_sky: ./out/LHC_samples_sky.fit
+PhotozDeepDeepZpDustPipe:
+  output_mode: default
+  chunk_size: 2000
+  hdf5_groupname: None
+  zmin: 0.0
+  zmax: *id011
+  nzbins: *id012
+  calculated_point_estimates: *id001
+  recompute_point_estimates: false
+  redshift_col: *id013
+  inputs: *id002
+  input_ra_col: ra
+  input_dec_col: ra
+  input_errs: *id003
+  zero_points: *id004
+  som_shape: *id005
+  som_minerror: 0.005
+  som_wrap: *id016
+  som_take_log: *id015
+  convert_to_flux: *id014
+  set_threshold: true
+  thresh_val: 1.0e-05
+  debug: false
+  photometric_zeropoint: *id017
+  photometric_skybackground: *id019
+  name: PhotozDeepDeepZpDustPipe
+  deep_model: out/model_deep.pkl
+  assignment: out/deepdata_deep_zeropoint_assignment.hdf5
+  thresh_val_err: 1.0e-05
+  config: None
+
+PhotozDeepWideZpDustPipe:
   output_mode: default
   chunk_size: 2000
   hdf5_groupname: None
@@ -372,9 +416,11 @@ PhotozDeepZeroPointPipe:
   recompute_point_estimates: false
   redshift_col: *id013
   inputs: *id006
+  input_ra_col: ra
+  input_dec_col: ra
   input_errs: *id007
   zero_points: *id008
-  som_shape: *id005
+  som_shape: *id009
   som_minerror: 0.005
   som_wrap: *id016
   som_take_log: *id015
@@ -382,33 +428,61 @@ PhotozDeepZeroPointPipe:
   set_threshold: true
   thresh_val: 1.0e-05
   debug: false
-  name: PhotozDeepZeroPointPipe
-  deep_model: out/model_deep.pkl
-  assignment: out/deepdata_zeropoint_assignment.hdf5
+  photometric_zeropoint: *id018
+  photometric_skybackground: *id022
+  name: PhotozDeepWideZpDustPipe
+  deep_model: out/model_wide.pkl
+  assignment: out/deepdata_wide_zeropoint_assignment.hdf5
   thresh_val_err: 1.0e-05
   config: None
-PreparePZRealizationsPipe:
-  photometric_zeropoint_deep: True
-  redshift_sample_uncertainty: False
-  photometric_zeropoint_wide: False
-  photometric_skybackground_wide: False
-  deepfield_zeropoint_data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001] 
-  num_lhc_points: &id021 5
-  LHC_samples: ./out/LHC_samples_small.fit
+
+PhotozWideWideZpDustPipe:
+  output_mode: default
+  chunk_size: 2000
+  hdf5_groupname: None
+  zmin: 0.0
+  zmax: *id011
+  nzbins: *id012
+  calculated_point_estimates: *id001
+  recompute_point_estimates: false
+  redshift_col: *id013
+  inputs: *id006
+  input_ra_col: ra
+  input_dec_col: ra
+  input_errs: *id007
+  zero_points: *id008
+  som_shape: *id009
+  som_minerror: 0.005
+  som_wrap: *id016
+  som_take_log: *id015
+  convert_to_flux: *id014
+  set_threshold: true
+  thresh_val: 1.0e-05
+  debug: false
+  photometric_zeropoint: *id018
+  photometric_skybackground: *id022
+  name: PhotozWideWideZpDustPipe
+  deep_model: out/model_wide.pkl
+  assignment: out/widedata_wide_zeropoint_assignment.hdf5
+  thresh_val_err: 1.0e-05
+  config: None
+  
 Samplevariance: 
     area:  20.0
     zmin: 0.0
     zmax: *id011
     zbins_dz: *id020 
     Sample_variance: ./out/Sample_variance.fit
+    
 RunPZRealizationsPipe:
     redshift_col: *id013
     shot_noise: True
     sample_variance: False
-    photometric_zeropoint_deep: True
-    redshift_sample_uncertainty: False
-    photometric_zeropoint_wide: False
-    photometric_skybackground_wide: False
+    redshift_sample_uncertainty: *id024 
+    photometric_zeropoint_deep: *id017
+    photometric_zeropoint_wide: *id018
+    photometric_skybackground_deep: *id019
+    photometric_skybackground_wide: *id022 
     num_lhc_points: *id021 
     num_3sdir: 100
     bands: *id006 

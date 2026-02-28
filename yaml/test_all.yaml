@@ -7,6 +7,8 @@ inputs:
   input_deep_data: ./data/hlwas_cosmos_260120_UM_2026_01_22.parquet
   input_spec_data: ./data/hlwas_cosmos_260120_UM_2026_01_22.parquet
   input_wide_data: ./data/hlwas_cosmos_260120_UM_2026_01_22.parquet
+  input_sfd_data: ./data/sfd_ebv.fit
+  input_lss_error_data: ./data/lss_error.fit
 stages:
 - name: checkinputdeep
   classname: Inputcheck 
@@ -144,21 +146,52 @@ stages:
     tomo_bins_wide: tomo_bins_wide_sompz_tomobin
     pc_chat: pc_chat_pcchat_stage
     nz: nz_sompz_nz
-- name: PhotozDeepZeroPointPipe 
-  classname:  PhotozDeepZeroPointPipe
-  nprocess: *id001
-  module_name: roman_sompz.nz_realization.nzrealization_ceci
-  aliases:
-    deep_model: model_som_deep_informer
-    balrogdata: input_deep_data
-    lhc_samples: LHC_samples 
-    assignment: assignment_som_deepdeep_estimator_perturb
-
+    
 - name: PreparePZRealizationsPipe 
   classname:  PreparePZRealizationsPipe
   nprocess: 1
   module_name: roman_sompz.nz_realization.nzrealization_ceci
+  aliases:
+    sfd_data: input_sfd_data
+    lss_error_data: input_lss_error_data
+    lhc_samples_deep_zp: LHC_samples_deep_zp
+    lhc_samples_wide_zp: LHC_samples_wide_zp
+    lhc_samples_sky: LHC_samples_sky
+    
 
+- name: PhotozDeepDeepZpDustPipe 
+  classname:  PhotozZpDustPipe
+  nprocess: *id001
+  module_name: roman_sompz.nz_realization.nzrealization_ceci
+  aliases:
+    deep_model: model_som_deep_informer
+    data: input_deep_data
+    lhc_samples_zp: LHC_samples_deep_zp
+    lhc_samples_sky: LHC_samples_sky
+    assignment: assignment_som_deepdeep_estimator_perturb
+
+- name: PhotozDeepWideZpDustPipe 
+  classname:  PhotozZpDustPipe
+  nprocess: *id001
+  module_name: roman_sompz.nz_realization.nzrealization_ceci
+  aliases:
+    deep_model: model_som_wide_informer
+    data: input_deep_data
+    lhc_samples_zp: LHC_samples_wide_zp
+    lhc_samples_sky: LHC_samples_sky
+    assignment: assignment_som_deepwide_estimator_perturb
+
+- name: PhotozWideWideZpDustPipe 
+  classname:  PhotozZpDustPipe
+  nprocess: *id001
+  module_name: roman_sompz.nz_realization.nzrealization_ceci
+  aliases:
+    deep_model: model_som_wide_informer
+    data: input_wide_data
+    lhc_samples_zp: LHC_samples_wide_zp
+    lhc_samples_sky: LHC_samples_sky
+    assignment: assignment_som_widewide_estimator_perturb
+    
 - name: Samplevariance 
   classname:  Samplevariance
   nprocess: 1
@@ -177,6 +210,8 @@ stages:
       pcchat: pc_chat_pcchat_stage
       tomo_bin_assignment: tomo_bins_wide_sompz_tomobin 
       deep_cells_assignment_balrog_files_withzp: assignment_som_deepdeep_estimator_perturb
+      wide_cells_assignment_balrog_files_withzp: assignment_som_deepwide_estimator_perturb
+      wide_cells_assignment_wide_files_withzp: assignment_som_widewide_estimator_perturb
       sv_redshift_file: sample_variance
       sv_deep_file: sample_variance
       deep_som: model_som_deep_informer
@@ -186,5 +221,6 @@ stages:
 
 site:
   max_threads: 128
+  mpi_command: srun -n
   name: local
 

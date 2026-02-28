@@ -1,4 +1,5 @@
 from scm_pipeline import PipelineStage
+from rail.core.stage import RailStage
 from rail.core.data import TableHandle, ModelHandle, QPHandle, Hdf5Handle
 from rail.estimation.estimator import CatEstimator, CatInformer
 from ceci.config import StageParameter as Param
@@ -11,7 +12,9 @@ import astropy.table as apTable
 import tables_io
 from ceci.config import StageParameter
 import numpy as np
+import healpy as hp
 import os
+from astropy.io import fits
 from roman_sompz.nz_realization.samplevariance import *
 from roman_sompz.nz_realization.Roman_selection_nz_final_rushift_zpshift_ceci import get_realizations
 #from ceci_example.types import NpyFile, HDFFile
@@ -22,60 +25,96 @@ default_input_names = []
 default_err_names = []
 default_zero_points = []
 
-
 #from ceci_example.types import NpyFile, HDFFile
 # We need to define NpyFile etc we want to use inside ceci_example.types, Or not??? get_input don't use this function and we open in run ourselves
-class PreparePZRealizationsPipe(PipelineStage):
+#If we use RailStage and use self.get_data for the dust map, we have to put the maps as input in yaml file. And I hesitate doing this.
+class PreparePZRealizationsPipe(RailStage):
     """
     Generates LHC sampling points for the uncertainty beside sample variance and shot noise.
     Saves to a NPZfile with LHCsampling points.
     """
 
     name = "PreparePZRealizationsPipe"
-    inputs = []
-    outputs = [("LHC_samples",TableHandle)]
+    inputs = ("sfd_data",TableHandle), ("lss_error_data",TableHandle)
+    outputs = [("LHC_samples_deep_zp",TableHandle), ("LHC_samples_wide_zp",TableHandle),  ("LHC_samples_sky",TableHandle)]
     parallel = False
-    
+
     config_options = {
-        "photometric_zeropoint_deep": StageParameter(bool, False,
-            msg="If you want to add photometric zero point uncertainty due to the deep field zero point offsets " ),
         "redshift_sample_uncertainty": StageParameter(bool, False,
             msg="The bias and uncertainty due to the use of photometric redshfit calibration sample" ), #If we use spec-only, don't need this
+        "photometric_zeropoint_deep": StageParameter(bool, False,
+            msg="If you want to add photometric zero point uncertainty due to the deep field zero point offsets " ),
         "photometric_zeropoint_wide": StageParameter(bool, False,
             msg="If you want to add photometric zero point uncertainty due to the wide field zero point offsets " ),  #not implemented
+        "photometric_skybackground_deep": StageParameter(bool, False,
+            msg="If you want to add skybackground uncertainty on the deep field photometry " ),    
         "photometric_skybackground_wide": StageParameter(bool, False,
-            msg="If you want to add skybackground uncertainty on the wide field photometry " ), #not implemented       
-        "deepfield_zeropoint_data": StageParameter(list, [], msg="zero point uncertainty" ), #not implemented
+            msg="If you want to add skybackground uncertainty on the wide field photometry " ),      
+        "deepfield_zeropoint_data": StageParameter(list, [], msg="zero point uncertainty for deep field" ), 
+        "widefield_zeropoint_data": StageParameter(list, [], msg="zero point uncertainty for wide field" ), 
         "num_lhc_points":StageParameter(int, 100,msg="number of lhc points we want to sample")
     }
 
 
     def run(self):
-            photometric_zeropoint_deep = self.config["photometric_zeropoint_deep"]
-            redshift_sample_uncertainty = self.config["redshift_sample_uncertainty"]
-            photometric_zeropoint_wide = self.config["photometric_zeropoint_wide"]
-            photometric_skybackground_wide = self.config["photometric_skybackground_wide"]
-            deepfield_zeropoint_data=  self.config["deepfield_zeropoint_data"]
-            
-            num_lhc_points = self.config["num_lhc_points"]
-            
-            samples = generate_LHC_points(np.array(deepfield_zeropoint_data), photometric_zeropoint_deep, redshift_sample_uncertainty, photometric_zeropoint_wide, photometric_skybackground_wide, num_lhc_points)
-            samples=samples.T
-            filename = self.get_output(self.outputs[0][0])
-            t= np.zeros(len(samples), dtype=[("samples", '>f8', samples.shape[-1])])
-            t['samples'] = samples
-            table = apTable.Table(t)
-            table = tables_io.convert(table, tables_io.types.NUMPY_FITS)
-            filename, file_extension = os.path.splitext(filename)
-            tables_io.write(table,filename, file_extension[1:])
+        redshift_sample_uncertainty = self.config["redshift_sample_uncertainty"]
+        photometric_zeropoint_deep = self.config["photometric_zeropoint_deep"]
+        photometric_zeropoint_wide = self.config["photometric_zeropoint_wide"]
+        photometric_skybackground_deep = self.config["photometric_skybackground_deep"]
+        photometric_skybackground_wide = self.config["photometric_skybackground_wide"]
+        deepfield_zeropoint_data =  self.config["deepfield_zeropoint_data"]
+        widefield_zeropoint_data =  self.config["widefield_zeropoint_data"]
+        sfd_map = self.get_data('sfd_data').view(np.ndarray)['map']
+        lss_error_map = self.get_data('lss_error_data').view(np.ndarray)['map']
+        num_lhc_points = self.config["num_lhc_points"]
 
+    
+        lhc_samples = generate_LHC_points(np.array(deepfield_zeropoint_data), np.array(widefield_zeropoint_data), sfd_map, lss_error_map, photometric_zeropoint_deep, redshift_sample_uncertainty, photometric_zeropoint_wide, photometric_skybackground_deep, photometric_skybackground_wide, num_lhc_points)
+        deep_zp_samples=lhc_samples['deep_zp']
+        wide_zp_samples=lhc_samples['wide_zp']
+        sky_samples=lhc_samples['sky']
+
+        #I am saving to multiple tables since they will eventually have different length.
+        if photometric_zeropoint_deep:
+            #deep_zp_filename = self.get_output(self.outputs[0][0])
+            deep_zp_t = np.zeros(len(deep_zp_samples), dtype=[("samples", '>f8', deep_zp_samples.shape[-1])])
+            deep_zp_t['samples'] = deep_zp_samples
+            deep_zp_table = apTable.Table(deep_zp_t)
+            deep_zp_table = tables_io.convert(deep_zp_table, tables_io.types.NUMPY_FITS)
+            #deep_zp_filename, deep_zp_file_extension = os.path.splitext(deep_zp_filename)
+            #print(deep_zp_table, deep_zp_filename, deep_zp_file_extension)
+            #tables_io.write(deep_zp_table, deep_zp_filename, deep_zp_file_extension[1:])
+
+    
+
+        if photometric_zeropoint_wide: 
+            #wide_zp_filename = self.get_output(self.outputs[1][0])
+            wide_zp_t = np.zeros(len(wide_zp_samples), dtype=[("samples", '>f8', wide_zp_samples.shape[-1])])
+            wide_zp_t['samples'] = wide_zp_samples
+            wide_zp_table = apTable.Table(wide_zp_t)
+            wide_zp_table = tables_io.convert(wide_zp_table, tables_io.types.NUMPY_FITS)
+            #wide_zp_filename, wide_zp_file_extension = os.path.splitext(wide_zp_filename)
+            #tables_io.write(wide_zp_table, wide_zp_filename, wide_zp_file_extension[1:])
+
+        # We need to use the same dust error map for the deep and wide field, assuming they are both corrected using the csdf map
+        if photometric_skybackground_deep or photometric_skybackground_wide: 
+            #sky_filename = self.get_output(self.outputs[2][0])
+            sky_t = np.zeros(len(sky_samples), dtype=[("samples", '>f8', sky_samples.shape[-1])])
+            sky_t['samples'] = sky_samples
+            sky_table = apTable.Table(sky_t)
+            sky_table = tables_io.convert(sky_table, tables_io.types.NUMPY_FITS)
+            #sky_filename, sky_file_extension = os.path.splitext(sky_filename)
+            #tables_io.write(sky_table, sky_filename, sky_file_extension[1:])
             
-         
+        self.add_data("LHC_samples_deep_zp", deep_zp_table)
+        self.add_data("LHC_samples_wide_zp", wide_zp_table)
+        self.add_data("LHC_samples_sky", sky_table)
+        
 # assign_som_deep_ZPU_mpi4py_ceci.py
-class PhotozDeepZeroPointPipe(CatEstimator):
-    """CatEstimator subclass to compute redshift PDFs for SOMPZ
+class PhotozZpDustPipe(CatEstimator):
+    """CatEstimator subclass to assign pertubed photometry from zp and dust on SOM
     """
-    name = "PhotozDeepZeroPointPipe"
+    name = "PhotozZpDustPipe"
     config_options = CatEstimator.config_options.copy()
     config_options.update(chunk_size=SHARED_PARAMS,
                           redshift_col=SHARED_PARAMS, #Param(str, "redshift", msg="name of redshift column"),
@@ -83,6 +122,8 @@ class PhotozDeepZeroPointPipe(CatEstimator):
                           #groupname=SHARED_PARAMS, #Param(str, "", msg="hdf5_groupname for data"),
                           inputs=Param(list, default_input_names, msg="list of the names of columns to be used as inputs for deep data"),
                           input_errs=Param(list, default_err_names, msg="list of the names of columns containing errors on inputs for deep data"),
+                          input_ra_col = Param(str, "ra", msg="column name for ra"),
+                          input_dec_col = Param(str, "dec", msg="column name for dec"),
                           zero_points=Param(list, default_zero_points, msg="zero points for converting mags to fluxes for deep data, if needed"),
                           som_shape=Param(list, [32, 32], msg="shape for the deep som, must be a 2-element tuple"),
                           som_minerror=Param(float, 0.01, msg="floor placed on observational error on each feature in deep som"),
@@ -92,10 +133,12 @@ class PhotozDeepZeroPointPipe(CatEstimator):
                                                      "set to true if inputs are mags and to False if inputs are already fluxes"),
                           set_threshold=Param(bool, False, msg="flag for whether to replace values below a threshold with a set number"),
                           thresh_val=Param(float, 1.e-5, msg="threshold value for set_threshold for deep data"),
-                          debug=Param(bool, False, msg="boolean reducing dataset size for quick debuggin"))
-
-    inputs = [('deep_model', ModelHandle), ('lhc_samples', TableHandle),
-              ('balrogdata', TableHandle)]
+                          debug=Param(bool, False, msg="boolean reducing dataset size for quick debuggin"),
+                          photometric_zeropoint = Param(bool, False, msg="photometric zero point uncertainty" ),
+                          photometric_skybackground = Param(bool, False, msg="photometric dust uncertainty" )
+                         )
+    inputs = [('deep_model', ModelHandle), ('lhc_samples_zp', TableHandle), ('lhc_samples_sky', TableHandle),
+              ('data', TableHandle)]
     outputs = [
         ('assignment', Hdf5Handle),
     ]
@@ -203,7 +246,7 @@ class PhotozDeepZeroPointPipe(CatEstimator):
             output_chunk = dict(cells=cells_wide, dist=dist_wide)
         self._do_chunk_output(output_chunk, start, end, first)
 
-    def _process_chunk_perturb(self, start, end, data, first, LHC_id, LHC_sample):
+    def _process_chunk_perturb(self, start, end, data, first, LHC_id, LHC_sample_zp, LHC_sample_sky):
         """
         Run SOMPZ on a chunk of data
         """
@@ -219,8 +262,26 @@ class PhotozDeepZeroPointPipe(CatEstimator):
                 data_wide[:, j] = np.array(data[col], dtype=np.float32)
                 data_err_wide[:, j] = np.array(data[errcol], dtype=np.float32)
             #Here we assume only one deep field 
-            data_wide[:, j] = data_wide[:, j]* 10**LHC_sample[j]
-            data_err_wide[:, j] = data_wide[:, j]* 10**LHC_sample[j]
+            if self.config.photometric_zeropoint:
+                data_wide[:, j] = data_wide[:, j] * 10**LHC_sample_zp[j]
+
+            #Also add the dust uncertainty here
+            #Honestly I think all col are float 64, I use float32 here to be coherent with rail codes
+            if self.config.photometric_skybackground:
+                ra_col = self.config.input_ra_col
+                dec_col = self.config.input_ra_col
+                ra = np.array(data[ra_col], dtype=np.float32)
+                dec = np.array(data[dec_col], dtype=np.float32)
+                
+                nside = hp.get_nside(LHC_sample_sky)
+
+                theta = np.radians(90.0 - dec)
+                phi = np.radians(ra)
+                
+                pixel_ids = hp.ang2pix(nside, theta, phi, nest=False)
+                data_wide[:, j] = data_wide[:, j] * 10**LHC_sample_sky[pixel_ids]
+
+                
 
         if self.config.set_threshold:
             truncation_value = self.config.thresh_val
@@ -265,18 +326,24 @@ class PhotozDeepZeroPointPipe(CatEstimator):
     def run(self):
         self.model = None
         self.model = self.open_model(**self.config)  # None
+        #If we are doing neither zp nor dust map uncertainty, no need to assign soms
+        if not self.config.photometric_zeropoint and not self.config.photometric_skybackground:
+            return
         first = True
-        iter1 = self.input_iterator('balrogdata') # here we assume no deep galaxy duplicates  (Will deal with this later)
-        LHC_samples = self.get_data('lhc_samples').view(np.ndarray)['samples']
-        print(LHC_samples.shape)
+        iter1 = self.input_iterator('data') # here we assume no deep galaxy duplicates  (Will deal with this later)
+        LHC_samples_zp = self.get_data('lhc_samples_zp').view(np.ndarray)['samples']
+        LHC_samples_sky = self.get_data('lhc_samples_sky').view(np.ndarray)['samples']
+        print(LHC_samples_zp.shape)
+        print(LHC_samples_sky.shape)
         self._output_handle = None
         for s, e, test_data in iter1:
             print(f"Process {self.rank} running creator on chunk {s} - {e}", flush=True)
-            self._process_chunk(s, e, test_data, first, len(LHC_samples))
+            self._process_chunk(s, e, test_data, first, np.max((len(LHC_samples_zp), len(LHC_samples_sky))))
             first = False
-            for LHC_id, LHC_sample in enumerate(LHC_samples):
-                print(LHC_sample.shape)
-                self._process_chunk_perturb(s, e, test_data, first, LHC_id, LHC_sample)
+            for LHC_id, (LHC_sample_zp, LHC_sample_sky) in enumerate(zip(LHC_samples_zp, LHC_samples_sky)):
+                print(LHC_sample_zp.shape)
+                print(LHC_sample_sky.shape)
+                self._process_chunk_perturb(s, e, test_data, first, LHC_id, LHC_sample_zp, LHC_sample_sky)
             gc.collect()
         if self.comm:  # pragma: no cover
             self.comm.Barrier()
@@ -298,7 +365,7 @@ class PhotozDeepZeroPointPipe(CatEstimator):
         tmpdict = dict(som_size=self.som_size)
         self._output_handle.finalize_write(**tmpdict)
 
-
+        
 class Samplevariance(PipelineStage):
 
     name = "Samplevariance"
@@ -384,21 +451,23 @@ class RunPZRealizationsPipe(CatEstimator):
             msg="If you want to add sample variance from the limited area of redshift and deep field. Must add shot nose if you add sample variance" ),
         photometric_zeropoint_deep =  StageParameter(bool, False,
             msg="If you want to add photometric zero point uncertainty due to the deep field zero point offsets " ),
+        photometric_zeropoint_wide =  StageParameter(bool, False,
+            msg="If you want to add photometric zero point uncertainty due to the wide field zero point offsets " ), 
+        photometric_skybackground_deep = StageParameter(bool, False,
+            msg="If you want to add skybackground uncertainty on the deep field photometry " ),     
+        photometric_skybackground_wide = StageParameter(bool, False,
+            msg="If you want to add skybackground uncertainty on the wide field photometry " ),       
         redshift_sample_uncertainty =  StageParameter(bool, False,
             msg="The bias and uncertainty due to the use of photometric redshfit calibration sample" ), #If we use spec-only, don't need this
-        photometric_zeropoint_wide =  StageParameter(bool, False,
-            msg="If you want to add photometric zero point uncertainty due to the wide field zero point offsets " ),  #not implemented
-        photometric_skybackground_wide = StageParameter(bool, False,
-            msg="If you want to add skybackground uncertainty on the wide field photometry " ), #not implemented       
         num_lhc_points = StageParameter(int, 100,msg="number of lhc points we want to sample"),
         num_3sdir = StageParameter(int, 100,msg="number of 3sdir sampling we want to do"),
         bands = StageParameter(list, [], msg="photometric bands"),
-          zbins_min=StageParameter(float, 0.0, msg="minimum redshift for output grid"),
-          zbins_max=StageParameter(float, 6.0, msg="maximum redshift for output grid"),
-          zbins_dz=StageParameter(float, 0.01, msg="delta z for defining output grid"),
+        zbins_min=StageParameter(float, 0.0, msg="minimum redshift for output grid"),
+        zbins_max=StageParameter(float, 6.0, msg="maximum redshift for output grid"),
+        zbins_dz=StageParameter(float, 0.01, msg="delta z for defining output grid"),
 
     )
-    inputs = [("deep_balrog_file", TableHandle), ("redshift_deep_balrog_file", TableHandle), ("deep_som", ModelHandle), ("wide_som", ModelHandle), ("pchat", Hdf5Handle), ("pcchat", Hdf5Handle), ("tomo_bin_assignment", Hdf5Handle), ("deep_cells_assignment_balrog_files_withzp", TableHandle), ("sv_redshift_file", TableHandle),("sv_deep_file", TableHandle), ("deep_cells_assignment_balrog_files", TableHandle),("wide_cells_assignment_balrog_files", TableHandle)]
+    inputs = [("deep_balrog_file", TableHandle), ("redshift_deep_balrog_file", TableHandle), ("deep_som", ModelHandle), ("wide_som", ModelHandle), ("pchat", Hdf5Handle), ("pcchat", Hdf5Handle), ("tomo_bin_assignment", Hdf5Handle), ("deep_cells_assignment_balrog_files_withzp", TableHandle), ("wide_cells_assignment_balrog_files_withzp", TableHandle), ("wide_cells_assignment_wide_files_withzp", TableHandle), ("sv_redshift_file", TableHandle),("sv_deep_file", TableHandle), ("deep_cells_assignment_balrog_files", TableHandle),("wide_cells_assignment_balrog_files", TableHandle)]
     outputs = [("photoz_realizations", TableHandle)]
     def __init__(self, args, **kwargs):
         """Constructor, build the CatEstimator, then do SOMPZ specific setup
@@ -450,15 +519,18 @@ class RunPZRealizationsPipe(CatEstimator):
             sv_deep_data = self.get_data('sv_deep_file').view(np.ndarray)['sample_var']
             shot_noise = self.config["shot_noise"]
             sample_variance = self.config["sample_variance"]
-            photometric_zeropoint_deep = self.config["photometric_zeropoint_deep"]
             redshift_sample_uncertainty = self.config["redshift_sample_uncertainty"]
+            photometric_zeropoint_deep = self.config["photometric_zeropoint_deep"]
             photometric_zeropoint_wide = self.config["photometric_zeropoint_wide"]
+            photometric_skybackground_deep = self.config["photometric_skybackground_deep"]
             photometric_skybackground_wide = self.config["photometric_skybackground_wide"]
             num_lhc_points = self.config["num_lhc_points"]
             num_3sdir = self.config["num_3sdir"]
             deep_balrog_data = self.get_data('deep_balrog_file').to_pandas()
             redshift_deep_balrog_data = self.get_data('redshift_deep_balrog_file').to_pandas()
             deep_cells_assignment_balrog_files_withzp = self.get_data('deep_cells_assignment_balrog_files_withzp')
+            wide_cells_assignment_balrog_files_withzp = self.get_data('wide_cells_assignment_balrog_files_withzp')
+            wide_cells_assignment_wide_files_withzp = self.get_data('wide_cells_assignment_wide_files_withzp')
             tomo_bin_assignment = self.get_data('tomo_bin_assignment')
             deep_cells_assignment_balrog = self.get_data("deep_cells_assignment_balrog_files")
             wide_cells_assignment_balrog = self.get_data("wide_cells_assignment_balrog_files")
@@ -473,13 +545,13 @@ class RunPZRealizationsPipe(CatEstimator):
                 print('Sorry must have shot noise for now.')
             if redshift_sample_uncertainty == True:
                 print('Sorry dont have redshift_sample_uncertainty yet.')
-            if photometric_zeropoint_wide == True:
-                print('Sorry dont have photometric_zeropoint_wide yet.')
-            if photometric_skybackground_wide == True:
-                print('Sorry dont have photometric_skybackground_wide yet.')
+            #if photometric_zeropoint_wide == True:
+            #    print('Sorry dont have photometric_zeropoint_wide yet.')
+            #if photometric_skybackground_wide == True:
+            #    print('Sorry dont have photometric_skybackground_wide yet.')
             zbins = np.arange(self.config.zbins_min - self.config.zbins_dz / 2., self.config.zbins_max + self.config.zbins_dz, self.config.zbins_dz)
                 
-            nz_realizations = get_realizations(sv_redshift_data, sv_deep_data, shot_noise, sample_variance, photometric_zeropoint_deep, redshift_sample_uncertainty, photometric_zeropoint_wide, photometric_skybackground_wide, num_lhc_points, num_3sdir, deep_balrog_data, redshift_deep_balrog_data, deep_som_size, wide_som_size, pchat, pcchat, tomo_bin_assignment, deep_cells_assignment_balrog_files_withzp, deep_cells_assignment_balrog, wide_cells_assignment_balrog, bands, self.config.redshift_col, zbins)
+            nz_realizations = get_realizations(sv_redshift_data, sv_deep_data, shot_noise, sample_variance, redshift_sample_uncertainty, photometric_zeropoint_deep, photometric_zeropoint_wide, photometric_skybackground_deep, photometric_skybackground_wide, num_lhc_points, num_3sdir, deep_balrog_data, redshift_deep_balrog_data, deep_som_size, wide_som_size, pchat, pcchat, tomo_bin_assignment, deep_cells_assignment_balrog_files_withzp, wide_cells_assignment_balrog_files_withzp, wide_cells_assignment_wide_files_withzp, deep_cells_assignment_balrog, wide_cells_assignment_balrog, bands, self.config.redshift_col, zbins)
             photoz_realizations = {}
             for idx, nz_r in enumerate(nz_realizations):
                 photoz_realizations["LHC_id_{0}".format(idx)]= nz_r
