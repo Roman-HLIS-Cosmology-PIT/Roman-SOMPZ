@@ -21,7 +21,6 @@ Roman SOMPZ uses self-organizing maps to estimate photometric redshifts from mul
 - pip
   
 ## NERSC installation 
-### Install from source
 1. Fork the repository
 2. Clone the Roman-SOMPZ repository with submodules:
 ```
