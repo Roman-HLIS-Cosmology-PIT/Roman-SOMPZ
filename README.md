@@ -19,7 +19,13 @@ Roman SOMPZ uses self-organizing maps to estimate photometric redshifts from mul
 
 - Python 3.11+
 - pip
-  
+
+### Submodule dependencies
+
+This project uses the following as git submodules:
+- `rail_base` - Core RAIL (Redshift Assessment Infrastructure Layers) framework
+- `tables_io` - I/O utilities for tabular data
+
 ## NERSC installation 
 1. Fork the repository
 2. Clone the Roman-SOMPZ repository with submodules:
@@ -80,19 +86,9 @@ cd job
 ceci ../yaml/test_all.yaml
 ```
 
-### Submodule dependencies
-
-This project uses the following as git submodules:
-- `rail_base` - Core RAIL (Redshift Assessment Infrastructure Layers) framework
-- `tables_io` - I/O utilities for tabular data
-
-If you cloned without `--recurse-submodules`, initialize them with:
-```bash
-git submodule update --init --recursive
-```
 
 
-### For DCC (Duke Computing Cluster) users to run mpirun
+## DCC (Duke Computing Cluster) Installation
 DCC has strict HDF5 sync checks due to file locking. This may result in 
 ```
 SError: Can't synchronously write data (Can't perform independent write when MPI_File_sync is required by ROMIO driver.)
