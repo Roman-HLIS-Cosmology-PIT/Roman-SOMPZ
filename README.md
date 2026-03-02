@@ -53,7 +53,7 @@ HDF5_MPI=ON CC=cc pip install -v --force-reinstall --no-cache-dir --no-binary=h5
 ```
 7. Install scm-pipeline and ceci
 ```
-cd ../scm-pipeline
+cd scm-pipeline
 pip install -e.
 cd ../ceci
 pip install -e.
