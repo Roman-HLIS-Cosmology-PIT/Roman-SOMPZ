@@ -24,8 +24,9 @@ Roman SOMPZ uses self-organizing maps to estimate photometric redshifts from mul
 ### Install from source
 1. Fork the repository
 2. Clone the Roman-SOMPZ repository with submodules:
-```bash
+```
 git clone --recurse-submodules https://github.com/yourusername/Roman-SOMPZ.git
+```
 3. Clone scm-pipeline
 ```
 git clone https://github.com/Roman-HLIS-Cosmology-PIT/scm-pipeline.git
