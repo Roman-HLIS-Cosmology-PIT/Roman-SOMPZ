@@ -469,8 +469,8 @@ PhotozWideWideZpDustPipe:
   
 Samplevariance: 
     area:  20.0
-    zmin: 0.0
-    zmax: *id011
+    zbins_min: 0.0
+    zbins_max: *id011
     zbins_dz: *id020 
     Sample_variance: ./out/Sample_variance.fit
     
