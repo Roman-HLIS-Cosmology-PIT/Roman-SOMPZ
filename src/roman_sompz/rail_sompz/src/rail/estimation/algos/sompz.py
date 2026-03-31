@@ -1168,8 +1168,7 @@ class SOMPZPchat(CatEstimator):
     """
     name = "SOMPZPchat"
     config_options = CatEstimator.config_options.copy()
-    config_options.update(inputs=Param(list, default_input_names, msg="list of the names of columns to be used as inputs for deep data"),
-                          )
+    config_options.update(som_wide_shape=Param(list, som_shape, msg="shape of deep som"))
     inputs = [
               ('cell_wide_wide_data', TableHandle),
               ]
@@ -1182,13 +1181,19 @@ class SOMPZPchat(CatEstimator):
         # check on bands, errs, and prior band
 
     def run(self):
+        som_wide_shape=self.config['som_wide_shape']
+        som_cell_total = som_wide_shape[0] * som_wide_shape[1]
         cell_wide_wide_data = self.get_data('cell_wide_wide_data')
         weights = np.ones(len(cell_wide_wide_data['cells']))
         wide_data_for_pz = pd.DataFrame({'cell_wide': cell_wide_wide_data['cells'], 
                                         'overlap_weight': weights})    
 
         cells, cell_weights = get_cell_weights_wide(wide_data_for_pz,  overlap_weighted_pchat=True, force_assignment=False, cell_key='cell_wide')
-        pchat = dict(pchat=cell_weights)
+        
+        full_pchat_array = np.zeros(som_cell_total)
+        full_pchat_array[cells] = cell_weights
+        pchat = dict(pchat=full_pchat_array)
+
         self.add_data('pchat',pchat)
 
     def estimate(self, cell_deep_balrog_data, cell_wide_balrog_data):
@@ -1196,7 +1201,6 @@ class SOMPZPchat(CatEstimator):
         self.set_data('cell_wide_balrog_data', cell_wide_balrog_data)
         self.run()
         self.finalize()
-
 
 
 
