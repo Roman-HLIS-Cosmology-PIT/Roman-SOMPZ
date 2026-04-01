@@ -314,6 +314,7 @@ sompz_pzchat:
   pz_chat: out/pz_chat.hdf5
 sompz_pchat:
   output_mode: default
+  som_shape: *id009
   chunk_size: 2000
   hdf5_groupname: None
   inputs: *id010
