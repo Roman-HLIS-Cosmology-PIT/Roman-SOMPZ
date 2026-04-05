@@ -269,7 +269,7 @@ class PhotozZpDustPipe(CatEstimator):
             #Honestly I think all col are float 64, I use float32 here to be coherent with rail codes
             if self.config.photometric_skybackground:
                 ra_col = self.config.input_ra_col
-                dec_col = self.config.input_ra_col
+                dec_col = self.config.input_dec_col
                 ra = np.array(data[ra_col], dtype=np.float32)
                 dec = np.array(data[dec_col], dtype=np.float32)
                 
