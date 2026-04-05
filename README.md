@@ -54,7 +54,7 @@ MPICC="cc -shared" pip install --force-reinstall --no-cache-dir --no-binary=mpi4
 ```
 ```
 export HDF5_DIR=$HDF5_ROOT
-conda install -c defaults --override-channels numpy "cython<3"
+conda install -c defaults --override-channels numpy "cython>=3"
 HDF5_MPI=ON CC=cc pip install -v --force-reinstall --no-cache-dir --no-binary=h5py --no-build-isolation --no-deps h5py
 ```
 7. Install scm-pipeline and ceci
