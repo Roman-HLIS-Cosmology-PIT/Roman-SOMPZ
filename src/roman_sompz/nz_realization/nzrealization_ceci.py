@@ -78,37 +78,25 @@ class PreparePZRealizationsPipe(RailStage):
         wide_zp_samples=lhc_samples['wide_zp']
         sky_samples=lhc_samples['sky']
 
-        #I am saving to multiple tables since they will eventually have different length.
-        if photometric_zeropoint_deep:
-            #deep_zp_filename = self.get_output(self.outputs[0][0])
-            deep_zp_t = np.zeros(len(deep_zp_samples), dtype=[("samples", '>f8', deep_zp_samples.shape[-1])])
-            deep_zp_t['samples'] = deep_zp_samples
-            deep_zp_table = apTable.Table(deep_zp_t)
-            deep_zp_table = tables_io.convert(deep_zp_table, tables_io.types.NUMPY_FITS)
-        else:
-            deep_zp_table = apTable.Table(names=['samples'], dtype=['>f8'])
-            deep_zp_table = tables_io.convert(deep_zp_table, tables_io.types.NUMPY_FITS)
-    
+        #Saving to tables
+        deep_zp_t = np.zeros(len(deep_zp_samples), dtype=[("samples", '>f8', deep_zp_samples.shape[-1])])
+        deep_zp_t['samples'] = deep_zp_samples
+        deep_zp_table = apTable.Table(deep_zp_t)
+        deep_zp_table = tables_io.convert(deep_zp_table, tables_io.types.NUMPY_FITS)
 
-        if photometric_zeropoint_wide: 
-            wide_zp_t = np.zeros(len(wide_zp_samples), dtype=[("samples", '>f8', wide_zp_samples.shape[-1])])
-            wide_zp_t['samples'] = wide_zp_samples
-            wide_zp_table = apTable.Table(wide_zp_t)
-            wide_zp_table = tables_io.convert(wide_zp_table, tables_io.types.NUMPY_FITS)
-        else:
-            wide_zp_table = apTable.Table(names=['samples'], dtype=['>f8'])
-            wide_zp_table = tables_io.convert(wide_zp_table, tables_io.types.NUMPY_FITS)
+
+        wide_zp_t = np.zeros(len(wide_zp_samples), dtype=[("samples", '>f8', wide_zp_samples.shape[-1])])
+        wide_zp_t['samples'] = wide_zp_samples
+        wide_zp_table = apTable.Table(wide_zp_t)
+        wide_zp_table = tables_io.convert(wide_zp_table, tables_io.types.NUMPY_FITS)
+
 
         # We need to use the same dust error map for the deep and wide field, assuming they are both corrected using the csdf map
-        if photometric_skybackground_deep or photometric_skybackground_wide: 
-            sky_t = np.zeros(len(sky_samples), dtype=[("samples", '>f8', sky_samples.shape[-1])])
-            sky_t['samples'] = sky_samples
-            sky_table = apTable.Table(sky_t)
-            sky_table = tables_io.convert(sky_table, tables_io.types.NUMPY_FITS)
-        else:
-            sky_table = apTable.Table(names=['samples'], dtype=['>f8'])
-            sky_table = tables_io.convert(sky_table, tables_io.types.NUMPY_FITS)
-            
+        sky_t = np.zeros(len(sky_samples), dtype=[("samples", '>f8', sky_samples.shape[-1])])
+        sky_t['samples'] = sky_samples
+        sky_table = apTable.Table(sky_t)
+        sky_table = tables_io.convert(sky_table, tables_io.types.NUMPY_FITS)
+
         self.add_data("LHC_samples_deep_zp", deep_zp_table)
         self.add_data("LHC_samples_wide_zp", wide_zp_table)
         self.add_data("LHC_samples_sky", sky_table)
@@ -140,8 +128,7 @@ class PhotozZpDustPipe(CatEstimator):
                           photometric_zeropoint = Param(bool, False, msg="photometric zero point uncertainty" ),
                           photometric_skybackground = Param(bool, False, msg="photometric dust uncertainty" )
                          )
-    inputs = [('deep_model', ModelHandle), ('lhc_samples_zp', TableHandle), ('lhc_samples_sky', TableHandle),
-              ('data', TableHandle)]
+    inputs = [('deep_model', ModelHandle), ('lhc_samples_zp', TableHandle), ('lhc_samples_sky', TableHandle), ('data', TableHandle)]
     outputs = [
         ('assignment', Hdf5Handle),
     ]
@@ -208,6 +195,7 @@ class PhotozZpDustPipe(CatEstimator):
 
         return cells_test, dist_test
 
+    
     def _process_chunk(self, start, end, data, first, total_LHCsamples):
         """
         Run SOMPZ on a chunk of data
@@ -238,16 +226,18 @@ class PhotozZpDustPipe(CatEstimator):
         flux_err_wide = data_err_wide_ndarray.view()
 
         cells_wide, dist_wide = self._assign_som(flux_wide, flux_err_wide)
+        '''
         if first:
             output_chunk = {}
             output_chunk['cells'] = cells_wide
             output_chunk['dist'] = dist_wide
             for ind in range(total_LHCsamples):
-                output_chunk['cells_LHC_id_{0}'.format(ind)] = cells_wide
-                output_chunk['dist_LHC_id_{0}'.format(ind)] = dist_wide
+                output_chunk['cells_LHC_id_{0}'.format(ind)] = np.full(len(cells_wide), -1)
+                output_chunk['dist_LHC_id_{0}'.format(ind)] = np.full(len(cells_wide), -1)
         else:
             output_chunk = dict(cells=cells_wide, dist=dist_wide)
-        self._do_chunk_output(output_chunk, start, end, first)
+        self._do_chunk_output(output_chunk, start, end, first)'''
+        return cells_wide, dist_wide
 
     def _process_chunk_perturb(self, start, end, data, first, LHC_id, LHC_sample_zp, LHC_sample_sky):
         """
@@ -300,10 +290,11 @@ class PhotozZpDustPipe(CatEstimator):
         flux_err_wide = data_err_wide_ndarray.view()
 
         cells_wide, dist_wide = self._assign_som(flux_wide, flux_err_wide)
-        output_chunk = {}
-        output_chunk['cells_LHC_id_{0}'.format(LHC_id)] = cells_wide
-        output_chunk['dist_LHC_id_{0}'.format(LHC_id)] = dist_wide
-        self._do_chunk_output(output_chunk, start, end, first)
+        #output_chunk = {}
+        #output_chunk['cells_LHC_id_{0}'.format(LHC_id)] = cells_wide
+        #output_chunk['dist_LHC_id_{0}'.format(LHC_id)] = dist_wide
+        return cells_wide, dist_wide
+        #self._do_chunk_output(output_chunk, start, end, first)
 
     def _do_chunk_output(self, output_chunk, start, end, first, purturbnum=-1):
         """
@@ -319,26 +310,34 @@ class PhotozZpDustPipe(CatEstimator):
         -------
 
         """
+        
         # --- Boyan: START PATCH ---
         # --- There is chunck padding and actual data mismatch ---
         # --- This is brute force solution to it. Problem probably lie in table_io ---
         # 1. If the iterator hands us a chunk completely past the file limit, ignore it.
 
+        print('PATCH with resize chunk')
+        print(self._input_length)
+        
         if start >= self._input_length:
             return
             
         # 2. If the iterator's end index overshoots the file limit, trim the data to fit.
         if end > self._input_length:
+            print('truncate', end, self._input_length)
             true_end = self._input_length
             true_size = true_end - start
+            print('start', start, true_size)
             for key in output_chunk.keys():
                 truncated_data = output_chunk[key][true_size:]
+                print('len', len(output_chunk[key][true_size:]))
                 print(f"Truncating from '{key}': {truncated_data}")
                 
                 output_chunk[key] = output_chunk[key][:true_size]
             end = true_end
         
         # --- END PATCH ---
+        
         
         if first:
             name = "assignment"
@@ -359,15 +358,22 @@ class PhotozZpDustPipe(CatEstimator):
         LHC_samples_sky = self.get_data('lhc_samples_sky').view(np.ndarray)['samples']
         print(LHC_samples_zp.shape)
         print(LHC_samples_sky.shape)
+        assert LHC_samples_sky.shape[0] == LHC_samples_zp.shape[0]
         self._output_handle = None
         for s, e, test_data in iter1:
             print(f"Process {self.rank} running creator on chunk {s} - {e}", flush=True)
-            self._process_chunk(s, e, test_data, first, np.max((len(LHC_samples_zp), len(LHC_samples_sky))))
-            first = False
+            output_chunk = {}
+            cells_wide, dist_wide = self._process_chunk(s, e, test_data, first, np.max((len(LHC_samples_zp), len(LHC_samples_sky))))
+            output_chunk['cells'] = cells_wide
+            output_chunk['dist'] = dist_wide
+            #first = False
             for LHC_id, (LHC_sample_zp, LHC_sample_sky) in enumerate(zip(LHC_samples_zp, LHC_samples_sky)):
-                print(LHC_sample_zp.shape)
-                print(LHC_sample_sky.shape)
-                self._process_chunk_perturb(s, e, test_data, first, LHC_id, LHC_sample_zp, LHC_sample_sky)
+                cells_wide, dist_wide = self._process_chunk_perturb(s, e, test_data, first, LHC_id, LHC_sample_zp, LHC_sample_sky)
+                output_chunk['cells_LHC_id_{0}'.format(LHC_id)] = cells_wide
+                output_chunk['dist_LHC_id_{0}'.format(LHC_id)] = dist_wide
+                
+            self._do_chunk_output(output_chunk, s, e, first)
+            first = False
             gc.collect()
         if self.comm:  # pragma: no cover
             self.comm.Barrier()
@@ -568,6 +574,9 @@ class RunPZRealizationsPipe(CatEstimator):
             bands = self.config.bands 
             deep_som_size = int(deep_cells_assignment_balrog['som_size'][0])
             wide_som_size = int(wide_cells_assignment_balrog['som_size'][0])
+            print('deep_som_size', deep_som_size)
+            print('wide_som_size', wide_som_size)
+        
 
             if shot_noise == False:
                 print('Sorry must have shot noise for now.')

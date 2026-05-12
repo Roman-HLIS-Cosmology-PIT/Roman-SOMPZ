@@ -28,7 +28,7 @@ def get_realizations(sv_redshift_data, sv_deep_data, shot_noise, sample_variance
             continue
         inarr1 = np.where(tomo_bins_wide_in['tomo_bins_wide'][:, 0] == i)[0]
         inarr2 = tomo_bins_wide_in['tomo_bins_wide'][inarr1, 1]
-        tomo_bins_wide[i] = np.array(inarr1)
+        tomo_bins_wide[int(i)] = np.array(inarr1)
     zbinsc = 0.5*(zbins[1:]+zbins[:-1])
     num_bins = len(tomo_bins_wide.keys())
     Nsamples = num_3sdir
@@ -157,12 +157,18 @@ def get_realizations(sv_redshift_data, sv_deep_data, shot_noise, sample_variance
         # here zmeant is the mean redshift per phenotype t * 100
         # for example a mean redshift = 1.017, here zmeant = 102
         # zmeant - (4096) with maskt
+        print('nzt', nzt)
         zmeant = np.zeros(nzt.shape[1])
         for i in range(nzt.shape[1]):
             zmeant[i] = np.average(np.arange(len(zbinsc)),weights=nzt.T[i])
         zmeant = np.rint(zmeant)
 
-
+        print('zmeant', zmeant)
+        print(np.where(zmeant==19))
+        print(np.shape(nzt))
+        print('num 19', np.sum(nzt[:,((zmeant==19))],axis=1))
+        print('num 19', np.sum(nzt[:,((zmeant==19))],axis=1).sum())
+        
 
         # Decide which phenotypes go to which superphenotype
         # Choose number of superphenotypes nT
@@ -180,7 +186,8 @@ def get_realizations(sv_redshift_data, sv_deep_data, shot_noise, sample_variance
             nTs[i] = np.sum(nzt[:,((zmeant==i))],axis=1).sum()
             #if not enough galaxy in this T still add, otherwide T num j+=1. append i to T dict
             #nT-1 is necessary here, because otherwise all but last bin will have smaller nT and the last bin will overflow with all leftovers
-            if (sumbin <= np.sum(nzt)/(nT-1))|(j==nT-1):
+            #Just tweak whether to use nT or nT-1... They will be replaced with new sv method
+            if (sumbin <= np.sum(nzt)/(nT))|(j==(nT-1)):
                 bins[str(j)].append(i)
             else:
                 j += 1
@@ -192,6 +199,7 @@ def get_realizations(sv_redshift_data, sv_deep_data, shot_noise, sample_variance
         print('total galaxy num', np.sum(nzt), np.sum(nzt)/6) 
         # number of redshift galaxies in each phenotype
         print('nTs', np.sum(nTs[np.array(bins['0'])]), np.sum(nTs[np.array(bins['1'])]),np.sum(nTs[np.array(bins['2'])]),np.sum(nTs[np.array(bins['3'])]),np.sum(nTs[np.array(bins['4'])]),np.sum(nTs[np.array(bins['5'])]))
+        #print('nTs', np.sum(nTs[np.array(bins['0'])]), np.sum(nTs[np.array(bins['1'])]))
         # what is the t zmeans for each T
         print('bins', bins)
 

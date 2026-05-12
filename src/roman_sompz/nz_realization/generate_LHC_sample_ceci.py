@@ -39,12 +39,12 @@ def generate_LHC_points(deepfield_zeropoint_data, widefield_zeropoint_data, sfd_
     if photometric_zeropoint_deep:
         LHC_sample['deep_zp'] = np.array(sample_gaussian[:,0:len_deepzp])
     else:
-        LHC_sample['deep_zp'] = np.zeros((0,len_deepzp))
+        LHC_sample['deep_zp'] = np.zeros((num_lhc_points,len_deepzp))
     
     if photometric_zeropoint_wide:
         LHC_sample['wide_zp'] = np.array(sample_gaussian[:,len_deepzp : len_deepzp+len_widezp])
     else:
-        LHC_sample['wide_zp'] = np.zeros((0,len_widezp))
+        LHC_sample['wide_zp'] = np.zeros((num_lhc_points,len_widezp))
     
     if photometric_skybackground_deep or photometric_skybackground_wide:   
         gauss_samples = np.array(sample_gaussian[:, len_deepzp+len_widezp: len_deepzp+len_widezp+len_sky].flatten())
@@ -58,6 +58,6 @@ def generate_LHC_points(deepfield_zeropoint_data, widefield_zeropoint_data, sfd_
         sky_result = sky_uncertainty + lss_uncertainty
         LHC_sample['sky'] = np.array(sky_result)
     else:
-        LHC_sample['sky'] = np.zeros((0,len(lss_error_map)))
+        LHC_sample['sky'] = np.zeros((num_lhc_points,len(lss_error_map)))
 
     return LHC_sample

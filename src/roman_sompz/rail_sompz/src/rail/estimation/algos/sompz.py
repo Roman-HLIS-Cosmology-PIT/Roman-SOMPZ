@@ -1465,6 +1465,7 @@ class SOMPZEstimatorBase(CatEstimator):
         -------
 
         """
+        
         # --- Boyan: START PATCH ---
         # --- There is chunck padding and actual data mismatch ---
         # --- This is brute force solution to it. Problem probably lie in table_io ---

@@ -142,6 +142,7 @@ stages:
   aliases:
     spec_data: input_spec_data
     cell_deep_spec_data: assignment_som_deepspec_estimator
+    cell_wide_spec_data: assignment_som_widespec_estimator
     cell_wide_wide_data: assignment_som_widewide_estimator
     tomo_bins_wide: tomo_bins_wide_sompz_tomobin
     pc_chat: pc_chat_pcchat_stage
@@ -195,6 +196,7 @@ stages:
 - name: Samplevariance 
   classname:  Samplevariance
   nprocess: 1
+  threads_per_process: 48
   module_name: roman_sompz.nz_realization.nzrealization_ceci
   aliases:
     Sample_variance: sample_variance
