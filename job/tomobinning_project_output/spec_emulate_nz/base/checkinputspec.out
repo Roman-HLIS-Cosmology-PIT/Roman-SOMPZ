@@ -1,0 +1,4 @@
+Executing stage: Inputcheck @ 2026-04-24 15:15:35.181835
+check ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet
+flux_pgauss_LSST_u 0.0004782969604745508 22.955645041447035 True
+Stage complete: Inputcheck @ 2026-04-24 15:15:35.253713 took 0.00 minutes

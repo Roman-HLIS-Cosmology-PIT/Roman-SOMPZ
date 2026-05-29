@@ -1,0 +1,15 @@
+True nz
+Equipopulated
+Three bins
+  - -0.025
+  - 1.025
+  - 1.525
+  - 2.875
+
+Emulate specz nz
+Equipopulated
+Three bins
+  - -0.025
+  - 0.975
+  - 1.575
+  - 2.875

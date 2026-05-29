@@ -1,0 +1,1666 @@
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 123 running creator on chunk 16236 - 16368
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 75 running creator on chunk 9900 - 10032
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 13 running creator on chunk 1716 - 1848
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 16 running creator on chunk 2112 - 2244
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 61 running creator on chunk 8052 - 8184
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 108 running creator on chunk 14256 - 14388
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 60 running creator on chunk 7920 - 8052
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 91 running creator on chunk 12012 - 12144
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 4 running creator on chunk 528 - 660
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 14 running creator on chunk 1848 - 1980
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 3 running creator on chunk 396 - 528
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 50 running creator on chunk 6600 - 6732
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 10 running creator on chunk 1320 - 1452
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 9 running creator on chunk 1188 - 1320
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 57 running creator on chunk 7524 - 7656
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 2 running creator on chunk 264 - 396
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 84 running creator on chunk 11088 - 11220
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 24 running creator on chunk 3168 - 3300
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 20 running creator on chunk 2640 - 2772
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 43 running creator on chunk 5676 - 5808
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 98 running creator on chunk 12936 - 13068
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 28 running creator on chunk 3696 - 3828
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 109 running creator on chunk 14388 - 14520
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 101 running creator on chunk 13332 - 13464
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 99 running creator on chunk 13068 - 13200
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 22 running creator on chunk 2904 - 3036
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 41 running creator on chunk 5412 - 5544
+classifying 0 0.00
+classifying 0 0.00
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 116 running creator on chunk 15312 - 15444
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 33 running creator on chunk 4356 - 4488
+classifying 0 0.00
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 111 running creator on chunk 14652 - 14784
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 87 running creator on chunk 11484 - 11616
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 85 running creator on chunk 11220 - 11352
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 1 running creator on chunk 132 - 264
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 5 running creator on chunk 660 - 792
+classifying 0 0.00
+classifying 0 0.00
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 117 running creator on chunk 15444 - 15576
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 104 running creator on chunk 13728 - 13860
+classifying 0 0.00
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 29 running creator on chunk 3828 - 3960
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 30 running creator on chunk 3960 - 4092
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 93 running creator on chunk 12276 - 12408
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+classifying 0 0.00
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 8 running creator on chunk 1056 - 1188
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 81 running creator on chunk 10692 - 10824
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 53 running creator on chunk 6996 - 7128
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 76 running creator on chunk 10032 - 10164
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 11 running creator on chunk 1452 - 1584
+classifying 0 0.00
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 94 running creator on chunk 12408 - 12540
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 80 running creator on chunk 10560 - 10692
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 70 running creator on chunk 9240 - 9372
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+classifying 0 0.00
+classifying 0 0.00
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 69 running creator on chunk 9108 - 9240
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 68 running creator on chunk 8976 - 9108
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 31 running creator on chunk 4092 - 4224
+classifying 0 0.00
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 63 running creator on chunk 8316 - 8448
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 110 running creator on chunk 14520 - 14652
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 46 running creator on chunk 6072 - 6204
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 77 running creator on chunk 10164 - 10296
+classifying 0 0.00
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 35 running creator on chunk 4620 - 4752
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 12 running creator on chunk 1584 - 1716
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 58 running creator on chunk 7656 - 7788
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+classifying 0 0.00
+classifying 0 0.00
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 88 running creator on chunk 11616 - 11748
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 64 running creator on chunk 8448 - 8580
+classifying 0 0.00
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 126 running creator on chunk 16632 - 16764
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 72 running creator on chunk 9504 - 9636
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 79 running creator on chunk 10428 - 10560
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 127 running creator on chunk 16764 - 16799
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 73 running creator on chunk 9636 - 9768
+classifying 0 0.00
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 44 running creator on chunk 5808 - 5940
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 38 running creator on chunk 5016 - 5148
+classifying 0 0.00
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 95 running creator on chunk 12540 - 12672
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 96 running creator on chunk 12672 - 12804
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 90 running creator on chunk 11880 - 12012
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 114 running creator on chunk 15048 - 15180
+classifying 0 0.00
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 102 running creator on chunk 13464 - 13596
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 7 running creator on chunk 924 - 1056
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 97 running creator on chunk 12804 - 12936
+classifying 0 0.00
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 119 running creator on chunk 15708 - 15840
+Executing stage: SOMPZEstimatorWide @ 2026-04-24 18:12:00.370052
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 0 running creator on chunk 0 - 132
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 26 running creator on chunk 3432 - 3564
+classifying 0 0.00
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 92 running creator on chunk 12144 - 12276
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 23 running creator on chunk 3036 - 3168
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 52 running creator on chunk 6864 - 6996
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 62 running creator on chunk 8184 - 8316
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 103 running creator on chunk 13596 - 13728
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 54 running creator on chunk 7128 - 7260
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+classifying 0 0.00
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 27 running creator on chunk 3564 - 3696
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 74 running creator on chunk 9768 - 9900
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 55 running creator on chunk 7260 - 7392
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 120 running creator on chunk 15840 - 15972
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 45 running creator on chunk 5940 - 6072
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 78 running creator on chunk 10296 - 10428
+classifying 0 0.00
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 121 running creator on chunk 15972 - 16104
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 17 running creator on chunk 2244 - 2376
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 49 running creator on chunk 6468 - 6600
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 106 running creator on chunk 13992 - 14124
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 83 running creator on chunk 10956 - 11088
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 37 running creator on chunk 4884 - 5016
+classifying 0 0.00
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 56 running creator on chunk 7392 - 7524
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 19 running creator on chunk 2508 - 2640
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 113 running creator on chunk 14916 - 15048
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 107 running creator on chunk 14124 - 14256
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 32 running creator on chunk 4224 - 4356
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 6 running creator on chunk 792 - 924
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 15 running creator on chunk 1980 - 2112
+classifying 0 0.00
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 105 running creator on chunk 13860 - 13992
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 125 running creator on chunk 16500 - 16632
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 65 running creator on chunk 8580 - 8712
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 124 running creator on chunk 16368 - 16500
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 118 running creator on chunk 15576 - 15708
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 66 running creator on chunk 8712 - 8844
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 59 running creator on chunk 7788 - 7920
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 36 running creator on chunk 4752 - 4884
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 112 running creator on chunk 14784 - 14916
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 40 running creator on chunk 5280 - 5412
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 39 running creator on chunk 5148 - 5280
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 21 running creator on chunk 2772 - 2904
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 67 running creator on chunk 8844 - 8976
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 122 running creator on chunk 16104 - 16236
+classifying 0 0.00
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 115 running creator on chunk 15180 - 15312
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 48 running creator on chunk 6336 - 6468
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 86 running creator on chunk 11352 - 11484
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 100 running creator on chunk 13200 - 13332
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 89 running creator on chunk 11748 - 11880
+classifying 0 0.00
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 71 running creator on chunk 9372 - 9504
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 51 running creator on chunk 6732 - 6864
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 42 running creator on chunk 5544 - 5676
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 47 running creator on chunk 6204 - 6336
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 25 running creator on chunk 3300 - 3432
+classifying 0 0.00
+classifying 0 0.00
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 34 running creator on chunk 4488 - 4620
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 82 running creator on chunk 10824 - 10956
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+Inserting handle into data store.  wide_model: out/model_wide.pkl, som_widespec_estimator
+Inserting handle into data store.  data: ../data/hlwas_cosmos_260120_UM_2026_01_22_classic_specmatch.parquet, som_widespec_estimator
+groupname True None
+Warning: You are reserving more processes than needed, reducing chunk size to 132 to use all of the processes
+Process 18 running creator on chunk 2376 - 2508
+classifying 0 0.00
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+/global/homes/b/boyanyin/.conda/envs/sompz_roman/lib/python3.11/site-packages/roman_sompz/rail_sompz/src/rail/estimation/algos/som.py:452: RuntimeWarning: overflow encountered in exp
+  w = np.minimum(np.exp(2 * (vf - 4)), 1000.)
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+PATCH with resize chunk
+16799
+Inserting handle into data store.  assignment: out/inprogress_specdata_wide_assignment.hdf5, som_widespec_estimator
+Stage complete: SOMPZEstimatorWide @ 2026-04-24 18:12:07.447881 took 0.12 minutes
