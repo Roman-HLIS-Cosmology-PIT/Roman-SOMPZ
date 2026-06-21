@@ -355,10 +355,14 @@ class PhotozZpDustPipe(CatEstimator):
         first = True
         iter1 = self.input_iterator('data') # here we assume no deep galaxy duplicates  (Will deal with this later)
         LHC_samples_zp = self.get_data('lhc_samples_zp').view(np.ndarray)['samples']
-        LHC_samples_sky = self.get_data('lhc_samples_sky').view(np.ndarray)['samples']
+        # Only load the (multi-GB) sky map when it is actually used; otherwise
+        # every MPI rank would hold a full copy and exhaust node memory.
+        if self.config.photometric_skybackground:
+            LHC_samples_sky = self.get_data('lhc_samples_sky').view(np.ndarray)['samples']
+            assert LHC_samples_sky.shape[0] == LHC_samples_zp.shape[0]
+        else:
+            LHC_samples_sky = [None] * len(LHC_samples_zp)
         print(LHC_samples_zp.shape)
-        print(LHC_samples_sky.shape)
-        assert LHC_samples_sky.shape[0] == LHC_samples_zp.shape[0]
         self._output_handle = None
         for s, e, test_data in iter1:
             print(f"Process {self.rank} running creator on chunk {s} - {e}", flush=True)
