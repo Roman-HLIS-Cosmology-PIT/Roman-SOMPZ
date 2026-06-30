@@ -11,6 +11,7 @@ import roman_sompz.rail_sompz.src.rail.estimation.algos.som as somfuncs
 from rail.core.common_params import SHARED_PARAMS
 import numpy as np
 import gc
+from roman_sompz.parquet_utils import parquet_row_group_iterator, get_parquet_num_rows, release_os_memory
 from roman_sompz.nz_realization.generate_LHC_sample_ceci import generate_LHC_points
 import astropy.table as apTable
 import tables_io
@@ -18,6 +19,7 @@ from ceci.config import StageParameter
 import numpy as np
 import healpy as hp
 import os
+import time
 from astropy.io import fits
 from roman_sompz.nz_realization.samplevariance import *
 from roman_sompz.nz_realization.Roman_selection_nz_final_rushift_zpshift_ceci import get_realizations
@@ -297,85 +299,122 @@ class PhotozZpDustPipe(CatEstimator):
         #self._do_chunk_output(output_chunk, start, end, first)
 
     def _do_chunk_output(self, output_chunk, start, end, first, purturbnum=-1):
-        """
-
-        Parameters
-        ----------
-        output_chunk
-        start
-        end
-        first
-
-        Returns
-        -------
-
-        """
-        
-        # --- Boyan: START PATCH ---
-        # --- There is chunck padding and actual data mismatch ---
-        # --- This is brute force solution to it. Problem probably lie in table_io ---
-        # 1. If the iterator hands us a chunk completely past the file limit, ignore it.
-
-        print('PATCH with resize chunk')
-        print(self._input_length)
-        
+        # --- Boyan: PATCH — HDF5 iterator can produce chunks past the file limit ---
         if start >= self._input_length:
             return
-            
-        # 2. If the iterator's end index overshoots the file limit, trim the data to fit.
         if end > self._input_length:
-            print('truncate', end, self._input_length)
-            true_end = self._input_length
-            true_size = true_end - start
-            print('start', start, true_size)
-            for key in output_chunk.keys():
-                truncated_data = output_chunk[key][true_size:]
-                print('len', len(output_chunk[key][true_size:]))
-                print(f"Truncating from '{key}': {truncated_data}")
-                
-                output_chunk[key] = output_chunk[key][:true_size]
-            end = true_end
-        
+            end = self._input_length
+            size = end - start
+            for key in output_chunk:
+                output_chunk[key] = output_chunk[key][:size]
         # --- END PATCH ---
-        
-        
-        if first:
-            name = "assignment"
-            self._output_handle = self.add_handle(name, data=output_chunk)
-            self._output_handle.initialize_write(self._input_length, communicator=self.comm)
-        self._output_handle.set_data(output_chunk, partial=True)
-        self._output_handle.write_chunk(start, end)
+
+        for key, val in output_chunk.items():
+            self._hdf5_fout[key][start:end] = np.asarray(val)
 
     def run(self):
+        import h5py
         self.model = None
-        self.model = self.open_model(**self.config)  # None
-        #If we are doing neither zp nor dust map uncertainty, no need to assign soms
+        self.model = self.open_model(**self.config)
         if not self.config.photometric_zeropoint and not self.config.photometric_skybackground:
             return
-        first = True
-        iter1 = self.input_iterator('data') # here we assume no deep galaxy duplicates  (Will deal with this later)
         LHC_samples_zp = self.get_data('lhc_samples_zp').view(np.ndarray)['samples']
         LHC_samples_sky = self.get_data('lhc_samples_sky').view(np.ndarray)['samples']
         print(LHC_samples_zp.shape)
         print(LHC_samples_sky.shape)
         assert LHC_samples_sky.shape[0] == LHC_samples_zp.shape[0]
-        self._output_handle = None
-        for s, e, test_data in iter1:
-            print(f"Process {self.rank} running creator on chunk {s} - {e}", flush=True)
+        total_LHC = int(np.max((len(LHC_samples_zp), len(LHC_samples_sky))))
+
+        # Compute som_size here so it's available even if all chunks are skipped on resume
+        s0 = int(self.config.som_shape[0])
+        s1 = int(self.config.som_shape[1])
+        self.som_size = np.array([int(s0 * s1)])
+
+        needed_cols = list(self.config.inputs) + list(self.config.input_errs)
+        chunk_size = self.config.chunk_size
+
+        handle = self.get_handle('data', allow_missing=True)
+        filepath = handle.path if handle.path not in [None, 'None', 'none'] else None
+
+        if filepath is not None and filepath.endswith('.parquet'):
+            self._input_length = get_parquet_num_rows(filepath)
+        else:
+            self._input_length = self.get_handle('data', allow_missing=True).size()
+
+        # --- Resume detection ---
+        inprogress_path = self.get_output('assignment')
+        resume_from = 0
+        if os.path.exists(inprogress_path):
+            try:
+                with h5py.File(inprogress_path, 'r') as _hf:
+                    resume_from = int(_hf.attrs.get('last_global_row', 0))
+            except Exception:
+                resume_from = 0
+        if self.comm:
+            resume_from = self.comm.bcast(resume_from, root=0)
+        if self.rank == 0 and resume_from > 0:
+            print(f"Resuming photoz perturbation assignment from row {resume_from}", flush=True)
+
+        dummy = {'cells': np.zeros(1, dtype=np.int64), 'dist': np.zeros(1, dtype=np.float64)}
+        self._output_handle = self.add_handle('assignment', data=dummy)
+        self._output_handle.partial = True
+
+        if self.comm:
+            self.comm.Barrier()
+        mode = 'a' if resume_from > 0 else 'w'
+        if self.comm:
+            #If MPI
+            self._hdf5_fout = h5py.File(inprogress_path, mode, driver='mpio', comm=self.comm)
+        else:
+            #If single thread
+            self._hdf5_fout = h5py.File(inprogress_path, mode)
+        if resume_from == 0:
+            self._hdf5_fout.create_dataset('cells', shape=(self._input_length,), dtype=np.int64)
+            self._hdf5_fout.create_dataset('dist',  shape=(self._input_length,), dtype=np.float64)
+            for lhc_id in range(total_LHC):
+                self._hdf5_fout.create_dataset(f'cells_LHC_id_{lhc_id}', shape=(self._input_length,), dtype=np.int64)
+                self._hdf5_fout.create_dataset(f'dist_LHC_id_{lhc_id}',  shape=(self._input_length,), dtype=np.float64)
+        # --- End resume detection ---
+
+        def _process_one_batch(s, e, test_data):
             output_chunk = {}
-            cells_wide, dist_wide = self._process_chunk(s, e, test_data, first, np.max((len(LHC_samples_zp), len(LHC_samples_sky))))
+            cells_wide, dist_wide = self._process_chunk(s, e, test_data, first, total_LHC)
             output_chunk['cells'] = cells_wide
             output_chunk['dist'] = dist_wide
-            #first = False
             for LHC_id, (LHC_sample_zp, LHC_sample_sky) in enumerate(zip(LHC_samples_zp, LHC_samples_sky)):
                 cells_wide, dist_wide = self._process_chunk_perturb(s, e, test_data, first, LHC_id, LHC_sample_zp, LHC_sample_sky)
                 output_chunk['cells_LHC_id_{0}'.format(LHC_id)] = cells_wide
                 output_chunk['dist_LHC_id_{0}'.format(LHC_id)] = dist_wide
-                
             self._do_chunk_output(output_chunk, s, e, first)
-            first = False
-            gc.collect()
-        if self.comm:  # pragma: no cover
+
+        first = True
+        if filepath is not None and filepath.endswith('.parquet'):
+            for rg_last_row, batch_iter in parquet_row_group_iterator(filepath, needed_cols, chunk_size, self.rank, self.size):
+                if rg_last_row <= resume_from:
+                    continue  # entire row group already done — never loaded from disk
+                for s, e, test_data in batch_iter:
+                    if e <= resume_from:
+                        continue  # partial skip for the first row group after resume point
+                    print(f"Process {self.rank} running creator on chunk {s} - {e}", flush=True)
+                    _process_one_batch(s, e, test_data)
+                    first = False
+                # All ranks finished this row group — safe to checkpoint now
+                if self.comm:
+                    self.comm.Barrier()
+                self._hdf5_fout.attrs['last_global_row'] = rg_last_row
+                self._hdf5_fout.flush()  # force HDF5 buffer to disk so SIGKILL can't lose the checkpoint
+                # Stagger prints after barrier so ranks don't all write simultaneously
+                time.sleep(self.rank * 0.001)
+        else:
+            for s, e, test_data in self.input_iterator('data'):
+                if e <= resume_from:
+                    continue
+                print(f"Process {self.rank} running creator on chunk {s} - {e}", flush=True)
+                _process_one_batch(s, e, test_data)
+                first = False
+                release_os_memory()
+
+        if self.comm:
             self.comm.Barrier()
         self._finalize_run()
 
@@ -386,14 +425,11 @@ class PhotozZpDustPipe(CatEstimator):
         return
 
     def _finalize_run(self):
-        """
-
-        Returns
-        -------
-
-        """
-        tmpdict = dict(som_size=self.som_size)
-        self._output_handle.finalize_write(**tmpdict)
+        self._hdf5_fout['som_size'] = self.som_size
+        if 'last_global_row' in self._hdf5_fout.attrs:
+            del self._hdf5_fout.attrs['last_global_row']
+        self._hdf5_fout.close()
+        self._hdf5_fout = None
 
         
 class Samplevariance(PipelineStage):

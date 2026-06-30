@@ -268,7 +268,7 @@ class NoiseSOM:
         dsq = np.zeros(nPts, dtype=float)
         t0 = time.time()
         for first in range(0, nPts, blocksize):
-            if first % 5000 == 0:
+            if first % 5000 == 0 and nPts > 5000:
                 deltat = time.time() - t0
                 print(f"classifying {first} {deltat:.2f}", flush=True)
             last = min(first + blocksize, nPts)

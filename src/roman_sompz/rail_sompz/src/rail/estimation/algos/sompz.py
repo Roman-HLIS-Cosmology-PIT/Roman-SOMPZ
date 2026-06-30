@@ -15,6 +15,9 @@ import matplotlib.pyplot as plt
 import h5py
 import pickle
 import gc
+import time
+import psutil
+from roman_sompz.parquet_utils import parquet_row_group_iterator, get_parquet_num_rows, release_os_memory
 
 
 class Pickableclassify:  # pragma: no cover
@@ -1396,29 +1399,11 @@ class SOMPZEstimatorBase(CatEstimator):
         if len(self.config.som_shape) != 2:  # pragma: no cover
             raise ValueError(f"som_shape must be a list with two integers specifying the SOM shape, not len {len(self.config.som_shape)}")
 
-    def _assign_som(self, flux, flux_err):
-        # som_dim = self.config.som_shape[0]
-        s0 = int(self.config.som_shape[0])
-        s1 = int(self.config.som_shape[1])
-        self.som_size = np.array([int(s0 * s1)])
-        # output_path = './'  # TODO make kwarg
-        nTrain = flux.shape[0]
-        # som_weights = np.load(infile_som, allow_pickle=True)
-        som_weights = self.model['som'].weights
-        hh = somfuncs.hFunc(nTrain, sigma=(30, 1))
-        metric = somfuncs.AsinhMetric(lnScaleSigma=0.4, lnScaleStep=0.03)
-        som = somfuncs.NoiseSOM(metric, None, None,
-                                learning=hh,
-                                shape=(s0, s1),
-                                wrap=False, logF=True,
-                                initialize=som_weights,
-                                minError=0.02)
-        subsamp = 1
-        cells_test, dist_test = som.classify(flux[::subsamp, :], flux_err[::subsamp, :])
-
+    def _assign_som(self, flux, flux_err, som):
+        cells_test, dist_test = som.classify(flux, flux_err)
         return cells_test, dist_test
 
-    def _process_chunk(self, start, end, data, first):
+    def _process_chunk(self, start, end, data, som, first):
         """
         Run SOMPZ on a chunk of data
         """
@@ -1442,73 +1427,122 @@ class SOMPZEstimatorBase(CatEstimator):
                 errmask = (data_err_wide[:, j] < self.config.thresh_val)
                 data_err_wide[:, j][errmask] = truncation_value
 
-        data_wide_ndarray = np.array(data_wide, copy=False)
-        flux_wide = data_wide_ndarray.view()
-        data_err_wide_ndarray = np.array(data_err_wide, copy=False)
-        flux_err_wide = data_err_wide_ndarray.view()
+        flux_wide = np.array(data_wide, dtype=np.float64)
+        flux_err_wide = np.array(data_err_wide, dtype=np.float64)
+        del data_wide, data_err_wide
 
-        cells_wide, dist_wide = self._assign_som(flux_wide, flux_err_wide)
+        cells_wide, dist_wide = self._assign_som(flux_wide, flux_err_wide, som)
+        del flux_wide, flux_err_wide
         output_chunk = dict(cells=cells_wide, dist=dist_wide)
         self._do_chunk_output(output_chunk, start, end, first)
+        del output_chunk
+        gc.collect()
 
     def _do_chunk_output(self, output_chunk, start, end, first):
-        """
-
-        Parameters
-        ----------
-        output_chunk
-        start
-        end
-        first
-
-        Returns
-        -------
-
-        """
-        
-        # --- Boyan: START PATCH ---
-        # --- There is chunck padding and actual data mismatch ---
-        # --- This is brute force solution to it. Problem probably lie in table_io ---
-        # 1. If the iterator hands us a chunk completely past the file limit, ignore it.
-        print('PATCH with resize chunk')
-        print(self._input_length)
-        
-        if start >= self._input_length:
-            return
-            
-        # 2. If the iterator's end index overshoots the file limit, trim the data to fit.
-        if end > self._input_length:
-            true_end = self._input_length
-            true_size = true_end - start
-            for key in output_chunk.keys():
-                truncated_data = output_chunk[key][true_size:]
-                print(f"Truncating from '{key}': {truncated_data}")
-                
-                output_chunk[key] = output_chunk[key][:true_size]
-            end = true_end
-        
-        # --- END PATCH ---
-        
-        if first:
-            self._output_handle = self.add_handle('assignment', data=output_chunk)
-            self._output_handle.initialize_write(self._input_length, communicator=self.comm)
-        self._output_handle.set_data(output_chunk, partial=True)
-        self._output_handle.write_chunk(start, end)
+        for key, val in output_chunk.items():
+            self._hdf5_fout[key][start:end] = np.asarray(val)
 
     def run(self):
+
         self.model = None
-        self.model = self.open_model(**self.config)  # None
+        self.model = self.open_model(**self.config)
+
+        # Build SOM once; reuse across all chunks to avoid per-chunk weight copies
+        s0 = int(self.config.som_shape[0])
+        s1 = int(self.config.som_shape[1])
+        self.som_size = np.array([int(s0 * s1)])
+        hh = somfuncs.hFunc(self.config.chunk_size, sigma=(30, 1))
+        metric = somfuncs.AsinhMetric(lnScaleSigma=0.4, lnScaleStep=0.03)
+        som = somfuncs.NoiseSOM(metric, None, None,
+                                learning=hh,
+                                shape=(s0, s1),
+                                wrap=False, logF=True,
+                                initialize=self.model['som'].weights,
+                                minError=0.02)
+
+        needed_cols = list(self.config.inputs) + list(self.config.input_errs)
+        chunk_size = self.config.chunk_size
+
+        handle = self.get_handle('data', allow_missing=True)
+        filepath = handle.path if handle.path not in [None, 'None', 'none'] else None
+
+        if filepath is not None and filepath.endswith('.parquet'):
+            self._input_length = get_parquet_num_rows(filepath)
+        else:
+            self._input_length = self.get_handle('data', allow_missing=True).size()
+
+        # --- Resume detection ---
+        # Check if a partial output from a previous crashed run exists.
+        # All ranks read the same shared file; rank 0 broadcasts to guarantee agreement.
+        inprogress_path = self.get_output('assignment')
+        resume_from = 0
+        if os.path.exists(inprogress_path):
+            try:
+                with h5py.File(inprogress_path, 'r') as _hf:
+                    resume_from = int(_hf.attrs.get('last_global_row', 0))
+            except Exception:
+                resume_from = 0
+        if self.comm:
+            resume_from = self.comm.bcast(resume_from, root=0)
+        if self.rank == 0 and resume_from > 0:
+            print(f"Resuming SOM assignment from row {resume_from}", flush=True)
+
+        # Register output with RAIL so finalize() can rename the file.
+        # partial=True prevents RAIL from trying to overwrite our h5py-written file.
+        dummy = {'cells': np.zeros(1, dtype=np.int64), 'dist': np.zeros(1, dtype=np.float64)}
+        self._output_handle = self.add_handle('assignment', data=dummy)
+        self._output_handle.partial = True
+
+        # Open HDF5 for writing — all ranks participate together (collective MPI-IO).
+        if self.comm:
+            self.comm.Barrier()
+        mode = 'a' if resume_from > 0 else 'w'
+        if self.comm:
+            #If MPI
+            self._hdf5_fout = h5py.File(inprogress_path, mode, driver='mpio', comm=self.comm)
+        else:
+            #If single thread
+            self._hdf5_fout = h5py.File(inprogress_path, mode)
+        if resume_from == 0:
+            self._hdf5_fout.create_dataset('cells', shape=(self._input_length,), dtype=np.int64)
+            self._hdf5_fout.create_dataset('dist',  shape=(self._input_length,), dtype=np.float64)
+        # --- End resume detection ---
+
         first = True
-        iter1 = self.input_iterator('data')
-        # iter1 = self.input_iterator('data', groupname=self.config.hdf5_groupname)
-        # iter1 = self.input_iterator('data')
-        self._output_handle = None
-        for s, e, test_data in iter1:
-            print(f"Process {self.rank} running creator on chunk {s} - {e}", flush=True)
-            self._process_chunk(s, e, test_data, first)
-            first = False
-            gc.collect()
-        if self.comm:  # pragma: no cover
+        if filepath is not None and filepath.endswith('.parquet'):
+            for rg_last_row, batch_iter in parquet_row_group_iterator(filepath, needed_cols, chunk_size, self.rank, self.size):
+                if rg_last_row <= resume_from:
+                    continue  # entire row group already done — never loaded from disk
+                for s, e, chunk_data in batch_iter:
+                    if e <= resume_from:
+                        continue  # partial skip for the first row group after resume point
+                    print(f"Process {self.rank} running creator on chunk {s} - {e}", flush=True)
+                    self._process_chunk(s, e, chunk_data, som, first)
+                    first = False
+                    del chunk_data
+                    mem_mb = psutil.Process(os.getpid()).memory_info().rss / (1024 ** 2)
+                    print(f"--> Rank {self.rank} RAM: {mem_mb:.2f} MB", flush=True)
+                # All ranks finished this row group — safe to checkpoint now
+                if self.comm:
+                    self.comm.Barrier()
+                self._hdf5_fout.attrs['last_global_row'] = rg_last_row
+                self._hdf5_fout.flush()  # force HDF5 buffer to disk so SIGKILL can't lose the checkpoint
+                # Stagger prints after barrier so ranks don't all write simultaneously
+                time.sleep(self.rank * 0.001)
+        else:
+            iter1 = self.input_iterator('data')
+            for s, e, test_data in iter1:
+                if e <= resume_from:
+                    continue
+                print(f"Process {self.rank} running creator on chunk {s} - {e}", flush=True)
+                self._process_chunk(s, e, test_data, som, first)
+                first = False
+                del test_data
+                release_os_memory()
+                mem_mb = psutil.Process(os.getpid()).memory_info().rss / (1024 ** 2)
+                print(f"--> Rank {self.rank} RAM: {mem_mb:.2f} MB", flush=True)
+
+        if self.comm:
             self.comm.Barrier()
         self._finalize_run()
 
@@ -1519,14 +1553,12 @@ class SOMPZEstimatorBase(CatEstimator):
         return
 
     def _finalize_run(self):
-        """
+        self._hdf5_fout['som_size'] = self.som_size
+        if 'last_global_row' in self._hdf5_fout.attrs:
+            del self._hdf5_fout.attrs['last_global_row']
+        self._hdf5_fout.close()
+        self._hdf5_fout = None
 
-        Returns
-        -------
-
-        """
-        tmpdict = dict(som_size=self.som_size)
-        self._output_handle.finalize_write(**tmpdict)
 
 
 class SOMPZEstimatorWide(SOMPZEstimatorBase):
