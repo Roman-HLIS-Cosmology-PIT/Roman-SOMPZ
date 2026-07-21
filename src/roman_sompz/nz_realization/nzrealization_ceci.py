@@ -531,6 +531,7 @@ class RunPZRealizationsPipe(CatEstimator):
         zbins_min=StageParameter(float, 0.0, msg="minimum redshift for output grid"),
         zbins_max=StageParameter(float, 6.0, msg="maximum redshift for output grid"),
         zbins_dz=StageParameter(float, 0.01, msg="delta z for defining output grid"),
+        id_col = StageParameter(str, 'ID', msg="name of the ID column"),
 
     )
     inputs = [("deep_balrog_file", TableHandle), ("redshift_deep_balrog_file", TableHandle), ("deep_som", ModelHandle), ("wide_som", ModelHandle), ("pchat", Hdf5Handle), ("pcchat", Hdf5Handle), ("tomo_bin_assignment", Hdf5Handle), ("deep_cells_assignment_balrog_files_withzp", TableHandle), ("wide_cells_assignment_balrog_files_withzp", TableHandle), ("wide_cells_assignment_wide_files_withzp", TableHandle), ("sv_redshift_file", TableHandle),("sv_deep_file", TableHandle), ("deep_cells_assignment_balrog_files", TableHandle),("wide_cells_assignment_balrog_files", TableHandle), ("deep_cells_assignment_spec_files", TableHandle), ("wide_cells_assignment_spec_files", TableHandle)]
@@ -624,7 +625,7 @@ class RunPZRealizationsPipe(CatEstimator):
             #    print('Sorry dont have photometric_skybackground_wide yet.')
             zbins = np.arange(self.config.zbins_min - self.config.zbins_dz / 2., self.config.zbins_max + self.config.zbins_dz, self.config.zbins_dz)
                 
-            nz_realizations = get_realizations(sv_redshift_data, sv_deep_data, shot_noise, sample_variance, redshift_sample_uncertainty, photometric_zeropoint_deep, photometric_zeropoint_wide, photometric_skybackground_deep, photometric_skybackground_wide, num_lhc_points, num_3sdir, deep_balrog_data, redshift_deep_balrog_data, deep_som_size, wide_som_size, pchat, pcchat, tomo_bin_assignment, deep_cells_assignment_balrog_files_withzp, wide_cells_assignment_balrog_files_withzp, wide_cells_assignment_wide_files_withzp, deep_cells_assignment_balrog, wide_cells_assignment_balrog, deep_cells_assignment_spec, wide_cells_assignment_spec, bands, self.config.redshift_col, zbins)
+            nz_realizations = get_realizations(sv_redshift_data, sv_deep_data, shot_noise, sample_variance, redshift_sample_uncertainty, photometric_zeropoint_deep, photometric_zeropoint_wide, photometric_skybackground_deep, photometric_skybackground_wide, num_lhc_points, num_3sdir, deep_balrog_data, redshift_deep_balrog_data, deep_som_size, wide_som_size, pchat, pcchat, tomo_bin_assignment, deep_cells_assignment_balrog_files_withzp, wide_cells_assignment_balrog_files_withzp, wide_cells_assignment_wide_files_withzp, deep_cells_assignment_balrog, wide_cells_assignment_balrog, deep_cells_assignment_spec, wide_cells_assignment_spec, bands, self.config.redshift_col, zbins, self.config.id_col)
             photoz_realizations = {}
             for idx, nz_r in enumerate(nz_realizations):
                 photoz_realizations["LHC_id_{0}".format(idx)]= nz_r

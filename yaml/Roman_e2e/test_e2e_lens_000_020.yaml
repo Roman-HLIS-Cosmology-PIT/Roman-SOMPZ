@@ -1,16 +1,16 @@
-#cd job/Roman_e2e/e2e_noshear
-#ceci ../../../yaml/Roman_e2e/test_e2e.yaml
+#cd job/Roman_e2e/e2e_lens/e2e_lens_000_020
+#ceci ../../../../yaml/Roman_e2e/test_e2e_lens_000_020.yaml
 output_dir: ./
 log_dir: out
 resume: True # If all the outputs for a stage already exist then do not re-run that stage
-config: ../../../yaml/Roman_e2e/config_e2e.yaml
+config: ../../../../yaml/Roman_e2e/config_e2e_lens_dcc.yaml
 modules: rail
 inputs:
-  input_spec_data: ../../data/Roman_e2e/e2e_catalog_noshear_random1M.parquet
-  input_deep_data: ../../data/Roman_e2e/e2e_catalog_noshear_random1M.parquet
-  input_wide_data: ../../data/Roman_e2e/e2e_catalog_noshear.parquet
-  input_sfd_data: ../../data/sfd_ebv.fit
-  input_lss_error_data: ../../data/lss_error.fit
+  input_spec_data: ../../../data/Roman_e2e/e2e_data_lens/e2e_catalog_magLim_zbin_0.00_0.20_2x10deg2.parquet
+  input_deep_data: ../../../data/Roman_e2e/e2e_data_lens/e2e_catalog_magLim_zbin_0.00_0.20_2x10deg2.parquet
+  input_wide_data: ../../../data/Roman_e2e/e2e_data_lens/e2e_catalog_magLim_zbin_0.00_0.20.parquet
+  input_sfd_data: ../../../data/sfd_ebv.fit
+  input_lss_error_data: ../../../data/lss_error.fit
 stages:
 - name: checkinputdeep
   classname: Inputcheck 
@@ -54,7 +54,7 @@ stages:
     checked: checkdeep
 - name: som_deepdeep_estimator
   classname: SOMPZEstimatorDeep
-  nprocess: &id001 128
+  nprocess: &id001 80
   module_name: roman_sompz.rail_sompz.src.rail.estimation.algos.sompz
   aliases:
     deep_model: model_som_deep_informer
@@ -228,7 +228,7 @@ stages:
 
 
 site:
-  max_threads: 128
-  mpi_command: srun -n
+  max_threads: 80
+  mpi_command: /opt/apps/rhel9/openmpi-4.1.6/bin/mpirun -n
   name: local
 

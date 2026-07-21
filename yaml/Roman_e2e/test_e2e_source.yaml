@@ -1,0 +1,234 @@
+#cd job/Roman_e2e/e2e_noshear
+#ceci ../../../yaml/Roman_e2e/test_e2e_source.yaml
+output_dir: ./
+log_dir: out
+resume: True # If all the outputs for a stage already exist then do not re-run that stage
+config: ../../../yaml/Roman_e2e/config_e2e_source_nersc.yaml
+modules: rail
+inputs:
+  input_spec_data: ../../data/Roman_e2e/e2e_catalog_noshear_2x10deg2.parquet
+  input_deep_data: ../../data/Roman_e2e/e2e_catalog_noshear_2x10deg2.parquet
+  input_wide_data: ../../data/Roman_e2e/e2e_catalog_noshear_random2M.parquet
+  input_sfd_data: ../../data/sfd_ebv.fit
+  input_lss_error_data: ../../data/lss_error.fit
+stages:
+- name: checkinputdeep
+  classname: Inputcheck 
+  nprocess: 1
+  module_name: roman_sompz.catalog_check
+  aliases:
+    catfile: input_deep_data    
+    checked: checkdeep
+- name: checkinputspec
+  classname: Inputcheck 
+  nprocess: 1
+  module_name: roman_sompz.catalog_check
+  aliases:
+    catfile: input_spec_data    
+    checked: checkspec
+- name: checkinputwide
+  classname: Inputcheck 
+  nprocess: 1
+  module_name: roman_sompz.catalog_check
+  aliases:
+    catfile: input_wide_data    
+    checked: checkwide
+
+
+- name: som_wide_informer_big
+  classname: SOMPZInformer
+  nprocess: 1
+  module_name: roman_sompz.rail_sompz.src.rail.estimation.algos.sompz
+  aliases:
+    model: model_som_wide_informer
+    input_data: input_wide_data
+    checked: checkwide
+
+- name: som_deep_informer_big
+  classname: SOMPZInformer
+  nprocess: 1
+  module_name: roman_sompz.rail_sompz.src.rail.estimation.algos.sompz
+  aliases:
+    model: model_som_deep_informer
+    input_data: input_deep_data
+    checked: checkdeep
+- name: som_deepdeep_estimator
+  classname: SOMPZEstimatorDeep
+  nprocess: &id001 128
+  module_name: roman_sompz.rail_sompz.src.rail.estimation.algos.sompz
+  aliases:
+    deep_model: model_som_deep_informer
+    data: input_deep_data
+    assignment: assignment_som_deepdeep_estimator
+- name: som_deepwide_estimator
+  classname: SOMPZEstimatorWide
+  nprocess:  *id001
+  module_name: roman_sompz.rail_sompz.src.rail.estimation.algos.sompz
+  aliases:
+    data: input_deep_data
+    assignment: assignment_som_deepwide_estimator
+    wide_model: model_som_wide_informer 
+- name: som_deepspec_estimator
+  classname: SOMPZEstimatorDeep
+  nprocess: *id001
+  module_name: roman_sompz.rail_sompz.src.rail.estimation.algos.sompz
+  aliases:
+    assignment: assignment_som_deepspec_estimator
+    deep_model: model_som_deep_informer
+    data: input_spec_data
+- name: som_widewide_estimator
+  classname: SOMPZEstimatorWide
+  nprocess: *id001
+  module_name: roman_sompz.rail_sompz.src.rail.estimation.algos.sompz
+  aliases:
+    assignment: assignment_som_widewide_estimator
+    wide_model: model_som_wide_informer 
+    data: input_wide_data
+- name: som_widespec_estimator
+  classname: SOMPZEstimatorWide
+  nprocess: *id001
+  module_name: roman_sompz.rail_sompz.src.rail.estimation.algos.sompz
+  aliases:
+    assignment: assignment_som_widespec_estimator
+    wide_model: model_som_wide_informer 
+    data: input_spec_data
+- name: som_pzc_stage
+  classname: SOMPZPzc
+  nprocess: 1
+  module_name: roman_sompz.rail_sompz.src.rail.estimation.algos.sompz
+  aliases:
+    cell_deep_spec_data: assignment_som_deepspec_estimator
+    spec_data: input_spec_data
+    pz_c: pz_c_som_pzc_stage
+- name: pcchat_stage
+  classname: SOMPZPc_chat
+  nprocess: 1
+  module_name: roman_sompz.rail_sompz.src.rail.estimation.algos.sompz
+  aliases:
+    cell_deep_balrog_data: assignment_som_deepdeep_estimator
+    cell_wide_balrog_data: assignment_som_deepwide_estimator
+    pc_chat: pc_chat_pcchat_stage
+- name: sompz_pzchat
+  classname: SOMPZPzchat
+  nprocess: 1
+  module_name: roman_sompz.rail_sompz.src.rail.estimation.algos.sompz
+  aliases:
+    spec_data: input_spec_data
+    cell_deep_spec_data: assignment_som_deepspec_estimator
+    cell_wide_wide_data: assignment_som_widewide_estimator
+    pz_c: pz_c_som_pzc_stage
+    pc_chat: pc_chat_pcchat_stage
+    pz_chat: pz_chat_sompz_pzchat
+
+- name: sompz_pchat
+  classname: SOMPZPchat
+  nprocess: 1
+  module_name: roman_sompz.rail_sompz.src.rail.estimation.algos.sompz
+  aliases:
+      cell_wide_wide_data: assignment_som_widewide_estimator
+      pchat: pchat_stage
+
+- name: sompz_tomobin
+  classname: SOMPZTomobin
+  nprocess: 1
+  module_name: roman_sompz.rail_sompz.src.rail.estimation.algos.sompz
+  aliases:
+    spec_data: input_spec_data
+    cell_deep_spec_data: assignment_som_deepspec_estimator
+    cell_wide_spec_data: assignment_som_widespec_estimator
+    tomo_bins_wide: tomo_bins_wide_sompz_tomobin
+- name: sompz_nz
+  classname: SOMPZnz
+  nprocess: 1
+  module_name: roman_sompz.rail_sompz.src.rail.estimation.algos.sompz
+  aliases:
+    spec_data: input_spec_data
+    cell_deep_spec_data: assignment_som_deepspec_estimator
+    cell_wide_spec_data: assignment_som_widespec_estimator
+    cell_wide_wide_data: assignment_som_widewide_estimator
+    tomo_bins_wide: tomo_bins_wide_sompz_tomobin
+    pc_chat: pc_chat_pcchat_stage
+    nz: nz_sompz_nz
+
+
+- name: PreparePZRealizationsPipe 
+  classname:  PreparePZRealizationsPipe
+  nprocess: 1
+  module_name: roman_sompz.nz_realization.nzrealization_ceci
+  aliases:
+    sfd_data: input_sfd_data
+    lss_error_data: input_lss_error_data
+    lhc_samples_deep_zp: LHC_samples_deep_zp
+    lhc_samples_wide_zp: LHC_samples_wide_zp
+    lhc_samples_sky: LHC_samples_sky
+    
+
+- name: PhotozDeepDeepZpDustPipe 
+  classname:  PhotozZpDustPipe
+  nprocess: *id001
+  module_name: roman_sompz.nz_realization.nzrealization_ceci
+  aliases:
+    deep_model: model_som_deep_informer
+    data: input_deep_data
+    lhc_samples_zp: LHC_samples_deep_zp
+    lhc_samples_sky: LHC_samples_sky
+    assignment: assignment_som_deepdeep_estimator_perturb
+
+- name: PhotozDeepWideZpDustPipe 
+  classname:  PhotozZpDustPipe
+  nprocess: *id001
+  module_name: roman_sompz.nz_realization.nzrealization_ceci
+  aliases:
+    deep_model: model_som_wide_informer
+    data: input_deep_data
+    lhc_samples_zp: LHC_samples_wide_zp
+    lhc_samples_sky: LHC_samples_sky
+    assignment: assignment_som_deepwide_estimator_perturb
+
+- name: PhotozWideWideZpDustPipe 
+  classname:  PhotozZpDustPipe
+  nprocess: *id001
+  module_name: roman_sompz.nz_realization.nzrealization_ceci
+  aliases:
+    deep_model: model_som_wide_informer
+    data: input_wide_data
+    lhc_samples_zp: LHC_samples_wide_zp
+    lhc_samples_sky: LHC_samples_sky
+    assignment: assignment_som_widewide_estimator_perturb
+    
+- name: Samplevariance 
+  classname:  Samplevariance
+  nprocess: 1
+  threads_per_process: 48
+  module_name: roman_sompz.nz_realization.nzrealization_ceci
+  aliases:
+    Sample_variance: sample_variance
+
+- name: RunPZRealizationsPipe
+  classname: RunPZRealizationsPipe
+  nprocess: 1
+  module_name: roman_sompz.nz_realization.nzrealization_ceci
+  aliases:
+      deep_balrog_file: input_deep_data
+      redshift_deep_balrog_file: input_spec_data
+      pchat: pchat_stage
+      pcchat: pc_chat_pcchat_stage
+      tomo_bin_assignment: tomo_bins_wide_sompz_tomobin 
+      deep_cells_assignment_balrog_files_withzp: assignment_som_deepdeep_estimator_perturb
+      wide_cells_assignment_balrog_files_withzp: assignment_som_deepwide_estimator_perturb
+      wide_cells_assignment_wide_files_withzp: assignment_som_widewide_estimator_perturb
+      sv_redshift_file: sample_variance
+      sv_deep_file: sample_variance
+      deep_som: model_som_deep_informer
+      wide_som: model_som_wide_informer
+      wide_cells_assignment_balrog_files: assignment_som_deepwide_estimator
+      deep_cells_assignment_balrog_files: assignment_som_deepdeep_estimator 
+      deep_cells_assignment_spec_files: assignment_som_deepspec_estimator
+      wide_cells_assignment_spec_files: assignment_som_widespec_estimator
+
+
+site:
+  max_threads: 128
+  mpi_command: srun -n
+  name: local
+

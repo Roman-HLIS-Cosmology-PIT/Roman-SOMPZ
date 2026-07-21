@@ -20,7 +20,7 @@ today = today.strftime('%B%d')
 import gc
 
 #added wide_cells_assignment_wide_files_withzp
-def get_realizations(sv_redshift_data, sv_deep_data, shot_noise, sample_variance, redshift_sample_uncertainty,  photometric_zeropoint_deep, photometric_zeropoint_wide, photometric_skybackground_deep, photometric_skybackground_wide, num_lhc_points, num_3sdir, deep_balrog_data, redshift_deep_balrog_data, deep_som_size, wide_som_size, pchat, pcchat, tomo_bins_wide_in, deep_cells_assignment_balrog_files_withzp, wide_cells_assignment_balrog_files_withzp, wide_cells_assignment_wide_files_withzp, deep_cells_assignment_balrog_file, wide_cells_assignment_balrog_file, deep_cells_assignment_spec_file, wide_cells_assignment_spec_file, bands, redshiftcol, zbins):
+def get_realizations(sv_redshift_data, sv_deep_data, shot_noise, sample_variance, redshift_sample_uncertainty,  photometric_zeropoint_deep, photometric_zeropoint_wide, photometric_skybackground_deep, photometric_skybackground_wide, num_lhc_points, num_3sdir, deep_balrog_data, redshift_deep_balrog_data, deep_som_size, wide_som_size, pchat, pcchat, tomo_bins_wide_in, deep_cells_assignment_balrog_files_withzp, wide_cells_assignment_balrog_files_withzp, wide_cells_assignment_wide_files_withzp, deep_cells_assignment_balrog_file, wide_cells_assignment_balrog_file, deep_cells_assignment_spec_file, wide_cells_assignment_spec_file, bands, redshiftcol, zbins, id_col):
     ndeep = int(np.sqrt(deep_som_size))
     tomo_bins_wide = {}
     for i in np.unique(tomo_bins_wide_in['tomo_bins_wide'][:, 0]):
@@ -41,10 +41,10 @@ def get_realizations(sv_redshift_data, sv_deep_data, shot_noise, sample_variance
     #Now just assume they are the same. The reason for below is if you want to do redshift sample uncertainty, you want to perturb only the redhsift sample to save time and memory
     deep_cells_assignment_spec_file = deep_cells_assignment_spec_file['cells']
     wide_cells_assignment_spec_file = wide_cells_assignment_spec_file['cells']
-    spec_data_noshift = redshift_deep_balrog_data[[redshiftcol, 'ID']]
+    spec_data_noshift = redshift_deep_balrog_data[[redshiftcol, id_col]]
     spec_data_noshift['cell_deep'] = deep_cells_assignment_spec_file
     spec_data_noshift['cell_wide_unsheared'] = wide_cells_assignment_spec_file
-    deep_data_ID= deep_balrog_data['ID']
+    deep_data_ID= deep_balrog_data[id_col]
 
 
     returnned = []
@@ -55,14 +55,14 @@ def get_realizations(sv_redshift_data, sv_deep_data, shot_noise, sample_variance
             # Load deep cell assignment with zpu
             cells_deep = deep_cells_assignment_balrog_files_withzp['cells_LHC_id_{0}'.format(LHC_id)]
 
-            cells_deep_df = pd.DataFrame({'ID': deep_data_ID, 'cell_deep': cells_deep})
+            cells_deep_df = pd.DataFrame({id_col: deep_data_ID, 'cell_deep': cells_deep})
 
             # use this cell_deep column for balrog_data and spec_data
             balrog_data = balrog_data_noshift.copy().drop('cell_deep', axis=1)
-            balrog_data = balrog_data.merge(cells_deep_df, on='ID', how='left')
-            
+            balrog_data = balrog_data.merge(cells_deep_df, on=id_col, how='left')
+
             spec_data = spec_data_noshift.copy().drop('cell_deep', axis=1)
-            spec_data = spec_data.merge(cells_deep_df, on='ID', how='left')
+            spec_data = spec_data.merge(cells_deep_df, on=id_col, how='left')
             
         if photometric_zeropoint_wide or photometric_skybackground_wide:
             cell_wide_balrog = wide_cells_assignment_balrog_files_withzp['cells_LHC_id_{0}'.format(LHC_id)]
@@ -196,9 +196,9 @@ def get_realizations(sv_redshift_data, sv_deep_data, shot_noise, sample_variance
 
         print(bins)
         # tot number of redshift galaxies
-        print('total galaxy num', np.sum(nzt), np.sum(nzt)/6) 
+        print('total galaxy num', np.sum(nzt), np.sum(nzt)/nT)
         # number of redshift galaxies in each phenotype
-        print('nTs', np.sum(nTs[np.array(bins['0'])]), np.sum(nTs[np.array(bins['1'])]),np.sum(nTs[np.array(bins['2'])]),np.sum(nTs[np.array(bins['3'])]),np.sum(nTs[np.array(bins['4'])]),np.sum(nTs[np.array(bins['5'])]))
+        print('nTs', [np.sum(nTs[bins[str(k)]]) for k in range(nT)])
         #print('nTs', np.sum(nTs[np.array(bins['0'])]), np.sum(nTs[np.array(bins['1'])]))
         # what is the t zmeans for each T
         print('bins', bins)

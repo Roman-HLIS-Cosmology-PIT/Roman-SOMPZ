@@ -1,8 +1,9 @@
+# nproc: 80 = DCC, 128 = NERSC (threads per node)
 som_deep_informer_big:
   output_mode: default
   redshift_col: &id013 z
   hdf5_groupname: None
-  nproc: 128
+  nproc: 80
   inputs: &id002
   - flux_pgauss_LSST_u
   - flux_pgauss_LSST_g
@@ -49,7 +50,7 @@ som_wide_informer_big:
   output_mode: default
   redshift_col: *id013
   hdf5_groupname: None
-  nproc: 128
+  nproc: 80
   inputs: &id006
   - flux_pgauss_LSST_u
   - flux_pgauss_LSST_g
@@ -125,7 +126,7 @@ checkinputwide:
 
 som_deepdeep_estimator:
   output_mode: default
-  chunk_size: 8192
+  chunk_size: 64
   hdf5_groupname: None
   zmin: 0.0
   zmax: &id011 3.12
@@ -151,7 +152,7 @@ som_deepdeep_estimator:
   config: None
 som_deepwide_estimator:
   output_mode: default
-  chunk_size: 8192
+  chunk_size: 64
   hdf5_groupname: None
   zmin: 0.0
   zmax: *id011
@@ -177,7 +178,7 @@ som_deepwide_estimator:
   config: None
 som_deepspec_estimator:
   output_mode: default
-  chunk_size: 8192
+  chunk_size: 64
   hdf5_groupname: None
   zmin: 0.0
   zmax: *id011
@@ -229,7 +230,7 @@ som_widewide_estimator:
   config: None
 som_widespec_estimator:
   output_mode: default
-  chunk_size: 8192
+  chunk_size: 64
   hdf5_groupname: None
   zmin: 0.0
   zmax: *id011
@@ -267,12 +268,7 @@ som_pzc_stage:
   deep_groupname: None
   bin_edges: &id023
   - -0.025
-  - 0.375
-  - 0.775
-  - 1.175
-  - 1.525
-  - 1.925
-  - 2.325
+  - 5.0
   zbins_min: 0.0
   zbins_max: *id011
   zbins_dz: *id020
@@ -377,7 +373,7 @@ PreparePZRealizationsPipe:
   LHC_samples_sky: ./out/LHC_samples_sky.fit
 PhotozDeepDeepZpDustPipe:
   output_mode: default
-  chunk_size: 8192
+  chunk_size: 64
   hdf5_groupname: None
   zmin: 0.0
   zmax: *id011
@@ -408,7 +404,7 @@ PhotozDeepDeepZpDustPipe:
 
 PhotozDeepWideZpDustPipe:
   output_mode: default
-  chunk_size: 8192
+  chunk_size: 64
   hdf5_groupname: None
   zmin: 0.0
   zmax: *id011
@@ -477,6 +473,7 @@ Samplevariance:
     
 RunPZRealizationsPipe:
     redshift_col: *id013
+    id_col: objectid
     shot_noise: True
     sample_variance: False
     redshift_sample_uncertainty: *id024 
@@ -485,7 +482,7 @@ RunPZRealizationsPipe:
     photometric_skybackground_deep: *id019
     photometric_skybackground_wide: *id022 
     num_lhc_points: *id021 
-    num_3sdir: 100
+    num_3sdir: 1000
     bands: *id006 
     inputs: *id006
     input_errs: *id007
