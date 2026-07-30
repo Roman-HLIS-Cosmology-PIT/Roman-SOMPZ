@@ -317,6 +317,14 @@ class PhotozZpDustPipe(CatEstimator):
         self.model = None
         self.model = self.open_model(**self.config)
         if not self.config.photometric_zeropoint and not self.config.photometric_skybackground:
+            self._output_handle = self.add_handle('assignment', data={'cells': np.zeros(1, dtype=np.int64), 'dist': np.zeros(1, dtype=np.float64)})
+            self._output_handle.partial = True
+            if self.rank == 0:
+                with h5py.File(self.get_output('assignment'), 'w') as f:
+                    f.create_dataset('cells', data=np.zeros(1, dtype=np.int64))
+                    f.create_dataset('dist', data=np.zeros(1, dtype=np.float64))
+            if self.comm:
+                self.comm.Barrier()
             return
         LHC_samples_zp = self.get_data('lhc_samples_zp').view(np.ndarray)['samples']
         LHC_samples_sky = self.get_data('lhc_samples_sky').view(np.ndarray)['samples']

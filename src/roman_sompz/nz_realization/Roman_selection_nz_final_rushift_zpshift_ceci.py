@@ -51,6 +51,10 @@ def get_realizations(sv_redshift_data, sv_deep_data, shot_noise, sample_variance
     
     for LHC_id in range(num_lhc_points):
         T0 = time.time()
+        balrog_data = balrog_data_noshift
+        spec_data = spec_data_noshift
+        cells_deep = deep_balrog_data['cell_deep'].to_numpy()
+        cell_wide_balrog = deep_balrog_data['cell_wide_unsheared'].to_numpy()
         if photometric_zeropoint_deep or photometric_skybackground_deep:
             # Load deep cell assignment with zpu
             cells_deep = deep_cells_assignment_balrog_files_withzp['cells_LHC_id_{0}'.format(LHC_id)]
@@ -71,13 +75,13 @@ def get_realizations(sv_redshift_data, sv_deep_data, shot_noise, sample_variance
             #recompute pchat
             pchat = np.zeros(wide_som_size)
             np.add.at(pchat, cell_wide, 1)
-            pchat /= np.sum(pchat)
 
-        if photometric_zeropoint_deep or photometric_skybackground_deep or photometric_zeropoint_wide or photometric_skybackground_wide:
-            #recompute pcchat
-            pcchat = np.zeros((deep_som_size, wide_som_size))
-            np.add.at(pcchat, (cells_deep,cell_wide_balrog), 1)
-            pcchat /= np.sum(pcchat)
+        pchat = pchat / np.sum(pchat)
+
+        #recompute pcchat
+        pcchat = np.zeros((deep_som_size, wide_som_size))
+        np.add.at(pcchat, (cells_deep,cell_wide_balrog), 1)
+        pcchat /= np.sum(pcchat)
             
         ###########################################################################################
         ### Define new redshift bins
@@ -452,8 +456,8 @@ def get_realizations(sv_redshift_data, sv_deep_data, shot_noise, sample_variance
         print("Total time for %d: %.2f"%(LHC_id, T1-T0))
         returnned.append(nz_samples_newmethod)
 
-        # only SV + SN 
-        if ((photometric_zeropoint_deep==False)):
+        # only SV + SN
+        if not (redshift_sample_uncertainty or photometric_zeropoint_deep or photometric_zeropoint_wide or photometric_skybackground_deep or photometric_skybackground_wide):
             break
     return returnned
 
