@@ -234,8 +234,8 @@ def get_realizations(sv_redshift_data, sv_deep_data, shot_noise, sample_variance
         assert sv_deep_data.shape[0]==len(zbinsc)
         
         if sample_variance:
-            sv_redshift_data = sv_redshift_data
-            sv_deep_data = sv_deep_data
+            if np.ndim(sv_redshift_data) == 2: sv_redshift_data = np.diag(sv_redshift_data)
+            if np.ndim(sv_deep_data) == 2: sv_deep_data = np.diag(sv_deep_data)
         else:
             sv_redshift_data = np.zeros(len(zbinsc))
             sv_deep_data = np.zeros(len(zbinsc))
